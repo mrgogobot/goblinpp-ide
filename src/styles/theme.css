@@ -1,0 +1,285 @@
+/*
+ * Goblin++ IDE — theme token system
+ * Four themes, toggled atomically via the `data-theme` attribute on <html>.
+ * All colours, spacing, and typography are CSS custom properties so a theme
+ * switch re-skins the entire chrome without touching component code.
+ */
+
+:root {
+  /* ---------- shared metrics ---------- */
+  --activitybar-width: 48px;
+  --toolbar-height: 36px;
+  --editor-tab-height: 30px;
+  --statusbar-height: 24px;
+  --bottom-panel-height: 220px;
+  --left-sidebar-width: 260px;
+  --ai-pane-width: 360px;
+  --ai-pane-retracted-width: 24px;
+
+  --radius-sm: 3px;
+  --radius-md: 5px;
+
+  --shadow-popup: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --transition-fast: 90ms ease;
+
+  /* syntax font size default 14, UI 13 */
+  --font-size-ui: 13px;
+  --font-size-mono: 14px;
+}
+
+/* ============================= DARCULA (default dark) ============================= */
+:root[data-theme='darcula'] {
+  --theme-name: 'Darcula';
+
+  --bg-editor: #2b2b2b;
+  --bg-panel: #3c3f41;
+  --bg-panel-rgb: 60, 63, 65;
+  --bg-editor-rgb: 43, 43, 43;
+  --bg-gutter: #2b2b2b;
+  --bg-toolbar: #3c3f41;
+  --bg-activitybar: #3c3f41;
+  --bg-statusbar: #3c3f41;
+  --bg-sidebar: #3c3f41;
+  --bg-input: #45494a;
+  --bg-hover: #4c5052;
+  --bg-selected: #3a3d3f;
+  --bg-modal: #3c3f41;
+
+  --fg-text: #a9b7c6;
+  --fg-selected: #a9b7c6;
+  --fg-muted: #808080;
+  --fg-disabled: #5c5c5c;
+
+  --border: #323232;
+  --border-strong: #1e1e1e;
+
+  --accent: #ff8000;
+  --accent-secondary: #66c434;
+  --accent-soft: rgba(255, 128, 0, 0.16);
+  --error: #ff5555;
+  --warning: #ffcc66;
+  --sealed-star: #ffd700;
+  --frozen-lock: #888888;
+
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
+  --font-ui: 'JetBrains Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --fg-keyword: #cc7832;
+  --fg-builtin: #66c434;
+  --fg-unit: #ff8000;
+  --fg-number: #6897bb;
+  --fg-string: #6a8759;
+  --fg-punctuation: #a9b7c6;
+  --fg-operator: #a9b7c6;
+  --fg-comment: #808080;
+  --fg-directive: #ff8000;
+  --fg-seal: #ffd700;
+  --fg-format: #bbb529;
+  --fg-ident: #a9b7c6;
+}
+
+/* ============================= LIGHT ============================= */
+:root[data-theme='light'] {
+  --theme-name: 'Light';
+
+  --bg-editor: #ffffff;
+  --bg-panel: #f2f2f2;
+  --bg-panel-rgb: 242, 242, 242;
+  --bg-editor-rgb: 255, 255, 255;
+  --bg-gutter: #f2f2f2;
+  --bg-toolbar: #f2f2f2;
+  --bg-activitybar: #f2f2f2;
+  --bg-statusbar: #f2f2f2;
+  --bg-sidebar: #f2f2f2;
+  --bg-input: #ffffff;
+  --bg-hover: #e8e8e8;
+  --bg-selected: #d8e0ec;
+  --bg-modal: #f7f7f7;
+
+  --fg-text: #000000;
+  --fg-selected: #000000;
+  --fg-muted: #6b6b6b;
+  --fg-disabled: #999999;
+
+  --border: #d1d1d1;
+  --border-strong: #bfbfbf;
+
+  --accent: #d2691e;
+  --accent-secondary: #3e8c00;
+  --accent-soft: rgba(210, 105, 30, 0.14);
+  --error: #d32f2f;
+  --warning: #e6a700;
+  --sealed-star: #b8860b;
+  --frozen-lock: #555555;
+
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
+  --font-ui: 'JetBrains Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --fg-keyword: #000080;
+  --fg-builtin: #3e8c00;
+  --fg-unit: #d2691e;
+  --fg-number: #1750eb;
+  --fg-string: #067d17;
+  --fg-punctuation: #000000;
+  --fg-operator: #000000;
+  --fg-comment: #8c8c8c;
+  --fg-directive: #d2691e;
+  --fg-seal: #b8860b;
+  --fg-format: #3e8c00;
+  --fg-ident: #000000;
+}
+
+/* ============================= HIGH CONTRAST ============================= */
+:root[data-theme='high-contrast'] {
+  --theme-name: 'High Contrast';
+
+  --bg-editor: #000000;
+  --bg-panel: #000000;
+  --bg-panel-rgb: 0, 0, 0;
+  --bg-editor-rgb: 0, 0, 0;
+  --bg-gutter: #000000;
+  --bg-toolbar: #000000;
+  --bg-activitybar: #000000;
+  --bg-statusbar: #000000;
+  --bg-sidebar: #000000;
+  --bg-input: #000000;
+  --bg-hover: #3c3c3c;
+  --bg-selected: #ffffff;
+  --bg-modal: #000000;
+
+  --fg-text: #ffffff;
+  --fg-selected: #000000;
+  --fg-muted: #d0d0d0;
+  --fg-disabled: #808080;
+
+  --border: #ffffff;
+  --border-strong: #ffffff;
+
+  --accent: #ffff00;
+  --accent-secondary: #00ff00;
+  --accent-soft: rgba(255, 255, 0, 0.22);
+  --error: #ffff00;
+  --warning: #ffff00;
+  --sealed-star: #ffffff;
+  --frozen-lock: #ffffff;
+
+  --font-mono: 'DejaVu Sans Mono', Menlo, Consolas, monospace;
+  --font-ui: 'DejaVu Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --fg-keyword: #ffffff;
+  --fg-builtin: #00ff00;
+  --fg-unit: #ffff00;
+  --fg-number: #00ffff;
+  --fg-string: #ff55ff;
+  --fg-punctuation: #ffffff;
+  --fg-operator: #ffffff;
+  --fg-comment: #c0c0c0;
+  --fg-directive: #ffff00;
+  --fg-seal: #ffd700;
+  --fg-format: #00ffff;
+  --fg-ident: #ffffff;
+}
+
+/* ============================= NEW UI (flat, muted) ============================= */
+:root[data-theme='new-ui'] {
+  --theme-name: 'New UI';
+
+  --bg-editor: #1e1e1e;
+  --bg-panel: #252526;
+  --bg-panel-rgb: 37, 37, 38;
+  --bg-editor-rgb: 30, 30, 30;
+  --bg-gutter: #1e1e1e;
+  --bg-toolbar: #2b2b2b;
+  --bg-activitybar: #2b2b2b;
+  --bg-statusbar: #2b2b2b;
+  --bg-sidebar: #252526;
+  --bg-input: #3c3c3c;
+  --bg-hover: #37373d;
+  --bg-selected: #37373d;
+  --bg-modal: #2b2b2b;
+
+  --fg-text: #d4d4d4;
+  --fg-selected: #d4d4d4;
+  --fg-muted: #9d9d9d;
+  --fg-disabled: #6a6a6a;
+
+  --border: #3e3e42;
+  --border-strong: #2b2b2b;
+
+  --accent: #e8a853;
+  --accent-secondary: #5bae1f;
+  --accent-soft: rgba(232, 168, 83, 0.16);
+  --error: #f14c4c;
+  --warning: #e6b044;
+  --sealed-star: #daa520;
+  --frozen-lock: #777777;
+
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
+  --font-ui: 'JetBrains Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --fg-keyword: #cc7832;
+  --fg-builtin: #5bae1f;
+  --fg-unit: #e8a853;
+  --fg-number: #9cdcfe;
+  --fg-string: #ce9178;
+  --fg-punctuation: #d4d4d4;
+  --fg-operator: #d4d4d4;
+  --fg-comment: #6a9955;
+  --fg-directive: #e8a853;
+  --fg-seal: #daa520;
+  --fg-format: #c9a264;
+  --fg-ident: #d4d4d4;
+}
+
+/* ============================= GOBLIN MERCH (charcoal / deep purple / electric green) ============================= */
+:root[data-theme='goblin'] {
+  --theme-name: 'Goblin Merch';
+
+  --bg-editor: #242428;
+  --bg-panel: #2c2c31;
+  --bg-gutter: #242428;
+  --bg-toolbar: #2c2c31;
+  --bg-activitybar: #28282d;
+  --bg-statusbar: #2c2c31;
+  --bg-sidebar: #2a2a2f;
+  --bg-input: #1f1f23;
+  --bg-hover: #36363d;
+  --bg-selected: #3b2f52;
+  --bg-modal: #2c2c31;
+  --bg-panel-rgb: 44, 44, 49;
+  --bg-editor-rgb: 36, 36, 40;
+
+  --fg-text: #dcdce4;
+  --fg-selected: #ffffff;
+  --fg-muted: #9494a3;
+  --fg-disabled: #5f5f6c;
+
+  --border: #3a3a42;
+  --border-strong: #1b1b1f;
+
+  --accent: #a855f7;
+  --accent-deep: #7c3aed;
+  --accent-secondary: #39ff14;
+  --accent-soft: rgba(168, 85, 247, 0.18);
+  --accent-secondary-soft: rgba(57, 255, 20, 0.14);
+  --error: #ff5c5c;
+  --warning: #f0c674;
+  --sealed-star: #39ff14;
+  --frozen-lock: #a78bfa;
+
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
+  --font-ui: 'JetBrains Sans', 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --fg-keyword: #c084fc;
+  --fg-builtin: #4ade80;
+  --fg-unit: #a78bfa;
+  --fg-number: #7dd3fc;
+  --fg-string: #a3e635;
+  --fg-punctuation: #b8b8c8;
+  --fg-operator: #d8d8e2;
+  --fg-comment: #6b6b78;
+  --fg-directive: #a855f7;
+  --fg-seal: #39ff14;
+  --fg-format: #e879f9;
+  --fg-ident: #dcdce4;
+}

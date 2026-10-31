@@ -1,0 +1,131 @@
+{
+ "schema": "goblin-ide.diagnostics.v1",
+ "codes": [
+  {
+   "code": "G001",
+   "severity": "error",
+   "category": "MACHINERY_FAIL",
+   "message": "Lexer error: unexpected character.",
+   "see": "README.md"
+  },
+  {
+   "code": "G002",
+   "severity": "error",
+   "category": "MACHINERY_FAIL",
+   "message": "Parse error: unexpected token.",
+   "see": "CONTROL_FLOW.md"
+  },
+  {
+   "code": "G101",
+   "severity": "error",
+   "category": "MACHINERY_FAIL",
+   "message": "Unknown symbol: not a declared variable, registered constant, known function, or unit.",
+   "see": "README.md"
+  },
+  {
+   "code": "G201",
+   "severity": "error",
+   "category": "MACHINERY_FAIL",
+   "message": "Dimension error: incompatible SI dimensions.",
+   "see": "COMPOUND_UNITS.md"
+  },
+  {
+   "code": "G202",
+   "severity": "error",
+   "category": "MACHINERY_FAIL",
+   "message": "Numeric failure (non-finite result, domain error, or overflow).",
+   "see": "MATH.md"
+  },
+  {
+   "code": "G203",
+   "severity": "error",
+   "category": "MACHINERY_FAIL",
+   "message": "Execution limit: loop budget exceeded or function without return.",
+   "see": "CONTROL_FLOW.md"
+  },
+  {
+   "code": "G301",
+   "severity": "error",
+   "category": "MACHINERY_FAIL",
+   "message": "Artifact failure: output or seal could not be produced.",
+   "see": "OUTPUTS.md"
+  },
+  {
+   "code": "G302",
+   "severity": "warning",
+   "category": "MIGRATION",
+   "message": "Ambiguous angle function: use the explicit r (radians) or d (degrees) suffix.",
+   "see": "MATH.md"
+  },
+  {
+   "code": "G401",
+   "severity": "error",
+   "category": "PROTOCOL_VIOLATION",
+   "message": "Protocol violation: frozen source changed, tampered receipt, or custody breach.",
+   "see": "PROTECTED_VALUES.md"
+  },
+  {
+   "code": "G402",
+   "severity": "error",
+   "category": "MACHINERY_FAIL",
+   "message": "Freeze failure.",
+   "see": "README.md"
+  },
+  {
+   "code": "G403",
+   "severity": "error",
+   "category": "MACHINERY_FAIL",
+   "message": "Revision failure.",
+   "see": "README.md"
+  },
+  {
+   "code": "G404",
+   "severity": "error",
+   "category": "MACHINERY_FAIL",
+   "message": "Custody ledger failure.",
+   "see": "README.md"
+  },
+  {
+   "code": "G405",
+   "severity": "error",
+   "category": "MACHINERY_FAIL",
+   "message": "Inline Rust refused (missing or mismatched exact-hash authorisation).",
+   "see": "README.md"
+  },
+  {
+   "code": "G501",
+   "severity": "error",
+   "category": "MACHINERY_FAIL",
+   "message": "Native compilation failure.",
+   "see": "ARCHITECTURE.md"
+  },
+  {
+   "code": "G601",
+   "severity": "error",
+   "category": "MACHINERY_FAIL",
+   "message": "Data import failure (CSV/TSV/FITS/NPY/ECSV).",
+   "see": "SCIENTIFIC_READERS.md"
+  },
+  {
+   "code": "G999",
+   "severity": "error",
+   "category": "MACHINERY_FAIL",
+   "message": "I/O or JSON failure.",
+   "see": "README.md"
+  },
+  {
+   "code": "IDE100",
+   "severity": "error",
+   "category": "IDE",
+   "message": "Unbalanced block delimiter (local preview check).",
+   "see": "CONTROL_FLOW.md"
+  },
+  {
+   "code": "IDE101",
+   "severity": "info",
+   "category": "IDE",
+   "message": "Inline Rust block present: native compilation requires an exact SHA-256 authorisation.",
+   "see": "README.md"
+  }
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "schema": "goblin-ide.constants.v1",
+ "constants": [
+  {
+   "canonical_id": "math.pi",
+   "aliases": [
+    "pi",
+    "π"
+   ]
+  },
+  {
+   "canonical_id": "physical.speed_of_light",
+   "aliases": [
+    "c",
+    "speed_of_light"
+   ]
+  },
+  {
+   "canonical_id": "physical.planck_constant",
+   "aliases": [
+    "h",
+    "planck_constant"
+   ]
+  },
+  {
+   "canonical_id": "physical.reduced_planck_constant",
+   "aliases": [
+    "hbar",
+    "ħ"
+   ]
+  },
+  {
+   "canonical_id": "physical.gravitational_constant",
+   "aliases": [
+    "G",
+    "gravitational_constant"
+   ]
+  },
+  {
+   "canonical_id": "physical.boltzmann_constant",
+   "aliases": [
+    "k_B",
+    "boltzmann_constant"
+   ]
+  },
+  {
+   "canonical_id": "physical.avogadro_constant",
+   "aliases": [
+    "N_A",
+    "avogadro_constant"
+   ]
+  },
+  {
+   "canonical_id": "physical.molar_gas_constant",
+   "aliases": [
+    "R",
+    "molar_gas_constant"
+   ],
+   "detail": "Molar gas constant; exact derived SI relation."
+  },
+  {
+   "canonical_id": "physical.atomic_mass_constant",
+   "aliases": [
+    "m_u",
+    "atomic_mass_constant"
+   ],
+   "detail": "Atomic mass constant; CODATA-2022 measured value."
+  }
+ ]
+}

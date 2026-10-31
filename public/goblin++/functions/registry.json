@@ -1,0 +1,2433 @@
+{
+ "schema": "goblin-ide.functions.v1",
+ "runtime": "goblin++ 0.1.0-alpha.41",
+ "authority": "EDITOR_AID_NOT_LANGUAGE_SPEC",
+ "arrayMathHelp": "Also element-wise over numeric arrays: equal array lengths, explicit scalar repetition, independent copies, dimensional checks and zero-based failing indices. No reduction, truncation or length-one array broadcasting.",
+ "quantityLiterals": "Compound suffixes such as 1.13e-10 m/s^2; 3 m^2 means 3 square metres, (3 m)^2 squares the whole quantity; group multiple denominator factors with parentheses.",
+ "functions": [
+  {
+   "name": "npy_read",
+   "domain": "Scientific Readers",
+   "signature": "npy_read(\"array.npy\")",
+   "description": "Native bounded NPY reader; flat logical C-order copy with explicit shape. Exact uint64 IDs via npy_text; no pickle/object arrays.",
+   "snippet": "npy_read(\"${1:array.npy}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "npy_text",
+   "domain": "Scientific Readers",
+   "signature": "npy_text(\"array.npy\")",
+   "description": "Native bounded NPY reader; flat logical C-order copy with explicit shape. Exact uint64 IDs via npy_text; no pickle/object arrays.",
+   "snippet": "npy_text(\"${1:array.npy}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "npy_shape",
+   "domain": "Scientific Readers",
+   "signature": "npy_shape(\"array.npy\")",
+   "description": "Native bounded NPY reader; flat logical C-order copy with explicit shape. Exact uint64 IDs via npy_text; no pickle/object arrays.",
+   "snippet": "npy_shape(\"${1:array.npy}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "npy_dtype",
+   "domain": "Scientific Readers",
+   "signature": "npy_dtype(\"array.npy\")",
+   "description": "Native bounded NPY reader; flat logical C-order copy with explicit shape. Exact uint64 IDs via npy_text; no pickle/object arrays.",
+   "snippet": "npy_dtype(\"${1:array.npy}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "npy_order",
+   "domain": "Scientific Readers",
+   "signature": "npy_order(\"array.npy\")",
+   "description": "Native bounded NPY reader; flat logical C-order copy with explicit shape. Exact uint64 IDs via npy_text; no pickle/object arrays.",
+   "snippet": "npy_order(\"${1:array.npy}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "npz_keys",
+   "domain": "Scientific Readers",
+   "signature": "npz_keys(\"arrays.npz\")",
+   "description": "Native bounded stored/DEFLATE NPZ; exact key without .npy. Flat logical C-order values; exact IDs via npz_text. No extraction/pickle. Keys listing does not decode unselected payloads.",
+   "snippet": "npz_keys(\"${1:arrays.npz}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "npz_read",
+   "domain": "Scientific Readers",
+   "signature": "npz_read(\"arrays.npz\", \"values\")",
+   "description": "Native bounded stored/DEFLATE NPZ; exact key without .npy. Flat logical C-order values; exact IDs via npz_text. No extraction/pickle. Keys listing does not decode unselected payloads.",
+   "snippet": "npz_read(\"${1:arrays.npz}\", \"${2:values}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "npz_text",
+   "domain": "Scientific Readers",
+   "signature": "npz_text(\"arrays.npz\", \"values\")",
+   "description": "Native bounded stored/DEFLATE NPZ; exact key without .npy. Flat logical C-order values; exact IDs via npz_text. No extraction/pickle. Keys listing does not decode unselected payloads.",
+   "snippet": "npz_text(\"${1:arrays.npz}\", \"${2:values}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "npz_shape",
+   "domain": "Scientific Readers",
+   "signature": "npz_shape(\"arrays.npz\", \"values\")",
+   "description": "Native bounded stored/DEFLATE NPZ; exact key without .npy. Flat logical C-order values; exact IDs via npz_text. No extraction/pickle. Keys listing does not decode unselected payloads.",
+   "snippet": "npz_shape(\"${1:arrays.npz}\", \"${2:values}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "npz_dtype",
+   "domain": "Scientific Readers",
+   "signature": "npz_dtype(\"arrays.npz\", \"values\")",
+   "description": "Native bounded stored/DEFLATE NPZ; exact key without .npy. Flat logical C-order values; exact IDs via npz_text. No extraction/pickle. Keys listing does not decode unselected payloads.",
+   "snippet": "npz_dtype(\"${1:arrays.npz}\", \"${2:values}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "npz_order",
+   "domain": "Scientific Readers",
+   "signature": "npz_order(\"arrays.npz\", \"values\")",
+   "description": "Native bounded stored/DEFLATE NPZ; exact key without .npy. Flat logical C-order values; exact IDs via npz_text. No extraction/pickle. Keys listing does not decode unselected payloads.",
+   "snippet": "npz_order(\"${1:arrays.npz}\", \"${2:values}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "scipy_sparse_shape",
+   "domain": "Scientific Readers",
+   "signature": "scipy_sparse_shape(\"matrix.npz\")",
+   "description": "Native real CSR/CSC/COO NPZ. Duplicate coordinates refused; explicit bounded flat C-order densification. nnz includes stored zeros; row is zero-based.",
+   "snippet": "scipy_sparse_shape(\"${1:matrix.npz}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "scipy_sparse_format",
+   "domain": "Scientific Readers",
+   "signature": "scipy_sparse_format(\"matrix.npz\")",
+   "description": "Native real CSR/CSC/COO NPZ. Duplicate coordinates refused; explicit bounded flat C-order densification. nnz includes stored zeros; row is zero-based.",
+   "snippet": "scipy_sparse_format(\"${1:matrix.npz}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "scipy_sparse_nnz",
+   "domain": "Scientific Readers",
+   "signature": "scipy_sparse_nnz(\"matrix.npz\")",
+   "description": "Native real CSR/CSC/COO NPZ. Duplicate coordinates refused; explicit bounded flat C-order densification. nnz includes stored zeros; row is zero-based.",
+   "snippet": "scipy_sparse_nnz(\"${1:matrix.npz}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "scipy_sparse_dense",
+   "domain": "Scientific Readers",
+   "signature": "scipy_sparse_dense(\"matrix.npz\")",
+   "description": "Native real CSR/CSC/COO NPZ. Duplicate coordinates refused; explicit bounded flat C-order densification. nnz includes stored zeros; row is zero-based.",
+   "snippet": "scipy_sparse_dense(\"${1:matrix.npz}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "scipy_sparse_row",
+   "domain": "Scientific Readers",
+   "signature": "scipy_sparse_row(\"matrix.npz\", 0)",
+   "description": "Native real CSR/CSC/COO NPZ. Duplicate coordinates refused; explicit bounded flat C-order densification. nnz includes stored zeros; row is zero-based.",
+   "snippet": "scipy_sparse_row(\"${1:matrix.npz}\", ${2:0})",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ecsv_rows",
+   "domain": "Scientific Readers",
+   "signature": "ecsv_rows(\"catalogue.ecsv\")",
+   "description": "Native ECSV 1.0 scalar subset; no masks/mixins/general YAML. ecsv_column preserves exact ID text; numeric reads apply registered units to SI and refuse unknown units.",
+   "snippet": "ecsv_rows(\"${1:catalogue.ecsv}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ecsv_columns",
+   "domain": "Scientific Readers",
+   "signature": "ecsv_columns(\"catalogue.ecsv\")",
+   "description": "Native ECSV 1.0 scalar subset; no masks/mixins/general YAML. ecsv_column preserves exact ID text; numeric reads apply registered units to SI and refuse unknown units.",
+   "snippet": "ecsv_columns(\"${1:catalogue.ecsv}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ecsv_headers",
+   "domain": "Scientific Readers",
+   "signature": "ecsv_headers(\"catalogue.ecsv\")",
+   "description": "Native ECSV 1.0 scalar subset; no masks/mixins/general YAML. ecsv_column preserves exact ID text; numeric reads apply registered units to SI and refuse unknown units.",
+   "snippet": "ecsv_headers(\"${1:catalogue.ecsv}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ecsv_column",
+   "domain": "Scientific Readers",
+   "signature": "ecsv_column(\"catalogue.ecsv\", \"column\")",
+   "description": "Native ECSV 1.0 scalar subset; no masks/mixins/general YAML. ecsv_column preserves exact ID text; numeric reads apply registered units to SI and refuse unknown units.",
+   "snippet": "ecsv_column(\"${1:catalogue.ecsv}\", \"${2:column}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ecsv_read",
+   "domain": "Scientific Readers",
+   "signature": "ecsv_read(\"catalogue.ecsv\", \"column\")",
+   "description": "Native ECSV 1.0 scalar subset; no masks/mixins/general YAML. ecsv_column preserves exact ID text; numeric reads apply registered units to SI and refuse unknown units.",
+   "snippet": "ecsv_read(\"${1:catalogue.ecsv}\", \"${2:column}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ecsv_numbers",
+   "domain": "Scientific Readers",
+   "signature": "ecsv_numbers(\"catalogue.ecsv\", \"column\")",
+   "description": "Native ECSV 1.0 scalar subset; no masks/mixins/general YAML. ecsv_column preserves exact ID text; numeric reads apply registered units to SI and refuse unknown units.",
+   "snippet": "ecsv_numbers(\"${1:catalogue.ecsv}\", \"${2:column}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ecsv_dtype",
+   "domain": "Scientific Readers",
+   "signature": "ecsv_dtype(\"catalogue.ecsv\", \"column\")",
+   "description": "Native ECSV 1.0 scalar subset; no masks/mixins/general YAML. ecsv_column preserves exact ID text; numeric reads apply registered units to SI and refuse unknown units.",
+   "snippet": "ecsv_dtype(\"${1:catalogue.ecsv}\", \"${2:column}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ecsv_unit",
+   "domain": "Scientific Readers",
+   "signature": "ecsv_unit(\"catalogue.ecsv\", \"column\")",
+   "description": "Native ECSV 1.0 scalar subset; no masks/mixins/general YAML. ecsv_column preserves exact ID text; numeric reads apply registered units to SI and refuse unknown units.",
+   "snippet": "ecsv_unit(\"${1:catalogue.ecsv}\", \"${2:column}\")",
+   "see": "SCIENTIFIC_READERS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "csv_join",
+   "domain": "Table Joins",
+   "signature": "csv_join(\"joined.csv\", \"left.csv\", \"right.csv\", \"source_id\", \"source_id\", \"left\", \"left_\", \"right_\")",
+   "description": "Exact UTF-8 text-ID one-to-one CSV join. Eight required arguments: output, left, right, left key, right key, inner/left, left prefix, right prefix. Missing (empty or backslash-N) and duplicate keys refuse; left input order, __join_matched flag, both keys retained. 16 MiB/100,000-row inputs and output; matched/unmatched counts and hashes preserved, offline reconstruction. Returns output row count; no physical blinding.",
+   "snippet": "csv_join(\"${1:joined.csv}\", \"${2:left.csv}\", \"${3:right.csv}\", \"${4:source_id}\", \"${5:source_id}\", \"${6:left}\", \"${7:left_}\", \"${8:right_}\")",
+   "see": "TABLE_JOINS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "tsv_join",
+   "domain": "Table Joins",
+   "signature": "tsv_join(\"joined.tsv\", \"left.tsv\", \"right.tsv\", \"source_id\", \"source_id\", \"left\", \"left_\", \"right_\")",
+   "description": "Exact UTF-8 text-ID one-to-one TSV join. Eight required arguments: output, left, right, left key, right key, inner/left, left prefix, right prefix. Same strict rules as csv_join: missing and duplicate keys refuse, explicit prefixes, match flag, preserved counts and hashes, offline reconstruction. Quoted tabs/newlines stay intact. 16 MiB/100,000-row inputs and output; not a streaming join.",
+   "snippet": "tsv_join(\"${1:joined.tsv}\", \"${2:left.tsv}\", \"${3:right.tsv}\", \"${4:source_id}\", \"${5:source_id}\", \"${6:left}\", \"${7:left_}\", \"${8:right_}\")",
+   "see": "TABLE_JOINS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "plot_line",
+   "domain": "Array Plots",
+   "signature": "plot_line(\"motion.png\", x, y, \"Motion\", \"time\", \"distance\")",
+   "description": "PNG/SVG array line plot: filename, x, y, title, x label, y label. Every finite point in supplied order; matching lengths, homogeneous units per axis, SI labels, exact data/settings sidecar and reconstruction verification.",
+   "snippet": "plot_line(\"${1:motion.png}\", ${2:x}, ${3:y}, \"${4:Motion}\", \"${5:time}\", \"${6:distance}\")",
+   "see": "ARRAY_PLOTS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "plot_scatter",
+   "domain": "Array Plots",
+   "signature": "plot_scatter(\"measurements.svg\", x, y, \"Measurements\", \"x\", \"y\")",
+   "description": "PNG/SVG array scatter: filename, x, y, title, x label, y label. No sampling/dropped rows; matching lengths, homogeneous units per axis, SI labels, exact data/settings sidecar. Unicode labels: SVG.",
+   "snippet": "plot_scatter(\"${1:measurements.svg}\", ${2:x}, ${3:y}, \"${4:Measurements}\", \"${5:x}\", \"${6:y}\")",
+   "see": "ARRAY_PLOTS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "plot_histogram",
+   "domain": "Array Plots",
+   "signature": "plot_histogram(\"distribution.png\", values, 20, \"Distribution\", \"measurement\")",
+   "description": "PNG/SVG numeric array histogram: filename, values, explicit integer bins 2..500, title, x label. Uniform bins, final right edge included, count baseline zero; all values preserved in exact data/settings sidecar.",
+   "snippet": "plot_histogram(\"${1:distribution.png}\", ${2:values}, ${3:20}, \"${4:Distribution}\", \"${5:measurement}\")",
+   "see": "ARRAY_PLOTS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "resample",
+   "domain": "Randomness & Resampling",
+   "signature": "resample(values, count, 0)",
+   "description": "Independent numeric sample with replacement; explicit pre-seeded stream required, positive count <=100,000; units preserved.",
+   "snippet": "resample(${1:values}, ${2:count}, ${3:0})",
+   "see": "RANDOMNESS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "bootstrap_mean",
+   "domain": "Randomness & Resampling",
+   "signature": "bootstrap_mean(values, 1000, 0)",
+   "description": "IID replacement bootstrap mean replicates; explicit repetitions and seeded stream; no implicit interval or seed. At most 1,000,000 sample selections.",
+   "snippet": "bootstrap_mean(${1:values}, ${2:1000}, ${3:0})",
+   "see": "RANDOMNESS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "bootstrap_median",
+   "domain": "Randomness & Resampling",
+   "signature": "bootstrap_median(values, 1000, 0)",
+   "description": "IID replacement bootstrap median replicates; explicit repetitions and seeded stream; no automatic confidence interval.",
+   "snippet": "bootstrap_median(${1:values}, ${2:1000}, ${3:0})",
+   "see": "RANDOMNESS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "rng_normal",
+   "domain": "Randomness & Resampling",
+   "signature": "rng_normal(0)",
+   "description": "Standard normal via Box-Muller cosine using exactly two PCG uniforms; explicit seeded stream; platform transcendental last bits may differ. NOT cryptographic.",
+   "snippet": "rng_normal(${1:0})",
+   "see": "RANDOMNESS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "rng_normal_array",
+   "domain": "Randomness & Resampling",
+   "signature": "rng_normal_array(count, 0)",
+   "description": "Positive count <=100,000 standard normals; explicit seeded stream; no cached spare; NOT cryptographic.",
+   "snippet": "rng_normal_array(${1:count}, ${2:0})",
+   "see": "RANDOMNESS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "matrix_transpose",
+   "domain": "Matrices & Covariance",
+   "signature": "matrix_transpose(values, rows, columns)",
+   "description": "Transpose a flat row-major homogeneous numeric array with explicit positive shape; no nested arrays.",
+   "snippet": "matrix_transpose(${1:values}, ${2:rows}, ${3:columns})",
+   "see": "MATRICES_COVARIANCE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "matrix_multiply",
+   "domain": "Matrices & Covariance",
+   "signature": "matrix_multiply(left, left_rows, left_cols, right, right_rows, right_cols)",
+   "description": "Multiply flat row-major matrices with explicit left/right shapes, matching inner dimensions and checked output units; bounded scalar-product work.",
+   "snippet": "matrix_multiply(${1:left}, ${2:left_rows}, ${3:left_cols}, ${4:right}, ${5:right_rows}, ${6:right_cols})",
+   "see": "MATRICES_COVARIANCE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "vector_norm",
+   "domain": "Matrices & Covariance",
+   "signature": "vector_norm(values)",
+   "description": "Robust scaled Euclidean norm of a homogeneous numeric vector, retaining its unit; overflow refuses.",
+   "snippet": "vector_norm(${1:values})",
+   "see": "MATRICES_COVARIANCE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "vector_unit",
+   "domain": "Matrices & Covariance",
+   "signature": "vector_unit(values)",
+   "description": "Normalize a nonzero homogeneous vector safely; returns dimensionless independent array; zero vector refuses.",
+   "snippet": "vector_unit(${1:values})",
+   "see": "MATRICES_COVARIANCE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "covariance",
+   "domain": "Matrices & Covariance",
+   "signature": "covariance(values, observations, variables, 1)",
+   "description": "Flat row-major observations by variables; explicit ddof 0 or 1, divisor observations-ddof; homogeneous units squared. No mixed-unit covariance.",
+   "snippet": "covariance(${1:values}, ${2:observations}, ${3:variables}, ${4:1})",
+   "see": "MATRICES_COVARIANCE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "cholesky",
+   "domain": "Matrices & Covariance",
+   "signature": "cholesky(values, n, 0)",
+   "description": "Positive-definite flat n-by-n matrix, explicit relative symmetry tolerance; lower-triangle factor, no jitter, clipping or silent repair.",
+   "snippet": "cholesky(${1:values}, ${2:n}, ${3:0})",
+   "see": "MATRICES_COVARIANCE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "mvnormal",
+   "domain": "Randomness & Resampling",
+   "signature": "mvnormal(mean_values, covariance_values, n, 0, 0)",
+   "description": "One multivariate-normal vector from homogeneous mean and squared-unit covariance; explicit n, symmetry tolerance and seeded stream; no implicit regularization.",
+   "snippet": "mvnormal(${1:mean_values}, ${2:covariance_values}, ${3:n}, ${4:0}, ${5:0})",
+   "see": "RANDOMNESS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "csv_batch_open",
+   "domain": "Batches",
+   "signature": "csv_batch_open(\"data.csv\", [\"id\", \"value\"], 4096, 8388608, 2147483648)",
+   "description": "Serial CSV reader: path, exact columns, row limit, decoded batch byte limit (<=8 MiB), file limit (<=64 GiB). Snapshots to disk first; returns run-local text handle, not a security capability. Exact IDs remain text.",
+   "snippet": "csv_batch_open(\"${1:data.csv}\", [\"${2:id}\", \"${3:value}\"], ${4:4096}, ${5:8388608}, ${6:2147483648})",
+   "see": "BATCHES_STREAMING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "tsv_batch_open",
+   "domain": "Batches",
+   "signature": "tsv_batch_open(\"data.tsv\", [\"id\", \"value\"], 4096, 8388608, 2147483648)",
+   "description": "Serial TSV reader with explicit row/batch/file limits. Requested columns in order; immutable disk snapshot; exact IDs remain text. Must read EOF and close.",
+   "snippet": "tsv_batch_open(\"${1:data.tsv}\", [\"${2:id}\", \"${3:value}\"], ${4:4096}, ${5:8388608}, ${6:2147483648})",
+   "see": "BATCHES_STREAMING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_batch_open",
+   "domain": "FITS Batches",
+   "signature": "fits_batch_open(\"catalog.fits\", 1, [\"SOURCE_ID\", \"Z\"], 4096, 8388608, 2147483648)",
+   "description": "Serial fixed-width FITS BINTABLE projection: path, zero-based HDU, exact case-sensitive columns, row limit, decoded batch byte limit (<=8 MiB), file limit (<=64 GiB). Exact IDs remain text; nulls are explicit \\N markers, units are metadata, not converted. Requires EOF/close; not physical blinding.",
+   "snippet": "fits_batch_open(\"${1:catalog.fits}\", ${2:1}, [\"${3:SOURCE_ID}\", \"${4:Z}\"], ${5:4096}, ${6:8388608}, ${7:2147483648})",
+   "see": "FITS_BATCHES.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "batch_next",
+   "domain": "Batches",
+   "signature": "batch_next(reader)",
+   "description": "Next bounded flat row-major TEXT batch from CSV, TSV or FITS; empty means observed EOF, never silently skipped rows. FITS null cells use \\N markers. Release batch=[] before next read; not a process-wide RAM quota.",
+   "snippet": "batch_next(${1:reader})",
+   "see": "BATCHES_STREAMING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "time_date",
+   "domain": "Clock",
+   "signature": "time_date(\"utc\")",
+   "description": "Capture system local time as DD-MM-YYYY:HH:MM:SS text; time_date(\"utc\") captures UTC. Fixed at call time. Optional; clock readings and UTC offsets recorded in audited runs; not certified time. Maximum 16,384 calls.",
+   "snippet": "time_date(${1:\"utc\"})",
+   "see": "CLOCK_TIME.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "batch_close",
+   "domain": "Batches",
+   "signature": "batch_close(reader)",
+   "description": "Close reader only after observed EOF. Early/double close refuses; unfinished lifecycle prevents PASS.",
+   "snippet": "batch_close(${1:reader})",
+   "see": "BATCHES_STREAMING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "csv_stream_open",
+   "domain": "Streaming",
+   "signature": "csv_stream_open(\"processed.csv\", [\"id\", \"value\"], 2147483648)",
+   "description": "Create exclusive incremental CSV output with headers and explicit file byte budget <=64 GiB. Returns run-local writer handle; failed run output marked .partial and incomplete.",
+   "snippet": "csv_stream_open(\"${1:processed.csv}\", [\"${2:id}\", \"${3:value}\"], ${4:2147483648})",
+   "see": "RESOURCES_STREAMING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "tsv_stream_open",
+   "domain": "Streaming",
+   "signature": "tsv_stream_open(\"processed.tsv\", [\"id\", \"value\"], 2147483648)",
+   "description": "Create incremental quoted TSV output; filename, header array, explicit file byte limit. No overwrites; failed-run outputs incomplete.",
+   "snippet": "tsv_stream_open(\"${1:processed.tsv}\", [\"${2:id}\", \"${3:value}\"], ${4:2147483648})",
+   "see": "RESOURCES_STREAMING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "stream_write",
+   "domain": "Streaming",
+   "signature": "stream_write(writer, batch)",
+   "description": "Write flat array of complete rows incrementally; return row count. <=100000 cells and 8 MiB per call; preserves exact text and quantity units. May be a statement.",
+   "snippet": "stream_write(${1:writer}, ${2:batch})",
+   "see": "RESOURCES_STREAMING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "stream_close",
+   "domain": "Streaming",
+   "signature": "stream_close(writer)",
+   "description": "Sync and close writer; no later writes or double close. Required before PASS; partial output is evidence, not a complete catalogue.",
+   "snippet": "stream_close(${1:writer})",
+   "see": "RESOURCES_STREAMING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "csv_scan_stats",
+   "domain": "Streaming",
+   "signature": "csv_scan_stats(\"data.csv\", \"value\")",
+   "description": "Bounded streaming numeric CSV column scan; returns [count,sum,mean,min,max]; <=1 GiB file, <=1 MiB record, <=1024 columns; missing/nonnumeric data refuses.",
+   "snippet": "csv_scan_stats(\"${1:data.csv}\", \"${2:value}\")",
+   "see": "RESOURCES_STREAMING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "tsv_scan_stats",
+   "domain": "Streaming",
+   "signature": "tsv_scan_stats(\"data.tsv\", \"value\")",
+   "description": "Bounded streaming numeric TSV column scan; returns [count,sum,mean,min,max]; input hash and parsed-byte evidence preserved; not full generic streaming tables.",
+   "snippet": "tsv_scan_stats(\"${1:data.tsv}\", \"${2:value}\")",
+   "see": "RESOURCES_STREAMING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "rng_seed",
+   "domain": "Randomness & Resampling",
+   "signature": "rng_seed(42, 0)",
+   "description": "Seed PCG32 v1 explicitly before drawing. Optional numeric stream ID defaults to 0. No reseeding. Full u64 seeds/u63 streams use canonical decimal text. Public receipt data; NOT cryptographic.",
+   "snippet": "rng_seed(${1:42}, ${2:0})",
+   "see": "RANDOMNESS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "rng_word",
+   "domain": "Randomness & Resampling",
+   "signature": "rng_word(0)",
+   "description": "Draw one exact PCG32 unsigned 32-bit word from a seeded stream (default 0). Consume its result. Algorithm, seed and trace are recorded; NOT for encryption.",
+   "snippet": "rng_word(${1:0})",
+   "see": "RANDOMNESS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "rng_uniform",
+   "domain": "Randomness & Resampling",
+   "signature": "rng_uniform(0)",
+   "description": "Draw dimensionless uniform [0,1) using two PCG32 words and the specified 53-bit mapping. Seeded stream defaults to 0; consume the result. NOT cryptographic.",
+   "snippet": "rng_uniform(${1:0})",
+   "see": "RANDOMNESS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "rng_integer",
+   "domain": "Randomness & Resampling",
+   "signature": "rng_integer(0, 10, 0)",
+   "description": "Draw a uniform integer in half-open [low, high) via bounded rejection, with optional seeded stream ID. Numeric dimensionless bounds within +/- (2^53-1); low < high. NOT cryptographic.",
+   "snippet": "rng_integer(${1:0}, ${2:10}, ${3:0})",
+   "see": "RANDOMNESS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "csv_rows",
+   "domain": "CSV / TSV",
+   "signature": "csv_rows(\"measurements.csv\")",
+   "description": "Count data rows in a UTF-8 CSV with a unique nonempty header; header is excluded.",
+   "snippet": "csv_rows(\"${1:measurements.csv}\")",
+   "see": "DATA_MODULES_NATIVE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "csv_columns",
+   "domain": "CSV / TSV",
+   "signature": "csv_columns(\"measurements.csv\")",
+   "description": "Count CSV header columns; ragged rows are refused.",
+   "snippet": "csv_columns(\"${1:measurements.csv}\")",
+   "see": "DATA_MODULES_NATIVE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "csv_headers",
+   "domain": "CSV / TSV",
+   "signature": "csv_headers(\"measurements.csv\")",
+   "description": "Return CSV header names as an independent text array.",
+   "snippet": "csv_headers(\"${1:measurements.csv}\")",
+   "see": "DATA_MODULES_NATIVE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "csv_column",
+   "domain": "CSV / TSV",
+   "signature": "csv_column(\"measurements.csv\", \"label\")",
+   "description": "Read an exact case-sensitive header as text; no inferred numbers or silent missing-value policy.",
+   "snippet": "csv_column(\"${1:measurements.csv}\", \"${2:label}\")",
+   "see": "DATA_MODULES_NATIVE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "csv_numbers",
+   "domain": "CSV / TSV",
+   "signature": "csv_numbers(\"measurements.csv\", \"length\")",
+   "description": "Explicit finite dimensionless numeric CSV column; blank, malformed or nonfinite cells fail instead of being dropped. Assign physical units explicitly.",
+   "snippet": "csv_numbers(\"${1:measurements.csv}\", \"${2:length}\")",
+   "see": "DATA_MODULES_NATIVE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "tsv_rows",
+   "domain": "CSV / TSV",
+   "signature": "tsv_rows(\"measurements.tsv\")",
+   "description": "Count data rows in a UTF-8 tab-separated table; header is excluded.",
+   "snippet": "tsv_rows(\"${1:measurements.tsv}\")",
+   "see": "DATA_MODULES_NATIVE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "tsv_columns",
+   "domain": "CSV / TSV",
+   "signature": "tsv_columns(\"measurements.tsv\")",
+   "description": "Count TSV header columns; ragged rows are refused.",
+   "snippet": "tsv_columns(\"${1:measurements.tsv}\")",
+   "see": "DATA_MODULES_NATIVE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "tsv_headers",
+   "domain": "CSV / TSV",
+   "signature": "tsv_headers(\"measurements.tsv\")",
+   "description": "Return TSV header names as an independent text array.",
+   "snippet": "tsv_headers(\"${1:measurements.tsv}\")",
+   "see": "DATA_MODULES_NATIVE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "tsv_column",
+   "domain": "CSV / TSV",
+   "signature": "tsv_column(\"measurements.tsv\", \"label\")",
+   "description": "Read an exact case-sensitive TSV header as text, preserving empty fields.",
+   "snippet": "tsv_column(\"${1:measurements.tsv}\", \"${2:label}\")",
+   "see": "DATA_MODULES_NATIVE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "tsv_numbers",
+   "domain": "CSV / TSV",
+   "signature": "tsv_numbers(\"measurements.tsv\", \"value\")",
+   "description": "Read a finite dimensionless numeric TSV column; missing or invalid numbers fail explicitly.",
+   "snippet": "tsv_numbers(\"${1:measurements.tsv}\", \"${2:value}\")",
+   "see": "DATA_MODULES_NATIVE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "input",
+   "domain": "Core",
+   "signature": "input(\"Prompt: \")",
+   "description": "Prompt for one text line; source placeholders capture immediately, responses remain plain text. The answer is preserved in evidence. Do not enter secrets.",
+   "snippet": "input(\"${1:Prompt: }\")",
+   "see": "INTERACTION_AND_ARRAYS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "argv",
+   "domain": "Core",
+   "signature": "argv(1)",
+   "description": "Read one zero-based text argument. argv(0) is the program path; use -- to pass arguments to goblin++.",
+   "snippet": "argv(${1:1})",
+   "see": "INTERACTION_AND_ARRAYS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "len",
+   "domain": "Core",
+   "signature": "len(value)",
+   "description": "Count array elements or Unicode scalar values in text.",
+   "snippet": "len(${1:value})",
+   "see": "INTERACTION_AND_ARRAYS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "append",
+   "domain": "Core",
+   "signature": "append(values, item)",
+   "description": "Return an independent array copy; the original remains unchanged. Discarded results are refused: use values = append(values, item).",
+   "snippet": "append(${1:values}, ${2:item})",
+   "see": "INTERACTION_AND_ARRAYS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "to_text",
+   "domain": "Text",
+   "signature": "to_text(value)",
+   "description": "Render quantity, Boolean, or text; default finite numeric text round-trips, including -0. Unitless numbers can use parse_number; unitful text includes SI units. Arrays are refused.",
+   "snippet": "to_text(${1:value})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "parse_number",
+   "domain": "Text",
+   "signature": "parse_number(text)",
+   "description": "Explicitly parse finite, unitless decimal text; invalid or oversized plain integers fail.",
+   "snippet": "parse_number(${1:text})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "parse_integer",
+   "domain": "Text",
+   "signature": "parse_integer(text)",
+   "description": "Parse signed or unsigned decimal integer text within the exact f64 range.",
+   "snippet": "parse_integer(${1:text})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "sum",
+   "domain": "Statistics",
+   "signature": "sum(values)",
+   "description": "Compensated sum of a non-empty numeric array; preserves its dimension, refuses overflow and never skips values.",
+   "snippet": "sum(${1:values})",
+   "see": "STATISTICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "mean",
+   "domain": "Statistics",
+   "signature": "mean(values)",
+   "description": "Scaled compensated arithmetic mean of a non-empty numeric array; preserves its dimension and never skips values.",
+   "snippet": "mean(${1:values})",
+   "see": "STATISTICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "sort",
+   "domain": "Statistics",
+   "signature": "sort(values)",
+   "description": "Stable ascending numeric copy; dimensions retained, signed-zero ties stay in source order. Empty arrays allowed; never mutates input.",
+   "snippet": "sort(${1:values})",
+   "see": "STATISTICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "median",
+   "domain": "Statistics",
+   "signature": "median(values)",
+   "description": "Median of a non-empty finite numeric array; equivalent to type-7 quantile at 0.5. Dimensions retained; no dropped values.",
+   "snippet": "median(${1:values})",
+   "see": "STATISTICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "quantile",
+   "domain": "Statistics",
+   "signature": "quantile(values, 0.25)",
+   "description": "Hyndman-Fan type 7 quantile; non-empty finite numeric array and dimensionless probability in [0,1]. Dimensions retained; no boundary fuzz.",
+   "snippet": "quantile(${1:values}, ${2:0.25})",
+   "see": "STATISTICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "std_population",
+   "domain": "Statistics",
+   "signature": "std_population(values)",
+   "description": "Population standard deviation, divisor n; non-empty finite numeric array. Singleton gives zero; original dimension retained.",
+   "snippet": "std_population(${1:values})",
+   "see": "STATISTICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "std_sample",
+   "domain": "Statistics",
+   "signature": "std_sample(values)",
+   "description": "Sample standard deviation, divisor n-1; at least two finite numeric observations. Original dimension retained; not standard error.",
+   "snippet": "std_sample(${1:values})",
+   "see": "STATISTICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ecdf",
+   "domain": "Statistics",
+   "signature": "ecdf(values, query)",
+   "description": "Unweighted fraction count(value <= query)/n, including all ties; non-empty numeric array and finite matching-dimension query. Returns dimensionless scalar.",
+   "snippet": "ecdf(${1:values}, ${2:query})",
+   "see": "STATISTICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_trim",
+   "domain": "Text",
+   "signature": "str_trim(text)",
+   "description": "Remove surrounding Unicode whitespace from text.",
+   "snippet": "str_trim(${1:text})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_contains",
+   "domain": "Text",
+   "signature": "str_contains(text, needle)",
+   "description": "Case-sensitive text substring test.",
+   "snippet": "str_contains(${1:text}, ${2:needle})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_replace",
+   "domain": "Text",
+   "signature": "str_replace(text, old, new)",
+   "description": "Replace all non-overlapping text matches; search text cannot be empty.",
+   "snippet": "str_replace(${1:text}, ${2:old}, ${3:new})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_split",
+   "domain": "Text",
+   "signature": "str_split(text, separator)",
+   "description": "Split text on a nonempty separator, preserving empty fields.",
+   "snippet": "str_split(${1:text}, ${2:separator})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_join",
+   "domain": "Text",
+   "signature": "str_join(separator, parts)",
+   "description": "Join a one-dimensional text array with a separator.",
+   "snippet": "str_join(${1:separator}, ${2:parts})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "print",
+   "domain": "Core",
+   "signature": "print(...)",
+   "description": "Append an interpolated text line to hashed run stdout.",
+   "snippet": "print(${1:arguments})",
+   "see": "INTERACTION_AND_ARRAYS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "printf",
+   "domain": "Core",
+   "signature": "printf(...)",
+   "description": "Append formatted numeric output to hashed run stdout.",
+   "snippet": "printf(${1:arguments})",
+   "see": "INTERACTION_AND_ARRAYS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "abs",
+   "domain": "Math",
+   "signature": "abs(value)",
+   "description": "Absolute magnitude while preserving the input dimension.",
+   "snippet": "abs(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "sqrt",
+   "domain": "Math",
+   "signature": "sqrt(value)",
+   "description": "Real square root; requires a non-negative value and even unit exponents.",
+   "snippet": "sqrt(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "min",
+   "domain": "Math",
+   "signature": "min(first, second)",
+   "description": "Smallest of two or more quantities with matching dimensions.",
+   "snippet": "min(${1:first}, ${2:second})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "max",
+   "domain": "Math",
+   "signature": "max(first, second)",
+   "description": "Largest of two or more quantities with matching dimensions.",
+   "snippet": "max(${1:first}, ${2:second})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "floor",
+   "domain": "Math",
+   "signature": "floor(value)",
+   "description": "Floor of one dimensionless value.",
+   "snippet": "floor(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "ceil",
+   "domain": "Math",
+   "signature": "ceil(value)",
+   "description": "Ceiling of one dimensionless value.",
+   "snippet": "ceil(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "round",
+   "domain": "Math",
+   "signature": "round(value)",
+   "description": "Round one dimensionless value; halfway cases move away from zero.",
+   "snippet": "round(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "exp",
+   "domain": "Math",
+   "signature": "exp(value)",
+   "description": "Natural exponential of one dimensionless value.",
+   "snippet": "exp(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "ln",
+   "domain": "Math",
+   "signature": "ln(value)",
+   "description": "Natural logarithm of a positive dimensionless value.",
+   "snippet": "ln(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "log10",
+   "domain": "Math",
+   "signature": "log10(value)",
+   "description": "Base-10 logarithm of a positive dimensionless value.",
+   "snippet": "log10(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "sin",
+   "domain": "Math",
+   "signature": "sin(radians)",
+   "description": "Deprecated radians alias; use sinr or sind. Emits G302 once per run.",
+   "snippet": "sin(${1:radians})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": true
+  },
+  {
+   "name": "cos",
+   "domain": "Math",
+   "signature": "cos(radians)",
+   "description": "Deprecated radians alias; use cosr or cosd. Emits G302 once per run.",
+   "snippet": "cos(${1:radians})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": true
+  },
+  {
+   "name": "tan",
+   "domain": "Math",
+   "signature": "tan(radians)",
+   "description": "Deprecated radians alias; use tanr or tand. Emits G302 once per run.",
+   "snippet": "tan(${1:radians})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": true
+  },
+  {
+   "name": "asin",
+   "domain": "Math",
+   "signature": "asin(value)",
+   "description": "Deprecated radians-result alias; use asinr or asind. Emits G302 once per run.",
+   "snippet": "asin(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": true
+  },
+  {
+   "name": "acos",
+   "domain": "Math",
+   "signature": "acos(value)",
+   "description": "Deprecated radians-result alias; use acosr or acosd. Emits G302 once per run.",
+   "snippet": "acos(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": true
+  },
+  {
+   "name": "atan",
+   "domain": "Math",
+   "signature": "atan(value)",
+   "description": "Deprecated radians-result alias; use atanr or atand. Emits G302 once per run.",
+   "snippet": "atan(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": true
+  },
+  {
+   "name": "atan2",
+   "domain": "Math",
+   "signature": "atan2(y, x)",
+   "description": "Deprecated radians-result alias; use atan2r or atan2d. Emits G302 once per run.",
+   "snippet": "atan2(${1:y}, ${2:x})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": true
+  },
+  {
+   "name": "sind",
+   "domain": "Math",
+   "signature": "sind(degrees)",
+   "description": "Sine of a dimensionless numeric angle measured in degrees.",
+   "snippet": "sind(${1:degrees})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "cosd",
+   "domain": "Math",
+   "signature": "cosd(degrees)",
+   "description": "Cosine of a dimensionless numeric angle measured in degrees.",
+   "snippet": "cosd(${1:degrees})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "tand",
+   "domain": "Math",
+   "signature": "tand(degrees)",
+   "description": "Tangent of a dimensionless numeric angle measured in degrees.",
+   "snippet": "tand(${1:degrees})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "sinr",
+   "domain": "Math",
+   "signature": "sinr(radians)",
+   "description": "Sine of a dimensionless numeric angle measured in radians.",
+   "snippet": "sinr(${1:radians})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "cosr",
+   "domain": "Math",
+   "signature": "cosr(radians)",
+   "description": "Cosine of a dimensionless numeric angle measured in radians.",
+   "snippet": "cosr(${1:radians})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "tanr",
+   "domain": "Math",
+   "signature": "tanr(radians)",
+   "description": "Tangent of a dimensionless numeric angle measured in radians.",
+   "snippet": "tanr(${1:radians})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "asind",
+   "domain": "Math",
+   "signature": "asind(value)",
+   "description": "Inverse sine with a numeric result measured in degrees.",
+   "snippet": "asind(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "acosd",
+   "domain": "Math",
+   "signature": "acosd(value)",
+   "description": "Inverse cosine with a numeric result measured in degrees.",
+   "snippet": "acosd(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "atand",
+   "domain": "Math",
+   "signature": "atand(value)",
+   "description": "Inverse tangent with a numeric result measured in degrees.",
+   "snippet": "atand(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "asinr",
+   "domain": "Math",
+   "signature": "asinr(value)",
+   "description": "Inverse sine with a numeric result measured in radians.",
+   "snippet": "asinr(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "acosr",
+   "domain": "Math",
+   "signature": "acosr(value)",
+   "description": "Inverse cosine with a numeric result measured in radians.",
+   "snippet": "acosr(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "atanr",
+   "domain": "Math",
+   "signature": "atanr(value)",
+   "description": "Inverse tangent with a numeric result measured in radians.",
+   "snippet": "atanr(${1:value})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "atan2d",
+   "domain": "Math",
+   "signature": "atan2d(y, x)",
+   "description": "Quadrant-aware atan2(y, x) for matching dimensions; result is degrees.",
+   "snippet": "atan2d(${1:y}, ${2:x})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "atan2r",
+   "domain": "Math",
+   "signature": "atan2r(y, x)",
+   "description": "Quadrant-aware atan2(y, x) for matching dimensions; result is radians.",
+   "snippet": "atan2r(${1:y}, ${2:x})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "deg2rad",
+   "domain": "Math",
+   "signature": "deg2rad(degrees)",
+   "description": "Convert a dimensionless numeric angle from degrees to radians.",
+   "snippet": "deg2rad(${1:degrees})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "rad2deg",
+   "domain": "Math",
+   "signature": "rad2deg(radians)",
+   "description": "Convert a dimensionless numeric angle from radians to degrees.",
+   "snippet": "rad2deg(${1:radians})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "hypot",
+   "domain": "Math",
+   "signature": "hypot(x, y)",
+   "description": "Hypotenuse of two quantities with matching dimensions.",
+   "snippet": "hypot(${1:x}, ${2:y})",
+   "see": "MATH.md",
+   "arrayMath": true,
+   "legacy": false
+  },
+  {
+   "name": "is_close",
+   "domain": "Math",
+   "signature": "is_close(observed, expected, absolute_tolerance, relative_tolerance)",
+   "description": "Compare quantities with matching dimensions using explicit absolute and dimensionless relative tolerances. All four arguments required; no defaults. Does not verify evidence or establish scientific validity.",
+   "snippet": "is_close(${1:observed}, ${2:expected}, ${3:absolute_tolerance}, ${4:relative_tolerance})",
+   "see": "MATH.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "same_bits",
+   "domain": "Math",
+   "signature": "same_bits(observed, expected)",
+   "description": "Compare exact finite f64 bits of two quantities with matching dimensions, including the sign of zero. Not an artifact hash or cross-platform guarantee.",
+   "snippet": "same_bits(${1:observed}, ${2:expected})",
+   "see": "MATH.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "au2m",
+   "domain": "Vectors & Kinematics",
+   "signature": "au2m(astronomical_units)",
+   "description": "Convert a dimensionless number of astronomical units to SI metres.",
+   "snippet": "au2m(${1:astronomical_units})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "m2au",
+   "domain": "Vectors & Kinematics",
+   "signature": "m2au(length)",
+   "description": "Convert an SI length to a dimensionless number of astronomical units.",
+   "snippet": "m2au(${1:length})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "pc2m",
+   "domain": "Vectors & Kinematics",
+   "signature": "pc2m(parsecs)",
+   "description": "Convert a dimensionless number of parsecs to SI metres.",
+   "snippet": "pc2m(${1:parsecs})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "m2pc",
+   "domain": "Vectors & Kinematics",
+   "signature": "m2pc(length)",
+   "description": "Convert an SI length to a dimensionless number of parsecs.",
+   "snippet": "m2pc(${1:length})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ly2m",
+   "domain": "Vectors & Kinematics",
+   "signature": "ly2m(light_years)",
+   "description": "Convert a dimensionless number of light-years to SI metres.",
+   "snippet": "ly2m(${1:light_years})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "m2ly",
+   "domain": "Vectors & Kinematics",
+   "signature": "m2ly(length)",
+   "description": "Convert an SI length to a dimensionless number of light-years.",
+   "snippet": "m2ly(${1:length})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "magnitude",
+   "domain": "Vectors & Kinematics",
+   "signature": "magnitude(vector)",
+   "description": "Euclidean magnitude of a non-empty homogeneous numeric vector.",
+   "snippet": "magnitude(${1:vector})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "dot",
+   "domain": "Vectors & Kinematics",
+   "signature": "dot(left, right)",
+   "description": "Dot product of equal-length homogeneous numeric vectors.",
+   "snippet": "dot(${1:left}, ${2:right})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "cross",
+   "domain": "Vectors & Kinematics",
+   "signature": "cross(left, right)",
+   "description": "Right-handed cross product of two three-component vectors.",
+   "snippet": "cross(${1:left}, ${2:right})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "polar2cartesiand",
+   "domain": "Vectors & Kinematics",
+   "signature": "polar2cartesiand(radius, azimuth_degrees)",
+   "description": "Convert polar radius and degree azimuth to [x, y].",
+   "snippet": "polar2cartesiand(${1:radius}, ${2:azimuth_degrees})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "polar2cartesianr",
+   "domain": "Vectors & Kinematics",
+   "signature": "polar2cartesianr(radius, azimuth_radians)",
+   "description": "Convert polar radius and radian azimuth to [x, y].",
+   "snippet": "polar2cartesianr(${1:radius}, ${2:azimuth_radians})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "cartesian_radius",
+   "domain": "Vectors & Kinematics",
+   "signature": "cartesian_radius(coordinates)",
+   "description": "Radius of a two- or three-component Cartesian length vector.",
+   "snippet": "cartesian_radius(${1:coordinates})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "cartesian_azimuthd",
+   "domain": "Vectors & Kinematics",
+   "signature": "cartesian_azimuthd(coordinates)",
+   "description": "Cartesian azimuth from +x toward +y, returned in degrees.",
+   "snippet": "cartesian_azimuthd(${1:coordinates})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "cartesian_azimuthr",
+   "domain": "Vectors & Kinematics",
+   "signature": "cartesian_azimuthr(coordinates)",
+   "description": "Cartesian azimuth from +x toward +y, returned in radians.",
+   "snippet": "cartesian_azimuthr(${1:coordinates})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "cartesian_inclinationd",
+   "domain": "Vectors & Kinematics",
+   "signature": "cartesian_inclinationd(coordinates)",
+   "description": "Three-dimensional inclination from +z, returned in degrees.",
+   "snippet": "cartesian_inclinationd(${1:coordinates})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "cartesian_inclinationr",
+   "domain": "Vectors & Kinematics",
+   "signature": "cartesian_inclinationr(coordinates)",
+   "description": "Three-dimensional inclination from +z, returned in radians.",
+   "snippet": "cartesian_inclinationr(${1:coordinates})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "spherical2cartesiand",
+   "domain": "Vectors & Kinematics",
+   "signature": "spherical2cartesiand(radius, inclination_degrees, azimuth_degrees)",
+   "description": "Convert radius, degree inclination from +z, and degree azimuth from +x to [x, y, z].",
+   "snippet": "spherical2cartesiand(${1:radius}, ${2:inclination_degrees}, ${3:azimuth_degrees})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "spherical2cartesianr",
+   "domain": "Vectors & Kinematics",
+   "signature": "spherical2cartesianr(radius, inclination_radians, azimuth_radians)",
+   "description": "Convert radius, radian inclination from +z, and radian azimuth from +x to [x, y, z].",
+   "snippet": "spherical2cartesianr(${1:radius}, ${2:inclination_radians}, ${3:azimuth_radians})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "velocity",
+   "domain": "Vectors & Kinematics",
+   "signature": "velocity(displacement, elapsed_time)",
+   "description": "Scalar or vector displacement divided by strictly positive elapsed time.",
+   "snippet": "velocity(${1:displacement}, ${2:elapsed_time})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "velocity_add_galilean",
+   "domain": "Vectors & Kinematics",
+   "signature": "velocity_add_galilean(first, second)",
+   "description": "Galilean addition of two scalar velocities or equal-length velocity vectors.",
+   "snippet": "velocity_add_galilean(${1:first}, ${2:second})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "velocity_add_relativistic_collinear",
+   "domain": "Vectors & Kinematics",
+   "signature": "velocity_add_relativistic_collinear(first, second)",
+   "description": "One-dimensional special-relativistic velocity addition; not a general frame transform.",
+   "snippet": "velocity_add_relativistic_collinear(${1:first}, ${2:second})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "angular_velocityd",
+   "domain": "Vectors & Kinematics",
+   "signature": "angular_velocityd(degrees, elapsed_time)",
+   "description": "Degree displacement per positive elapsed time, returned as radians per second.",
+   "snippet": "angular_velocityd(${1:degrees}, ${2:elapsed_time})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "angular_velocityr",
+   "domain": "Vectors & Kinematics",
+   "signature": "angular_velocityr(radians, elapsed_time)",
+   "description": "Radian displacement per positive elapsed time.",
+   "snippet": "angular_velocityr(${1:radians}, ${2:elapsed_time})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "tangential_velocity",
+   "domain": "Vectors & Kinematics",
+   "signature": "tangential_velocity(radius, angular_velocity)",
+   "description": "Tangential speed r times angular velocity.",
+   "snippet": "tangential_velocity(${1:radius}, ${2:angular_velocity})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "centripetal_acceleration",
+   "domain": "Vectors & Kinematics",
+   "signature": "centripetal_acceleration(radius, angular_velocity)",
+   "description": "Centripetal acceleration r times angular velocity squared.",
+   "snippet": "centripetal_acceleration(${1:radius}, ${2:angular_velocity})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "angular_momentum",
+   "domain": "Vectors & Kinematics",
+   "signature": "angular_momentum(position, momentum)",
+   "description": "Right-handed r cross p for three-component position and momentum vectors.",
+   "snippet": "angular_momentum(${1:position}, ${2:momentum})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "angular_momentum_from_velocity",
+   "domain": "Vectors & Kinematics",
+   "signature": "angular_momentum_from_velocity(position, mass, velocity)",
+   "description": "Right-handed r cross mass-times-velocity for three-component vectors.",
+   "snippet": "angular_momentum_from_velocity(${1:position}, ${2:mass}, ${3:velocity})",
+   "see": "VECTORS_COORDINATES_KINEMATICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "chem_registry_version",
+   "domain": "Chemistry",
+   "signature": "chem_registry_version()",
+   "description": "Return the exact versioned chemistry registry identity preserved in scientific evidence.",
+   "snippet": "chem_registry_version()",
+   "see": "CHEMISTRY.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "chem_atomic_number",
+   "domain": "Chemistry",
+   "signature": "chem_atomic_number(\"C\")",
+   "description": "Return the atomic number for an exact, case-sensitive element symbol in the scoped registry.",
+   "snippet": "chem_atomic_number(\"${1:C}\")",
+   "see": "CHEMISTRY.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "chem_atomic_weight",
+   "domain": "Chemistry",
+   "signature": "chem_atomic_weight(\"O\")",
+   "description": "Return the registry's dimensionless abridged standard atomic weight for an exact element symbol.",
+   "snippet": "chem_atomic_weight(\"${1:O}\")",
+   "see": "CHEMISTRY.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "chem_molar_mass",
+   "domain": "Chemistry",
+   "signature": "chem_molar_mass(\"H2O\")",
+   "description": "Calculate molar mass from element symbols, positive integer counts, and parentheses; charges, isotopes, brackets, and hydrate dots are refused.",
+   "snippet": "chem_molar_mass(\"${1:H2O}\")",
+   "see": "CHEMISTRY.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "chem_moles",
+   "domain": "Chemistry",
+   "signature": "chem_moles(mass, molar_mass)",
+   "description": "Calculate amount from non-negative mass and positive molar mass with dimensional checks.",
+   "snippet": "chem_moles(${1:mass}, ${2:molar_mass})",
+   "see": "CHEMISTRY.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "chem_mass",
+   "domain": "Chemistry",
+   "signature": "chem_mass(amount, molar_mass)",
+   "description": "Calculate mass from non-negative amount and positive molar mass with dimensional checks.",
+   "snippet": "chem_mass(${1:amount}, ${2:molar_mass})",
+   "see": "CHEMISTRY.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "chem_concentration",
+   "domain": "Chemistry",
+   "signature": "chem_concentration(amount, volume)",
+   "description": "Calculate amount concentration from non-negative amount and positive volume.",
+   "snippet": "chem_concentration(${1:amount}, ${2:volume})",
+   "see": "CHEMISTRY.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "chem_dilution",
+   "domain": "Chemistry",
+   "signature": "chem_dilution(concentration, initial_volume, final_volume)",
+   "description": "Calculate C2 = C1 V1 / V2; final volume must be positive and no smaller than initial volume.",
+   "snippet": "chem_dilution(${1:concentration}, ${2:initial_volume}, ${3:final_volume})",
+   "see": "CHEMISTRY.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_hdu_count",
+   "domain": "FITS",
+   "signature": "fits_hdu_count(\"file.fits\")",
+   "description": "Count FITS HDUs; imported input is read-only and hashed in a run.",
+   "snippet": "fits_hdu_count(\"${1:file.fits}\")",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_header",
+   "domain": "FITS",
+   "signature": "fits_header(\"file.fits\", 0, \"EXTNAME\")",
+   "description": "Read a FITS header card from a zero-based HDU.",
+   "snippet": "fits_header(\"${1:file.fits}\", ${2:0}, \"${3:EXTNAME}\")",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_axis",
+   "domain": "FITS",
+   "signature": "fits_axis(...)",
+   "description": "Read a one-based FITS image axis index in a zero-based HDU.",
+   "snippet": "fits_axis(${1:arguments})",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_count",
+   "domain": "FITS",
+   "signature": "fits_count(...)",
+   "description": "Count image pixels in a FITS HDU.",
+   "snippet": "fits_count(${1:arguments})",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_pixel",
+   "domain": "FITS",
+   "signature": "fits_pixel(...)",
+   "description": "Read a zero-based image pixel from a FITS HDU.",
+   "snippet": "fits_pixel(${1:arguments})",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_mean",
+   "domain": "FITS",
+   "signature": "fits_mean(...)",
+   "description": "Calculate the mean of supported FITS image pixels.",
+   "snippet": "fits_mean(${1:arguments})",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_rows",
+   "domain": "FITS",
+   "signature": "fits_rows(...)",
+   "description": "Count rows in a fixed-width FITS binary table.",
+   "snippet": "fits_rows(${1:arguments})",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_columns",
+   "domain": "FITS",
+   "signature": "fits_columns(...)",
+   "description": "Count columns in a fixed-width FITS binary table.",
+   "snippet": "fits_columns(${1:arguments})",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_column",
+   "domain": "FITS",
+   "signature": "fits_column(...)",
+   "description": "Read one zero-based row from a FITS binary-table column. Integers outside the safe f64 range are refused; use fits_column_text for exact catalogue IDs.",
+   "snippet": "fits_column(${1:arguments})",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_column_text",
+   "domain": "FITS",
+   "signature": "fits_column_text(\"catalog.fits\", 1, \"SOURCE_ID\", 0)",
+   "description": "Read a scalar FITS cell as text, preserving unscaled signed 64-bit catalogue IDs exactly. Null cells refuse; this is not an integer arithmetic type.",
+   "snippet": "fits_column_text(\"${1:catalog.fits}\", ${2:1}, \"${3:SOURCE_ID}\", ${4:0})",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_where",
+   "domain": "FITS",
+   "signature": "fits_where(\"Z\", \">=\", 0.4)",
+   "description": "Build a versioned explicit scalar FITS predicate. Comparisons take a bound; is_null/is_valid take two arguments. Quote large integer ID bounds. Null comparisons including != are false; FITS units are not inferred.",
+   "snippet": "fits_where(\"${1:Z}\", \"${2:>=}\", ${3:0.4})",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_all",
+   "domain": "FITS",
+   "signature": "fits_all([lower, upper])",
+   "description": "Combine a nonempty array of FITS predicates with AND; returns independent filter text, not a dataset or Boolean.",
+   "snippet": "fits_all([${1:lower}, ${2:upper}])",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_any",
+   "domain": "FITS",
+   "signature": "fits_any([first_cut, second_cut])",
+   "description": "Combine a nonempty array of FITS predicates with OR. Nested groups are explicit; no dynamic code or physical blinding is implied.",
+   "snippet": "fits_any([${1:first_cut}, ${2:second_cut}])",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_export_csv",
+   "domain": "FITS",
+   "signature": "fits_export_csv(\"subset.csv\", \"catalog.fits\", 1, [\"SOURCE_ID\", \"Z\"], cut)",
+   "description": "Export projected scalar FITS columns after combined cuts; returns selected row count. Preserves unscaled i64 IDs, original row order, shortest-round-trip floats and explicit null markers. Output is hashed under RUN_DIR/outputs; 64 MiB cap; not physical blinding.",
+   "snippet": "fits_export_csv(\"${1:subset.csv}\", \"${2:catalog.fits}\", ${3:1}, [\"${4:SOURCE_ID}\", \"${5:Z}\"], ${6:cut})",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_export_tsv",
+   "domain": "FITS",
+   "signature": "fits_export_tsv(\"subset.tsv\", \"catalog.fits\", 1, [\"SOURCE_ID\", \"Z\"], cut)",
+   "description": "Same audited subset projection as fits_export_csv, in TSV. Tabs/newlines in text cells refuse rather than being altered; use CSV for lossless quoting.",
+   "snippet": "fits_export_tsv(\"${1:subset.tsv}\", \"${2:catalog.fits}\", ${3:1}, [\"${4:SOURCE_ID}\", \"${5:Z}\"], ${6:cut})",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_column_valid_count",
+   "domain": "FITS",
+   "signature": "fits_column_valid_count(...)",
+   "description": "Count non-null numeric values in a FITS binary-table column.",
+   "snippet": "fits_column_valid_count(${1:arguments})",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_column_mean",
+   "domain": "FITS",
+   "signature": "fits_column_mean(...)",
+   "description": "Mean of supported non-null numeric FITS column values.",
+   "snippet": "fits_column_mean(${1:arguments})",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_column_min",
+   "domain": "FITS",
+   "signature": "fits_column_min(...)",
+   "description": "Minimum of supported non-null numeric FITS column values.",
+   "snippet": "fits_column_min(${1:arguments})",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_column_max",
+   "domain": "FITS",
+   "signature": "fits_column_max(...)",
+   "description": "Maximum of supported non-null numeric FITS column values.",
+   "snippet": "fits_column_max(${1:arguments})",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fits_select_stats",
+   "domain": "FITS",
+   "signature": "fits_select_stats(\"file.fits\", 1, \"Z\", 0.4, 0.6, \"Z\", \"WEIGHT\")",
+   "description": "Scan a half-open numeric FITS selection; returns [selected rows, used rows, weight sum, mean]. Optional weights must be positive.",
+   "snippet": "fits_select_stats(\"${1:file.fits}\", ${2:1}, \"${3:Z}\", ${4:0.4}, ${5:0.6}, \"${6:Z}\", \"${7:WEIGHT}\")",
+   "see": "FITS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "write_text",
+   "domain": "Outputs",
+   "signature": "write_text(\"summary.txt\", \"result = {value}\")",
+   "description": "Write .txt or .md under RUN_DIR/outputs; GO_PARANOID and seal are optional.",
+   "snippet": "write_text(\"${1:summary.txt}\", \"${2:result = {value}}\")",
+   "see": "OUTPUTS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "write_csv",
+   "domain": "Outputs",
+   "signature": "write_csv(\"summary.csv\", 2, \"name\", \"value\", \"result\", value)",
+   "description": "Write a bounded CSV under RUN_DIR/outputs; first row is the header.",
+   "snippet": "write_csv(\"${1:summary.csv}\", ${2:2}, \"${3:name}\", \"${4:value}\", \"${5:result}\", ${6:value})",
+   "see": "OUTPUTS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "write_tsv",
+   "domain": "Outputs",
+   "signature": "write_tsv(...)",
+   "description": "Write a bounded TSV under RUN_DIR/outputs; first row is the header.",
+   "snippet": "write_tsv(${1:arguments})",
+   "see": "OUTPUTS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "write_json",
+   "domain": "Outputs",
+   "signature": "write_json(\"summary.json\", \"value\", value)",
+   "description": "Write a JSON object under RUN_DIR/outputs with unique keys.",
+   "snippet": "write_json(\"${1:summary.json}\", \"${2:value}\", ${3:value})",
+   "see": "OUTPUTS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "plot_fits_histogram",
+   "domain": "FITS Plots",
+   "signature": "plot_fits_histogram(...)",
+   "description": "Deterministic sampled FITS histogram; SVG or PNG, not a full-population claim.",
+   "snippet": "plot_fits_histogram(${1:arguments})",
+   "see": "PLOT_PROVENANCE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "plot_fits_scatter",
+   "domain": "FITS Plots",
+   "signature": "plot_fits_scatter(...)",
+   "description": "Deterministic sampled FITS scatter plot; SVG or PNG.",
+   "snippet": "plot_fits_scatter(${1:arguments})",
+   "see": "PLOT_PROVENANCE.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_voltage",
+   "domain": "Electrical",
+   "signature": "ee_voltage(current, resistance)",
+   "description": "Ohm law V = I R; current and non-negative resistance produce voltage.",
+   "snippet": "ee_voltage(${1:current}, ${2:resistance})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_current",
+   "domain": "Electrical",
+   "signature": "ee_current(voltage, resistance)",
+   "description": "Ohm law I = V / R; resistance must be strictly positive.",
+   "snippet": "ee_current(${1:voltage}, ${2:resistance})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_resistance",
+   "domain": "Electrical",
+   "signature": "ee_resistance(voltage, current)",
+   "description": "Ohm law R = V / I; nonzero current and a non-negative resulting resistance are required.",
+   "snippet": "ee_resistance(${1:voltage}, ${2:current})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_power",
+   "domain": "Electrical",
+   "signature": "ee_power(voltage, current)",
+   "description": "P = V I under the passive sign convention; positive absorbs, negative delivers power.",
+   "snippet": "ee_power(${1:voltage}, ${2:current})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_power_i2r",
+   "domain": "Electrical",
+   "signature": "ee_power_i2r(current, resistance)",
+   "description": "Resistor dissipation I squared times non-negative resistance.",
+   "snippet": "ee_power_i2r(${1:current}, ${2:resistance})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_power_v2r",
+   "domain": "Electrical",
+   "signature": "ee_power_v2r(voltage, resistance)",
+   "description": "Resistor dissipation V squared divided by strictly positive resistance.",
+   "snippet": "ee_power_v2r(${1:voltage}, ${2:resistance})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_energy",
+   "domain": "Electrical",
+   "signature": "ee_energy(power, duration)",
+   "description": "Constant signed power times non-negative duration.",
+   "snippet": "ee_energy(${1:power}, ${2:duration})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_charge",
+   "domain": "Electrical",
+   "signature": "ee_charge(current, duration)",
+   "description": "Constant signed current times non-negative duration.",
+   "snippet": "ee_charge(${1:current}, ${2:duration})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_series_resistance",
+   "domain": "Electrical",
+   "signature": "ee_series_resistance(resistances)",
+   "description": "Sum a non-empty array of non-negative resistances.",
+   "snippet": "ee_series_resistance(${1:resistances})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_parallel_resistance",
+   "domain": "Electrical",
+   "signature": "ee_parallel_resistance(resistances)",
+   "description": "Equivalent parallel resistance of a non-empty array of strictly positive resistances.",
+   "snippet": "ee_parallel_resistance(${1:resistances})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_rc_time_constant",
+   "domain": "Electrical",
+   "signature": "ee_rc_time_constant(resistance, capacitance)",
+   "description": "Ideal RC time constant R C; resistance and capacitance must be non-negative.",
+   "snippet": "ee_rc_time_constant(${1:resistance}, ${2:capacitance})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_capacitor_energy",
+   "domain": "Electrical",
+   "signature": "ee_capacitor_energy(capacitance, voltage)",
+   "description": "Ideal stored energy one-half C V squared; capacitance must be non-negative.",
+   "snippet": "ee_capacitor_energy(${1:capacitance}, ${2:voltage})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_inductor_energy",
+   "domain": "Electrical",
+   "signature": "ee_inductor_energy(inductance, current)",
+   "description": "Ideal stored energy one-half L I squared; inductance must be non-negative.",
+   "snippet": "ee_inductor_energy(${1:inductance}, ${2:current})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_kcl_residual",
+   "domain": "Electrical",
+   "signature": "ee_kcl_residual(signed_currents)",
+   "description": "Signed current sum at an explicitly chosen node; zero means balance to floating-point precision.",
+   "snippet": "ee_kcl_residual(${1:signed_currents})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_kvl_residual",
+   "domain": "Electrical",
+   "signature": "ee_kvl_residual(signed_voltages)",
+   "description": "Signed voltage sum around an explicitly chosen loop; zero means balance to floating-point precision.",
+   "snippet": "ee_kvl_residual(${1:signed_voltages})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_kcl_balanced",
+   "domain": "Electrical",
+   "signature": "ee_kcl_balanced(signed_currents, tolerance)",
+   "description": "Test absolute signed-current residual against a non-negative current tolerance.",
+   "snippet": "ee_kcl_balanced(${1:signed_currents}, ${2:tolerance})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_kvl_balanced",
+   "domain": "Electrical",
+   "signature": "ee_kvl_balanced(signed_voltages, tolerance)",
+   "description": "Test absolute signed-voltage residual against a non-negative voltage tolerance.",
+   "snippet": "ee_kvl_balanced(${1:signed_voltages}, ${2:tolerance})",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ee_in_unit",
+   "domain": "Electrical",
+   "signature": "ee_in_unit(quantity, \"kΩ\")",
+   "description": "Return a dimensionless reporting number in an explicitly named compatible electrical unit.",
+   "snippet": "ee_in_unit(${1:quantity}, \"${2:kΩ}\")",
+   "see": "ELECTRICAL_ENGINEERING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_upper",
+   "domain": "Text",
+   "signature": "str_upper(text)",
+   "description": "Unicode uppercase copy; may expand; no locale tailoring or normalization; bounded to 1 MiB.",
+   "snippet": "str_upper(${1:text})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_lower",
+   "domain": "Text",
+   "signature": "str_lower(text)",
+   "description": "Unicode lowercase copy, including contextual final sigma; no locale tailoring or normalization; bounded to 1 MiB.",
+   "snippet": "str_lower(${1:text})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_bytes_len",
+   "domain": "Text",
+   "signature": "str_bytes_len(text)",
+   "description": "Count UTF-8 bytes, distinct from len(text) Unicode scalar count. No terminator or capacity.",
+   "snippet": "str_bytes_len(${1:text})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "sizeof",
+   "domain": "Text",
+   "signature": "sizeof(text)",
+   "description": "Text-only UTF-8 payload byte count, alias of str_bytes_len. Not C object size or RAM usage; other types refuse.",
+   "snippet": "sizeof(${1:text})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_compare",
+   "domain": "Text",
+   "signature": "str_compare(left, right)",
+   "description": "Return -1, 0, +1 using case-sensitive, locale-independent UTF-8 lexicographic order; no normalization.",
+   "snippet": "str_compare(${1:left}, ${2:right})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "to_base",
+   "domain": "Text",
+   "signature": "to_base(integer, base)",
+   "description": "Format a unitless integer within ±(2^53-1), base 2/8/10/16; sign-magnitude text, no prefixes or two's complement.",
+   "snippet": "to_base(${1:integer}, ${2:base})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "from_base",
+   "domain": "Text",
+   "signature": "from_base(text, base)",
+   "description": "Parse signed integer text, base 2/8/10/16, exact range ±(2^53-1); trims edges; refuses prefixes, fractions and separators.",
+   "snippet": "from_base(${1:text}, ${2:base})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fluid_density",
+   "domain": "Fluid Mechanics",
+   "signature": "fluid_density(mass, volume)",
+   "description": "mass/volume, kg/m^3. Nonnegative mass; positive volume; checked SI dimensions.",
+   "snippet": "fluid_density(${1:mass}, ${2:volume})",
+   "see": "FLUID_MECHANICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fluid_kinematic_viscosity",
+   "domain": "Fluid Mechanics",
+   "signature": "fluid_kinematic_viscosity(dynamic_viscosity, density)",
+   "description": "mu/rho, m^2/s. Both arguments positive with SI dimensions.",
+   "snippet": "fluid_kinematic_viscosity(${1:dynamic_viscosity}, ${2:density})",
+   "see": "FLUID_MECHANICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fluid_dynamic_viscosity",
+   "domain": "Fluid Mechanics",
+   "signature": "fluid_dynamic_viscosity(kinematic_viscosity, density)",
+   "description": "nu*rho, Pa*s. Both arguments positive with SI dimensions.",
+   "snippet": "fluid_dynamic_viscosity(${1:kinematic_viscosity}, ${2:density})",
+   "see": "FLUID_MECHANICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fluid_volume_flow",
+   "domain": "Fluid Mechanics",
+   "signature": "fluid_volume_flow(area, mean_normal_velocity)",
+   "description": "Signed volume flow = positive area * signed mean normal velocity, m^3/s.",
+   "snippet": "fluid_volume_flow(${1:area}, ${2:mean_normal_velocity})",
+   "see": "FLUID_MECHANICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fluid_flow_speed",
+   "domain": "Fluid Mechanics",
+   "signature": "fluid_flow_speed(volume_flow, area)",
+   "description": "Signed mean normal velocity = volume flow / positive area, m/s.",
+   "snippet": "fluid_flow_speed(${1:volume_flow}, ${2:area})",
+   "see": "FLUID_MECHANICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fluid_reynolds",
+   "domain": "Fluid Mechanics",
+   "signature": "fluid_reynolds(density, velocity, characteristic_length, dynamic_viscosity)",
+   "description": "rho*abs(v)*L/mu; dimensionless. Positive density, length, viscosity. General diagnostic, not proof of a flow regime.",
+   "snippet": "fluid_reynolds(${1:density}, ${2:velocity}, ${3:characteristic_length}, ${4:dynamic_viscosity})",
+   "see": "FLUID_MECHANICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fluid_dynamic_pressure",
+   "domain": "Fluid Mechanics",
+   "signature": "fluid_dynamic_pressure(density, velocity)",
+   "description": "rho*v^2/2, Pa. Positive density; signed scalar velocity; not automatically total pressure.",
+   "snippet": "fluid_dynamic_pressure(${1:density}, ${2:velocity})",
+   "see": "FLUID_MECHANICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fluid_bernoulli_total_pressure",
+   "domain": "Fluid Mechanics",
+   "signature": "fluid_bernoulli_total_pressure(static_pressure, density, velocity)",
+   "description": "p+rho*v^2/2, Pa. Same-height, steady, incompressible, inviscid streamline model; no pumps, losses or heating; assumptions are user responsibility.",
+   "snippet": "fluid_bernoulli_total_pressure(${1:static_pressure}, ${2:density}, ${3:velocity})",
+   "see": "FLUID_MECHANICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "fluid_pipe_pressure_drop",
+   "domain": "Fluid Mechanics",
+   "signature": "fluid_pipe_pressure_drop(density, dynamic_viscosity, length, radius, volume_flow)",
+   "description": "Signed Poiseuille drop 8*mu*L*Q/(pi*r^4), Pa. Circular fully developed Newtonian incompressible laminar flow; enforces Re < 2000 but cannot prove other assumptions. Radius, not diameter.",
+   "snippet": "fluid_pipe_pressure_drop(${1:density}, ${2:dynamic_viscosity}, ${3:length}, ${4:radius}, ${5:volume_flow})",
+   "see": "FLUID_MECHANICS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_to_hex",
+   "domain": "Text",
+   "signature": "str_to_hex(text)",
+   "description": "Encode UTF-8 bytes as fixed-width 2-digit base-16 groups; no separators; at most 1 MiB. Not encryption.",
+   "snippet": "str_to_hex(${1:text})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_from_hex",
+   "domain": "Text",
+   "signature": "str_from_hex(text)",
+   "description": "Decode fixed-width 2-digit base-16 byte groups; rejects invalid digits, bytes above 255 and invalid UTF-8; no prefixes or separators.",
+   "snippet": "str_from_hex(${1:text})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_to_octal",
+   "domain": "Text",
+   "signature": "str_to_octal(text)",
+   "description": "Encode UTF-8 bytes as fixed-width 3-digit base-8 groups; no separators; at most 1 MiB. Not encryption.",
+   "snippet": "str_to_octal(${1:text})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_from_octal",
+   "domain": "Text",
+   "signature": "str_from_octal(text)",
+   "description": "Decode fixed-width 3-digit base-8 byte groups; rejects invalid digits, bytes above 255 and invalid UTF-8; no prefixes or separators.",
+   "snippet": "str_from_octal(${1:text})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_to_binary",
+   "domain": "Text",
+   "signature": "str_to_binary(text)",
+   "description": "Encode UTF-8 bytes as fixed-width 8-digit base-2 groups; no separators; at most 1 MiB. Not encryption.",
+   "snippet": "str_to_binary(${1:text})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_from_binary",
+   "domain": "Text",
+   "signature": "str_from_binary(text)",
+   "description": "Decode fixed-width 8-digit base-2 byte groups; rejects invalid digits, bytes above 255 and invalid UTF-8; no prefixes or separators.",
+   "snippet": "str_from_binary(${1:text})",
+   "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  }
+ ],
+ "statements": [
+  {
+   "name": "COMPLETELY_MAD",
+   "kind": "statement",
+   "description": "First top-level directive. Implies GO_PARANOID; automatically seals final user-global values separately from explicit snapshots. At most 256 bindings and 8 MiB; no inline Rust or unaudited standalone native execution. Failed captures refuse PASS. Evidence integrity, not encryption or scientific validity.",
+   "snippet": "COMPLETELY_MAD"
+  },
+  {
+   "name": "GO_NUMERIC_AUDIT",
+   "kind": "statement",
+   "description": "Main-source directive naming an explicit JSON configuration; requires run --compile. Compare named scalar seals with exact bits and dimensions on this machine; not an accuracy certificate or cross-platform guarantee. No comparison during check preview.",
+   "snippet": "GO_NUMERIC_AUDIT \"${1:numeric_audit.json}\""
+  },
+  {
+   "name": "GO_LOOP_BUDGET",
+   "kind": "statement",
+   "description": "One main-source declaration, 1 to 50,000,000 shared loop-body entries; default 1,000,000. Requested/effective/used budget is audited; not a sandbox.",
+   "snippet": "GO_LOOP_BUDGET ${1:50000000}"
+  },
+  {
+   "name": "import",
+   "kind": "statement",
+   "description": "Statically import local .gbl g_func libraries; no top-level execution or hidden inline Rust. Paths stay below the entry source directory.",
+   "snippet": "import \"${1:lib/analysis.gbl}\""
+  },
+  {
+   "name": "GO_PARANOID",
+   "kind": "statement",
+   "description": "Optional stricter evidence mode: postflight source observation and receipt self-check; not a sandbox.",
+   "snippet": null
+  },
+  {
+   "name": "seal",
+   "kind": "statement",
+   "description": "Optionally snapshot a variable or registered constant as a separate typed run artifact.",
+   "snippet": "seal ${1:value}"
+  },
+  {
+   "name": "g_func",
+   "kind": "statement",
+   "description": "Declare a top-level user function with local copy-value arguments; every reached path must return.",
+   "snippet": "g_func ${1:name}(${2:value}) {\n    return ${3:value}\n}"
+  },
+  {
+   "name": "return",
+   "kind": "statement",
+   "description": "Return a value from g_func, including inside a branch or loop.",
+   "snippet": "return ${1:value}"
+  },
+  {
+   "name": "for",
+   "kind": "statement",
+   "description": "Iterate a half-open integer range or independent array value; shared default 1,000,000 loop-body entries, configurable to 50,000,000 with GO_LOOP_BUDGET.",
+   "snippet": "for ${1:i} in range(${2:0}, ${3:10}) {\n    ${4:print(\"{i}\")}\n}"
+  },
+  {
+   "name": "in",
+   "kind": "statement",
+   "description": "Connects a for-loop variable to range(...) or an array expression.",
+   "snippet": null
+  },
+  {
+   "name": "range",
+   "kind": "statement",
+   "description": "Half-open integer bounds used only in for ... in range(...).",
+   "snippet": null
+  },
+  {
+   "name": "while",
+   "kind": "statement",
+   "description": "Repeat while a Boolean condition is true; subject to the shared loop limit.",
+   "snippet": "while ${1:condition} {\n    ${2:statement}\n}"
+  },
+  {
+   "name": "break",
+   "kind": "statement",
+   "description": "Exit the nearest containing for or while loop.",
+   "snippet": null
+  },
+  {
+   "name": "continue",
+   "kind": "statement",
+   "description": "Start the next iteration of the nearest containing for or while loop.",
+   "snippet": null
+  },
+  {
+   "name": "and",
+   "kind": "statement",
+   "description": "Short-circuit Boolean conjunction.",
+   "snippet": null
+  },
+  {
+   "name": "or",
+   "kind": "statement",
+   "description": "Short-circuit Boolean disjunction.",
+   "snippet": null
+  },
+  {
+   "name": "not",
+   "kind": "statement",
+   "description": "Boolean negation.",
+   "snippet": null
+  },
+  {
+   "name": "if",
+   "kind": "statement",
+   "description": "Execute a branch when its condition is Boolean true.",
+   "snippet": "if ${1:condition} {\n    ${2:statement}\n} else {\n    ${3:statement}\n}"
+  },
+  {
+   "name": "else",
+   "kind": "statement",
+   "description": "Optional if fallback; `else if` tests another Boolean condition.",
+   "snippet": null
+  },
+  {
+   "name": "switch",
+   "kind": "statement",
+   "description": "Evaluate a selector once, then execute the first exact, dimension-aware matching case without fallthrough.",
+   "snippet": "switch ${1:value} {\n    case ${2:label} {\n        ${3:statement}\n    }\n    default {\n        ${4:statement}\n    }\n}"
+  },
+  {
+   "name": "case",
+   "kind": "statement",
+   "description": "A lazily evaluated switch label. The first exact match wins.",
+   "snippet": null
+  },
+  {
+   "name": "default",
+   "kind": "statement",
+   "description": "Optional final switch branch if no case matches.",
+   "snippet": null
+  },
+  {
+   "name": "argc",
+   "kind": "statement",
+   "description": "Read-only count of program arguments, including argv(0).",
+   "snippet": null
+  },
+  {
+   "name": "true",
+   "kind": "statement",
+   "description": "Boolean true literal.",
+   "snippet": null
+  },
+  {
+   "name": "false",
+   "kind": "statement",
+   "description": "Boolean false literal.",
+   "snippet": null
+  },
+  {
+   "name": "RUST_INLINE_BEGIN",
+   "kind": "statement",
+   "description": "Starts arbitrary native Rust; compiled mode and exact SHA-256 authorization required.",
+   "snippet": "RUST_INLINE_BEGIN\n${1:// reviewed Rust code}\nRUST_INLINE_END"
+  },
+  {
+   "name": "RUST_INLINE_END",
+   "kind": "statement",
+   "description": "Ends an inline Rust block.",
+   "snippet": null
+  }
+ ]
+}

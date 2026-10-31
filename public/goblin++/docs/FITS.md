@@ -1,0 +1,130 @@
+# FITS discovery and import
+
+Goblin++ treats FITS structure and scientific interpretation as separate questions. Discover what a file contains before choosing values to analyse.
+
+## Inspect first
+
+For fast structural reconnaissance of a large file:
+
+```console
+goblin++ fits-info specObj-dr16.fits --quick
+```
+
+This reads every HDU header but deliberately does not hash the full file. Its output is labelled `QUICK_INSPECTION_UNHASHED_NOT_EVIDENCE`.
+
+For a complete file SHA-256 as part of the inspection report:
+
+```console
+goblin++ fits-info specObj-dr16.fits
+goblin++ fits-info specObj-dr16.fits --json
+```
+
+Neither inspection mode creates a run receipt. A normal `.gbl` execution does.
+
+## Index conventions
+
+- HDU indexes are zero-based: the primary HDU is `0`, the first extension is `1`.
+- Table row and repeated-column element indexes are zero-based.
+- Image axes follow FITS notation and are one-based: `NAXIS1` is axis `1`.
+
+## Functions
+
+| Function | Result |
+|---|---|
+| `fits_hdu_count(file)` | Number of HDUs |
+| `fits_header(file, key)` | Primary-header value (compatible form) |
+| `fits_header(file, hdu, key)` | Value from an explicit HDU header |
+| `fits_axis(file, axis)` | Primary-image axis length (compatible form) |
+| `fits_axis(file, hdu, axis)` | Explicit image-HDU axis length |
+| `fits_count(file[, hdu])` | Image element count |
+| `fits_pixel(file[, hdu], index)` | Flattened image value |
+| `fits_mean(file[, hdu])` | Mean of finite, non-`BLANK` image values |
+| `fits_rows(file, hdu)` | Binary-table row count |
+| `fits_columns(file, hdu)` | Binary-table column count |
+| `fits_column(file, hdu, name, row)` | Scalar numeric, logical, or text cell |
+| `fits_column(file, hdu, name, row, element)` | Element of a repeated numeric/logical column |
+| `fits_column_valid_count(file, hdu, name)` | Non-null numeric elements |
+| `fits_column_mean(file, hdu, name)` | Compensated mean of non-null numeric elements |
+| `fits_column_min(file, hdu, name)` | Minimum non-null numeric element |
+| `fits_column_max(file, hdu, name)` | Maximum non-null numeric element |
+| `fits_select_stats(file, hdu, selection, lower, upper, value[, weight])` | Selected row counts, sum of weights, and mean over scalar numeric columns |
+
+A direct read of a null cell returns `G601`; aggregate statistics skip integer `TNULL` values and floating-point NaNs. Column matching is ASCII case-insensitive. A repeated numeric column requires the fifth `element` argument for a direct cell read, while statistics include every element.
+
+## Filtered and weighted table summary
+
+`fits_select_stats` scans the complete table in bounded chunks (at most 8 MiB
+per row/chunk), without sampling or modifying the FITS file. Its selection,
+value, and optional weight columns must each be supported *scalar numeric*
+columns. The lower bound is inclusive and the upper bound exclusive:
+`lower <= selection < upper`. Bounds must be finite, dimensionless numbers with
+`lower < upper`. FITS `TSCAL`/`TZERO` are applied to physical values; integer
+`TNULL` and floating NaN are treated as missing, following the FITS storage
+rules. A missing selection value cannot match. A selected row with a missing
+value or weight is counted as selected but not used. Every non-missing weight
+in a selected row must be strictly positive; zero or negative weights fail
+explicitly. No usable rows is an error rather than a fabricated mean.
+
+The returned array has four dimensionless values:
+`[selected_rows, used_rows, weight_sum, mean]`. Without a weight column, each
+usable row has weight 1 and `mean` is the ordinary selected mean. With a weight
+column, `mean = sum(value * weight) / sum(weight)`; sums use compensated
+accumulation, and any non-finite product or sum is refused.
+
+```goblin
+GO_PARANOID
+stats = fits_select_stats("sample.fits", 1, "Z", 0, 3, "Z", "QUALITY")
+selected = stats[0]
+used = stats[1]
+weighted_mean = stats[3]
+print("selected = {selected}; used = {used}; weighted mean = {weighted_mean}")
+seal stats
+```
+
+The exact interval, columns, and weights are never inferred from the catalogue:
+choose them for your scientific question. The run receipt records the source,
+input hash, and a structured access description; `seal stats` preserves the
+result as an independently checked artifact. This initial operation does not
+apply survey-specific quality cuts, uncertainties, random catalogues, or FITS
+`TUNIT` conversion. Alpha.19 supports these FITS calls in both engines using
+the same Rust helpers. See `examples/fits_selection.gbl` and
+[the native I/O guide](DATA_MODULES_NATIVE.md) for compilation and evidence boundaries.
+
+## Catalogue example
+
+```goblin
+GO_PARANOID
+
+rows = fits_rows("specObj-dr16.fits", 1)
+first_class = fits_column("specObj-dr16.fits", 1, "CLASS", 0)
+first_z = fits_column("specObj-dr16.fits", 1, "Z", 0)
+valid_z = fits_column_valid_count("specObj-dr16.fits", 1, "Z")
+mean_z = fits_column_mean("specObj-dr16.fits", 1, "Z")
+
+print("rows = {rows}")
+print("first class = {first_class}")
+print("first redshift = {first_z}")
+print("valid redshifts = {valid_z}")
+print("unfiltered mean redshift = {mean_z}")
+
+seal rows
+seal valid_z
+seal mean_z
+```
+
+The mean above is deliberately labelled unfiltered. Goblin++ does not infer sample selection, quality cuts, object class, warning masks, or cosmological meaning from a column name. Those scientific choices must become explicit language features or explicit source code before the result is interpretable.
+
+## Evidence and large files
+
+The first evidence-grade run over a large FITS file reads the file to hash it and reads it again to build a verified checksum-addressed evidence object. Ensure the project filesystem has enough free space for one preserved copy. Later runs hard-link that object into their run directories when supported, so they do not each consume another full copy.
+
+`--quick` is appropriate for discovering structure, never for making an evidence claim.
+
+## Explicit limits
+
+Alpha.23 adds [combined cuts and exact-ID CSV/TSV subset export](FITS_SUBSETS.md).
+Use `fits_column_text` for unscaled signed 64-bit IDs. Numeric access refuses
+unsafe integers rather than rounding; general integer arithmetic and FITS
+subset writing are not implemented. The subset projection is not physical blinding.
+
+This release does not read ASCII-table values, random groups, tile-compressed images, bit arrays, complex values, or variable-length array heaps. It reports those structures where possible and refuses unsupported access. WCS, declared FITS units, uncertainty models, filters, and catalogue-specific semantics are not interpreted.

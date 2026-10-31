@@ -1,0 +1,664 @@
+{
+ "schema": "goblin-ide.units.v1",
+ "compoundSyntax": "Compound suffixes such as 1.13e-10 m/s^2; 3 m^2 means 3 square metres, (3 m)^2 squares the whole quantity; group multiple denominator factors with parentheses.",
+ "units": [
+  {
+   "symbol": "L",
+   "dimension": "m^3",
+   "dimensionVector": [
+    0,
+    3,
+    0,
+    0,
+    0,
+    0
+   ],
+   "description": "length^3; SI factor 0.001",
+   "siFactor": 0.001
+  },
+  {
+   "symbol": "mL",
+   "dimension": "m^3",
+   "dimensionVector": [
+    0,
+    3,
+    0,
+    0,
+    0,
+    0
+   ],
+   "description": "length^3; SI factor 1e-06",
+   "siFactor": 1e-06
+  },
+  {
+   "symbol": "uL",
+   "dimension": "m^3",
+   "dimensionVector": [
+    0,
+    3,
+    0,
+    0,
+    0,
+    0
+   ],
+   "description": "length^3; SI factor 1e-09",
+   "siFactor": 1e-09
+  },
+  {
+   "symbol": "µL",
+   "dimension": "m^3",
+   "dimensionVector": [
+    0,
+    3,
+    0,
+    0,
+    0,
+    0
+   ],
+   "description": "length^3; SI factor 1e-09",
+   "siFactor": 1e-09
+  },
+  {
+   "symbol": "nm",
+   "dimension": "m",
+   "dimensionVector": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "description": "length^1; SI factor 1e-09",
+   "siFactor": 1e-09
+  },
+  {
+   "symbol": "pm",
+   "dimension": "m",
+   "dimensionVector": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "description": "length^1; SI factor 1e-12",
+   "siFactor": 1e-12
+  },
+  {
+   "symbol": "angstrom",
+   "dimension": "m",
+   "dimensionVector": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "description": "length^1; SI factor 1e-10",
+   "siFactor": 1e-10
+  },
+  {
+   "symbol": "Å",
+   "dimension": "m",
+   "dimensionVector": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "description": "length^1; SI factor 1e-10",
+   "siFactor": 1e-10
+  },
+  {
+   "symbol": "Pa",
+   "dimension": "kg·m^-1·s^-2",
+   "dimensionVector": [
+    1,
+    -1,
+    -2,
+    0,
+    0,
+    0
+   ],
+   "description": "mass^1 · length^-1 · time^-2; SI factor 1",
+   "siFactor": 1
+  },
+  {
+   "symbol": "kPa",
+   "dimension": "kg·m^-1·s^-2",
+   "dimensionVector": [
+    1,
+    -1,
+    -2,
+    0,
+    0,
+    0
+   ],
+   "description": "mass^1 · length^-1 · time^-2; SI factor 1000",
+   "siFactor": 1000
+  },
+  {
+   "symbol": "bar",
+   "dimension": "kg·m^-1·s^-2",
+   "dimensionVector": [
+    1,
+    -1,
+    -2,
+    0,
+    0,
+    0
+   ],
+   "description": "mass^1 · length^-1 · time^-2; SI factor 100000",
+   "siFactor": 100000
+  },
+  {
+   "symbol": "atm",
+   "dimension": "kg·m^-1·s^-2",
+   "dimensionVector": [
+    1,
+    -1,
+    -2,
+    0,
+    0,
+    0
+   ],
+   "description": "mass^1 · length^-1 · time^-2; SI factor 101325",
+   "siFactor": 101325
+  },
+  {
+   "symbol": "Da",
+   "dimension": "kg",
+   "dimensionVector": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "description": "mass^1; SI factor 1.66053906892e-27",
+   "siFactor": 1.66053906892e-27
+  },
+  {
+   "symbol": "A",
+   "dimension": "A",
+   "dimensionVector": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "description": "current^1; SI factor 1",
+   "siFactor": 1
+  },
+  {
+   "symbol": "mA",
+   "dimension": "A",
+   "dimensionVector": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "description": "current^1; SI factor 0.001",
+   "siFactor": 0.001
+  },
+  {
+   "symbol": "uA",
+   "dimension": "A",
+   "dimensionVector": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "description": "current^1; SI factor 1e-06",
+   "siFactor": 1e-06
+  },
+  {
+   "symbol": "µA",
+   "dimension": "A",
+   "dimensionVector": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "description": "current^1; SI factor 1e-06",
+   "siFactor": 1e-06
+  },
+  {
+   "symbol": "C",
+   "dimension": "s·A",
+   "dimensionVector": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    1
+   ],
+   "description": "time^1 · current^1; SI factor 1",
+   "siFactor": 1
+  },
+  {
+   "symbol": "V",
+   "dimension": "kg·m^2·s^-3·A^-1",
+   "dimensionVector": [
+    1,
+    2,
+    -3,
+    0,
+    0,
+    -1
+   ],
+   "description": "mass^1 · length^2 · time^-3 · current^-1; SI factor 1",
+   "siFactor": 1
+  },
+  {
+   "symbol": "mV",
+   "dimension": "kg·m^2·s^-3·A^-1",
+   "dimensionVector": [
+    1,
+    2,
+    -3,
+    0,
+    0,
+    -1
+   ],
+   "description": "mass^1 · length^2 · time^-3 · current^-1; SI factor 0.001",
+   "siFactor": 0.001
+  },
+  {
+   "symbol": "kV",
+   "dimension": "kg·m^2·s^-3·A^-1",
+   "dimensionVector": [
+    1,
+    2,
+    -3,
+    0,
+    0,
+    -1
+   ],
+   "description": "mass^1 · length^2 · time^-3 · current^-1; SI factor 1000",
+   "siFactor": 1000
+  },
+  {
+   "symbol": "ohm",
+   "dimension": "kg·m^2·s^-3·A^-2",
+   "dimensionVector": [
+    1,
+    2,
+    -3,
+    0,
+    0,
+    -2
+   ],
+   "description": "mass^1 · length^2 · time^-3 · current^-2; SI factor 1",
+   "siFactor": 1
+  },
+  {
+   "symbol": "Ω",
+   "dimension": "kg·m^2·s^-3·A^-2",
+   "dimensionVector": [
+    1,
+    2,
+    -3,
+    0,
+    0,
+    -2
+   ],
+   "description": "mass^1 · length^2 · time^-3 · current^-2; SI factor 1",
+   "siFactor": 1
+  },
+  {
+   "symbol": "kohm",
+   "dimension": "kg·m^2·s^-3·A^-2",
+   "dimensionVector": [
+    1,
+    2,
+    -3,
+    0,
+    0,
+    -2
+   ],
+   "description": "mass^1 · length^2 · time^-3 · current^-2; SI factor 1000",
+   "siFactor": 1000
+  },
+  {
+   "symbol": "kΩ",
+   "dimension": "kg·m^2·s^-3·A^-2",
+   "dimensionVector": [
+    1,
+    2,
+    -3,
+    0,
+    0,
+    -2
+   ],
+   "description": "mass^1 · length^2 · time^-3 · current^-2; SI factor 1000",
+   "siFactor": 1000
+  },
+  {
+   "symbol": "Mohm",
+   "dimension": "kg·m^2·s^-3·A^-2",
+   "dimensionVector": [
+    1,
+    2,
+    -3,
+    0,
+    0,
+    -2
+   ],
+   "description": "mass^1 · length^2 · time^-3 · current^-2; SI factor 1000000",
+   "siFactor": 1000000
+  },
+  {
+   "symbol": "MΩ",
+   "dimension": "kg·m^2·s^-3·A^-2",
+   "dimensionVector": [
+    1,
+    2,
+    -3,
+    0,
+    0,
+    -2
+   ],
+   "description": "mass^1 · length^2 · time^-3 · current^-2; SI factor 1000000",
+   "siFactor": 1000000
+  },
+  {
+   "symbol": "F",
+   "dimension": "kg^-1·m^-2·s^4·A^2",
+   "dimensionVector": [
+    -1,
+    -2,
+    4,
+    0,
+    0,
+    2
+   ],
+   "description": "mass^-1 · length^-2 · time^4 · current^2; SI factor 1",
+   "siFactor": 1
+  },
+  {
+   "symbol": "mF",
+   "dimension": "kg^-1·m^-2·s^4·A^2",
+   "dimensionVector": [
+    -1,
+    -2,
+    4,
+    0,
+    0,
+    2
+   ],
+   "description": "mass^-1 · length^-2 · time^4 · current^2; SI factor 0.001",
+   "siFactor": 0.001
+  },
+  {
+   "symbol": "uF",
+   "dimension": "kg^-1·m^-2·s^4·A^2",
+   "dimensionVector": [
+    -1,
+    -2,
+    4,
+    0,
+    0,
+    2
+   ],
+   "description": "mass^-1 · length^-2 · time^4 · current^2; SI factor 1e-06",
+   "siFactor": 1e-06
+  },
+  {
+   "symbol": "µF",
+   "dimension": "kg^-1·m^-2·s^4·A^2",
+   "dimensionVector": [
+    -1,
+    -2,
+    4,
+    0,
+    0,
+    2
+   ],
+   "description": "mass^-1 · length^-2 · time^4 · current^2; SI factor 1e-06",
+   "siFactor": 1e-06
+  },
+  {
+   "symbol": "nF",
+   "dimension": "kg^-1·m^-2·s^4·A^2",
+   "dimensionVector": [
+    -1,
+    -2,
+    4,
+    0,
+    0,
+    2
+   ],
+   "description": "mass^-1 · length^-2 · time^4 · current^2; SI factor 1e-09",
+   "siFactor": 1e-09
+  },
+  {
+   "symbol": "pF",
+   "dimension": "kg^-1·m^-2·s^4·A^2",
+   "dimensionVector": [
+    -1,
+    -2,
+    4,
+    0,
+    0,
+    2
+   ],
+   "description": "mass^-1 · length^-2 · time^4 · current^2; SI factor 1e-12",
+   "siFactor": 1e-12
+  },
+  {
+   "symbol": "H",
+   "dimension": "kg·m^2·s^-2·A^-2",
+   "dimensionVector": [
+    1,
+    2,
+    -2,
+    0,
+    0,
+    -2
+   ],
+   "description": "mass^1 · length^2 · time^-2 · current^-2; SI factor 1",
+   "siFactor": 1
+  },
+  {
+   "symbol": "mH",
+   "dimension": "kg·m^2·s^-2·A^-2",
+   "dimensionVector": [
+    1,
+    2,
+    -2,
+    0,
+    0,
+    -2
+   ],
+   "description": "mass^1 · length^2 · time^-2 · current^-2; SI factor 0.001",
+   "siFactor": 0.001
+  },
+  {
+   "symbol": "uH",
+   "dimension": "kg·m^2·s^-2·A^-2",
+   "dimensionVector": [
+    1,
+    2,
+    -2,
+    0,
+    0,
+    -2
+   ],
+   "description": "mass^1 · length^2 · time^-2 · current^-2; SI factor 1e-06",
+   "siFactor": 1e-06
+  },
+  {
+   "symbol": "µH",
+   "dimension": "kg·m^2·s^-2·A^-2",
+   "dimensionVector": [
+    1,
+    2,
+    -2,
+    0,
+    0,
+    -2
+   ],
+   "description": "mass^1 · length^2 · time^-2 · current^-2; SI factor 1e-06",
+   "siFactor": 1e-06
+  },
+  {
+   "symbol": "W",
+   "dimension": "kg·m^2·s^-3",
+   "dimensionVector": [
+    1,
+    2,
+    -3,
+    0,
+    0,
+    0
+   ],
+   "description": "mass^1 · length^2 · time^-3; SI factor 1",
+   "siFactor": 1
+  },
+  {
+   "symbol": "mW",
+   "dimension": "kg·m^2·s^-3",
+   "dimensionVector": [
+    1,
+    2,
+    -3,
+    0,
+    0,
+    0
+   ],
+   "description": "mass^1 · length^2 · time^-3; SI factor 0.001",
+   "siFactor": 0.001
+  },
+  {
+   "symbol": "kW",
+   "dimension": "kg·m^2·s^-3",
+   "dimensionVector": [
+    1,
+    2,
+    -3,
+    0,
+    0,
+    0
+   ],
+   "description": "mass^1 · length^2 · time^-3; SI factor 1000",
+   "siFactor": 1000
+  },
+  {
+   "symbol": "S",
+   "dimension": "kg^-1·m^-2·s^3·A^2",
+   "dimensionVector": [
+    -1,
+    -2,
+    3,
+    0,
+    0,
+    2
+   ],
+   "description": "mass^-1 · length^-2 · time^3 · current^2; SI factor 1",
+   "siFactor": 1
+  },
+  {
+   "symbol": "mS",
+   "dimension": "kg^-1·m^-2·s^3·A^2",
+   "dimensionVector": [
+    -1,
+    -2,
+    3,
+    0,
+    0,
+    2
+   ],
+   "description": "mass^-1 · length^-2 · time^3 · current^2; SI factor 0.001",
+   "siFactor": 0.001
+  },
+  {
+   "symbol": "uS",
+   "dimension": "kg^-1·m^-2·s^3·A^2",
+   "dimensionVector": [
+    -1,
+    -2,
+    3,
+    0,
+    0,
+    2
+   ],
+   "description": "mass^-1 · length^-2 · time^3 · current^2; SI factor 1e-06",
+   "siFactor": 1e-06
+  },
+  {
+   "symbol": "µS",
+   "dimension": "kg^-1·m^-2·s^3·A^2",
+   "dimensionVector": [
+    -1,
+    -2,
+    3,
+    0,
+    0,
+    2
+   ],
+   "description": "mass^-1 · length^-2 · time^3 · current^2; SI factor 1e-06",
+   "siFactor": 1e-06
+  },
+  {
+   "symbol": "Hz",
+   "dimension": "s^-1",
+   "dimensionVector": [
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0
+   ],
+   "description": "time^-1; SI factor 1",
+   "siFactor": 1
+  },
+  {
+   "symbol": "kHz",
+   "dimension": "s^-1",
+   "dimensionVector": [
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0
+   ],
+   "description": "time^-1; SI factor 1000",
+   "siFactor": 1000
+  },
+  {
+   "symbol": "MHz",
+   "dimension": "s^-1",
+   "dimensionVector": [
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0
+   ],
+   "description": "time^-1; SI factor 1000000",
+   "siFactor": 1000000
+  }
+ ]
+}

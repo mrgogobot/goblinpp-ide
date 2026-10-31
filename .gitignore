@@ -1,0 +1,25 @@
+node_modules
+dist
+dist-ssr
+.pnpm-store
+*.local
+.DS_Store
+.vite
+
+# Goblin++ evidence output (never commit runs by default)
+.goblin
+RUN_DIR
+*.partial
+
+# Rust / Tauri build artifacts
+src-tauri/target
+src-tauri/gen
+.cargo-home
+release
+
+# generated mobile icon sets (regenerate with: pnpm tauri icon public/goblinpp-logo.png)
+src-tauri/icons/android
+src-tauri/icons/ios
+
+# unused large asset
+squirrel.png
