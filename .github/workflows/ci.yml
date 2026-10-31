@@ -31,6 +31,15 @@ jobs:
           src-tauri/binaries/goblin++-aarch64-apple-darwin --version
       - name: Install frontend dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Check out exact bundled engine source for locked compile dependencies
+        uses: actions/checkout@v6
+        with:
+          repository: mrgogobot/goblinpp
+          ref: ffe11be7995e9be18fab0f2991b1f51702488a56
+          path: .engine-validation-source
+          persist-credentials: false
+      - name: Prefetch public engine dependencies before private offline compile tests
+        run: cargo fetch --locked --manifest-path .engine-validation-source/Cargo.toml
       - name: Typecheck
         run: pnpm typecheck
       - name: Real engine and frontend integration

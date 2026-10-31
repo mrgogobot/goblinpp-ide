@@ -38,6 +38,14 @@ exercise the actual process-capture/stdin adapter against the same sidecar.
 All automated fixtures are public; no AI API calls or real secrets are used.
 These do not substitute for a live installed GUI check or a security audit.
 
+Private/file-data native compilation builds the embedded engine support with
+`cargo --locked --offline`. A fresh machine must first cache the matching public
+engine dependencies: in the alpha.43 engine source checkout, run
+`cargo fetch --locked`. Do this setup before running private code. CI fetches
+those dependencies from engine commit
+`ffe11be7995e9be18fab0f2991b1f51702488a56` before running the compiled integration
+test. The interpreter needs no Rust toolchain or dependency-cache setup.
+
 The Rust toolchain stays at 1.92.0 for this local verification; dependency lock
 versions were retained. Source/binary sync is explicit and offline:
 `python3 scripts/sync-engine.py --engine-root ../goblinpp`.
