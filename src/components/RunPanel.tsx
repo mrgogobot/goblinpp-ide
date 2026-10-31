@@ -30,7 +30,7 @@ function SummaryCard() {
       <div className="run-summary-row">
         <Pill status={r.status} />
         <span className="mono" title={r.command}>{basename(r.file)}</span>
-        <span className="muted">{r.kind === 'check' ? 'check (preview only, no evidence)' : r.summary.EXECUTION_ENGINE ?? r.kind}</span>
+        <span className="muted">{r.profile === 'GO_PRIVATE' ? 'private script - no scientific receipt' : r.kind === 'check' ? 'check (preview only, no evidence)' : r.summary.EXECUTION_ENGINE ?? r.kind}</span>
         <span className="muted">{r.profile}</span>
         {r.summary.PARANOID_POSTFLIGHT && <span className="muted">postflight {r.summary.PARANOID_POSTFLIGHT}</span>}
         <span className="muted">{r.durationMs} ms</span>
@@ -64,7 +64,7 @@ function SummaryCard() {
         {r.runDir && <button type="button" className="toolbar-btn framed" onClick={() => void verifyRun(r.runDir!)}>Verify</button>}
         {r.runDir && <button type="button" className="toolbar-btn framed" onClick={() => void openPath(`${r.runDir}/receipt.json`)}>receipt.json</button>}
         {r.runDir && <button type="button" className="toolbar-btn framed" onClick={() => void shell.revealInFinder(r.runDir!)}>Finder</button>}
-        <button type="button" className="toolbar-btn framed" onClick={() => runAction('run.freeze')}>Freeze</button>
+        {r.profile !== 'GO_PRIVATE' && <button type="button" className="toolbar-btn framed" onClick={() => runAction('run.freeze')}>Freeze</button>}
         <button type="button" className="toolbar-btn framed" onClick={() => runAction('run.revise')}>Revise…</button>
       </div>
     </div>
@@ -75,6 +75,7 @@ export function RunPanel() {
   const output = useRunStore((s) => s.output)
   const running = useRunStore((s) => s.running)
   const awaitingInput = useRunStore((s) => s.awaitingInput)
+  const awaitingSecret = useRunStore((s) => s.awaitingSecret)
   const sendInput = useRunStore((s) => s.sendInput)
   const clearOutput = useRunStore((s) => s.clearOutput)
   const [input, setInput] = useState('')
@@ -84,6 +85,7 @@ export function RunPanel() {
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => { if (autoScroll && listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight }, [output, autoScroll])
+  useEffect(() => { if (awaitingSecret) setInput('') }, [awaitingSecret])
   useEffect(() => { if (awaitingInput) inputRef.current?.focus() }, [awaitingInput])
 
   return (
@@ -116,8 +118,8 @@ export function RunPanel() {
       </div>
       {running && (
         <div className={`run-stdin${awaitingInput ? ' waiting' : ''}`}>
-          <span className="muted mono" style={{ fontSize: 11 }}>{awaitingInput ? 'program is waiting for input()' : 'stdin'}</span>
-          <input ref={inputRef} className="mono" placeholder="type a line and press Enter to send to the program" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') { void sendInput(input); setInput('') } }} />
+          <span className="muted mono" style={{ fontSize: 11 }}>{awaitingSecret ? 'use the masked secret dialog' : awaitingInput ? 'program is waiting for input()' : 'stdin'}</span>
+          <input disabled={awaitingSecret} type={awaitingSecret ? "password" : "text"} ref={inputRef} className="mono" placeholder="type a line and press Enter to send to the program" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') { void sendInput(input); setInput('') } }} />
         </div>
       )}
     </div>

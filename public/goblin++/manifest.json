@@ -1,7 +1,7 @@
 {
  "name": "goblin++",
  "displayName": "Goblin++",
- "version": "0.1.0-alpha.41",
+ "version": "0.1.0-alpha.43",
  "languageId": "goblinpp",
  "fileExtensions": [
   ".gbl"
@@ -70,7 +70,9 @@
   "TABLE_JOINS.md",
   "TEST_RESULTS.md",
   "VECTORS_COORDINATES_KINEMATICS.md",
-  "WB3_ROADMAP.md"
+  "WB3_ROADMAP.md",
+  "PRIVATE_FUNCTIONS.md",
+  "ENCRYPTION.md"
  ],
  "examples": "examples/",
  "unitRegistry": "units/registry.json",
@@ -108,7 +110,8 @@
  "profiles": [
   "everyday",
   "GO_PARANOID",
-  "COMPLETELY_MAD"
+  "COMPLETELY_MAD",
+  "GO_PRIVATE"
  ],
  "evidence": {
   "runDirPrefix": "runs/",
@@ -132,7 +135,7 @@
   "kΩ",
   "µF"
  ],
- "minIDEVersion": "0.2.0",
+ "minIDEVersion": "0.2.1",
  "minRustVersion": "1.92.0",
  "license": "MIT",
  "changelog": "CHANGELOG.md",

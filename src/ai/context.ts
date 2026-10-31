@@ -1,3 +1,4 @@
+import { isPrivateSource } from '../run/secretInput'
 /*
  * Context assembly (§5.2). Bounded by a token budget with a priority order:
  * user prompt > active file > diagnostics > RUN_DIR > seal ledger >
@@ -29,7 +30,7 @@ export function approxTokens(chars: number): number {
 }
 
 export function assembleContext(input: ContextInput): ContextBundle {
-  if (input.contextFree) {
+  if (input.contextFree || (input.activeFile && isPrivateSource(input.activeFile.content))) {
     return {
       system: 'You are the Goblin++ IDE assistant. Answer directly. (Context-free mode: no file or evidence data is attached.)',
       user: input.userPrompt,
@@ -46,7 +47,7 @@ export function assembleContext(input: ContextInput): ContextBundle {
     { label: 'seal ledger', text: input.sealLedger?.join('\n') ?? '', priority: 4 },
     { label: 'freeze state', text: input.freezeState ?? '', priority: 5 },
     { label: 'docs', text: input.docs ?? '', priority: 6 },
-    { label: 'open files', text: input.openFiles?.map((f) => `${f.path}\n${f.snippet}`).join('\n\n') ?? '', priority: 7 },
+    { label: 'open files', text: input.openFiles?.filter(f=>!isPrivateSource(f.snippet)).map((f) => `${f.path}\n${f.snippet}`).join('\n\n') ?? '', priority: 7 },
   ].filter((p) => p.text.trim().length > 0)
 
   let used = 0
@@ -60,7 +61,7 @@ export function assembleContext(input: ContextInput): ContextBundle {
   }
 
   const system =
-    'You are the Goblin++ IDE assistant, specialised in the evidence-first scientific language Goblin++ (Rust engine goblin++ 0.1.0-alpha.41). Facts: comments start with #; quantities are written `2 kg`, `1.13e-10 m/s^2`, `4.7 kΩ`; directives GO_PARANOID / COMPLETELY_MAD go first; `seal name` snapshots a value; g_func defines functions with explicit return; trig uses sinr/sind (sin() is legacy G302); runs produce RUN_DIR receipts; the workflow is freeze → run → verify → revise. Be concise and prefer code in ```goblinpp fences.'
+    'You are the Goblin++ IDE assistant, specialised in the evidence-first scientific language Goblin++ (Rust engine goblin++ 0.1.0-alpha.43). Facts: comments start with #; quantities are written `2 kg`, `1.13e-10 m/s^2`, `4.7 kΩ`; directives GO_PARANOID / COMPLETELY_MAD go first; `seal name` snapshots a value; g_func defines functions with explicit return; trig uses sinr/sind (sin() is legacy G302); ordinary science runs produce RUN_DIR receipts; GO_PRIVATE scripts call input_secret/encrypt_text/encrypt_file/decrypt_text/decrypt_file/read_text/display_file without scientific receipts, and must not contain hardcoded secrets; the workflow is freeze → run → verify → revise. Be concise and prefer code in ```goblinpp fences.'
 
   const contextText = included
     .filter((p) => p.label !== 'user prompt')

@@ -1,0 +1,313 @@
+# Goblin++ IDE dependency notices
+
+Locked macOS arm64 normal Rust dependency graph plus installed locked Node packages (includes build dependencies; three nonredistributed build-tool executables excluded explicitly). Bundled engine notices are separate in public/goblin++/.
+
+Original licence texts and source evidence are retained under `third-party/`.
+Package declarations below retain their upstream expressions; this inventory does not relicense third-party work.
+The Goblin++ engine has its own MIT licence and dependency notices under `public/goblin++/`.
+
+- **rust adler2 2.0.1**: `0BSD OR MIT OR Apache-2.0`; [preserved texts](third-party/rust/adler2-2.0.1/).
+- **rust aho-corasick 1.1.5**: `Unlicense OR MIT`; [preserved texts](third-party/rust/aho-corasick-1.1.5/).
+- **rust alloc-no-stdlib 3.0.0**: `BSD-3-Clause`; [preserved texts](third-party/rust/alloc-no-stdlib-3.0.0/).
+- **rust alloc-stdlib 0.3.0**: `BSD-3-Clause`; [preserved texts](third-party/rust/alloc-stdlib-0.3.0/).
+- **rust anyhow 1.0.104**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/anyhow-1.0.104/).
+- **rust base64 0.21.7**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/base64-0.21.7/).
+- **rust base64 0.22.1**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/base64-0.22.1/).
+- **rust base64 0.23.1**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/base64-0.23.1/).
+- **rust bit-set 0.8.0**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/bit-set-0.8.0/).
+- **rust bit-vec 0.8.0**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/bit-vec-0.8.0/).
+- **rust bitflags 1.3.2**: `MIT/Apache-2.0`; [preserved texts](third-party/rust/bitflags-1.3.2/).
+- **rust bitflags 2.13.2**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/bitflags-2.13.2/).
+- **rust block-buffer 0.10.4**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/block-buffer-0.10.4/).
+- **rust block2 0.6.2**: `MIT`; [preserved texts](third-party/rust/block2-0.6.2/).
+- **rust brotli 9.1.1**: `BSD-3-Clause AND MIT`; [preserved texts](third-party/rust/brotli-9.1.1/).
+- **rust brotli-decompressor 6.2.0**: `BSD-3-Clause/MIT`; [preserved texts](third-party/rust/brotli-decompressor-6.2.0/).
+- **rust byteorder 1.5.0**: `Unlicense OR MIT`; [preserved texts](third-party/rust/byteorder-1.5.0/).
+- **rust bytes 1.12.1**: `MIT`; [preserved texts](third-party/rust/bytes-1.12.1/).
+- **rust camino 1.2.6**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/camino-1.2.6/).
+- **rust cargo-platform 0.1.9**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/cargo-platform-0.1.9/).
+- **rust cargo_metadata 0.19.2**: `MIT`; [preserved texts](third-party/rust/cargo_metadata-0.19.2/).
+- **rust cfb 0.14.0**: `MIT`; [preserved texts](third-party/rust/cfb-0.14.0/).
+- **rust cfg-if 1.0.5**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/cfg-if-1.0.5/).
+- **rust cookie 0.18.2**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/cookie-0.18.2/).
+- **rust core-foundation 0.10.1**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/core-foundation-0.10.1/).
+- **rust core-foundation-sys 0.8.7**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/core-foundation-sys-0.8.7/).
+- **rust core-graphics 0.25.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/core-graphics-0.25.0/).
+- **rust core-graphics-types 0.2.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/core-graphics-types-0.2.0/).
+- **rust cpufeatures 0.2.17**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/cpufeatures-0.2.17/).
+- **rust crc32fast 1.5.3**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/crc32fast-1.5.3/).
+- **rust crossbeam-channel 0.5.17**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/crossbeam-channel-0.5.17/).
+- **rust crossbeam-utils 0.8.23**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/crossbeam-utils-0.8.23/).
+- **rust crypto-common 0.1.7**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/crypto-common-0.1.7/).
+- **rust cssparser 0.37.0**: `MPL-2.0`; [preserved texts](third-party/rust/cssparser-0.37.0/).
+- **rust cssparser-macros 0.7.1**: `MPL-2.0`; [preserved texts](third-party/rust/cssparser-macros-0.7.1/).
+- **rust ctor 1.0.13**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/ctor-1.0.13/).
+- **rust darling 0.24.1**: `MIT`; [preserved texts](third-party/rust/darling-0.24.1/).
+- **rust darling_core 0.24.1**: `MIT`; [preserved texts](third-party/rust/darling_core-0.24.1/).
+- **rust darling_macro 0.24.1**: `MIT`; [preserved texts](third-party/rust/darling_macro-0.24.1/).
+- **rust deranged 0.5.9**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/deranged-0.5.9/).
+- **rust derive_more 2.1.1**: `MIT`; [preserved texts](third-party/rust/derive_more-2.1.1/).
+- **rust derive_more-impl 2.1.1**: `MIT`; [preserved texts](third-party/rust/derive_more-impl-2.1.1/).
+- **rust digest 0.10.7**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/digest-0.10.7/).
+- **rust dirs 7.0.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/dirs-7.0.0/).
+- **rust dirs-sys 0.5.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/dirs-sys-0.5.0/).
+- **rust dispatch2 0.3.1**: `Zlib OR Apache-2.0 OR MIT`; [preserved texts](third-party/rust/dispatch2-0.3.1/).
+- **rust displaydoc 0.2.7**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/displaydoc-0.2.7/).
+- **rust dom_query 0.28.0**: `MIT`; [preserved texts](third-party/rust/dom_query-0.28.0/).
+- **rust downcast-rs 1.2.1**: `MIT/Apache-2.0`; [preserved texts](third-party/rust/downcast-rs-1.2.1/).
+- **rust dpi 0.1.2**: `Apache-2.0 AND MIT`; [preserved texts](third-party/rust/dpi-0.1.2/).
+- **rust dtoa 1.0.11**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/dtoa-1.0.11/).
+- **rust dtoa-short 0.3.5**: `MPL-2.0`; [preserved texts](third-party/rust/dtoa-short-0.3.5/).
+- **rust dunce 1.0.5**: `CC0-1.0 OR MIT-0 OR Apache-2.0`; [preserved texts](third-party/rust/dunce-1.0.5/).
+- **rust dyn-clone 1.0.20**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/dyn-clone-1.0.20/).
+- **rust embed_plist 1.2.2**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/embed_plist-1.2.2/).
+- **rust equivalent 1.0.3**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/equivalent-1.0.3/).
+- **rust erased-serde 0.4.11**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/erased-serde-0.4.11/).
+- **rust fastrand 2.5.0**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/fastrand-2.5.0/).
+- **rust fdeflate 0.3.7**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/fdeflate-0.3.7/).
+- **rust filedescriptor 0.8.3**: `MIT`; [preserved texts](third-party/rust/filedescriptor-0.8.3/).
+- **rust flate2 1.1.10**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/flate2-1.1.10/).
+- **rust fnv 1.0.7**: `Apache-2.0 / MIT`; [preserved texts](third-party/rust/fnv-1.0.7/).
+- **rust foldhash 0.2.0**: `Zlib`; [preserved texts](third-party/rust/foldhash-0.2.0/).
+- **rust foreign-types 0.5.0**: `MIT/Apache-2.0`; [preserved texts](third-party/rust/foreign-types-0.5.0/).
+- **rust foreign-types-macros 0.2.4**: `MIT/Apache-2.0`; [preserved texts](third-party/rust/foreign-types-macros-0.2.4/).
+- **rust foreign-types-shared 0.3.1**: `MIT/Apache-2.0`; [preserved texts](third-party/rust/foreign-types-shared-0.3.1/).
+- **rust form_urlencoded 1.2.2**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/form_urlencoded-1.2.2/).
+- **rust generic-array 0.14.7**: `MIT`; [preserved texts](third-party/rust/generic-array-0.14.7/).
+- **rust getrandom 0.3.4**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/getrandom-0.3.4/).
+- **rust getrandom 0.4.3**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/getrandom-0.4.3/).
+- **rust glob 0.3.4**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/glob-0.3.4/).
+- **rust hashbrown 0.12.3**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/hashbrown-0.12.3/).
+- **rust hashbrown 0.17.1**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/hashbrown-0.17.1/).
+- **rust heck 0.5.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/heck-0.5.0/).
+- **rust html5ever 0.39.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/html5ever-0.39.0/).
+- **rust http 1.5.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/http-1.5.0/).
+- **rust ico 0.6.0**: `MIT`; [preserved texts](third-party/rust/ico-0.6.0/).
+- **rust icu_collections 2.4.0**: `Unicode-3.0`; [preserved texts](third-party/rust/icu_collections-2.4.0/).
+- **rust icu_locale_core 2.4.0**: `Unicode-3.0`; [preserved texts](third-party/rust/icu_locale_core-2.4.0/).
+- **rust icu_normalizer 2.4.0**: `Unicode-3.0`; [preserved texts](third-party/rust/icu_normalizer-2.4.0/).
+- **rust icu_normalizer_data 2.4.0**: `Unicode-3.0`; [preserved texts](third-party/rust/icu_normalizer_data-2.4.0/).
+- **rust icu_properties 2.4.0**: `Unicode-3.0`; [preserved texts](third-party/rust/icu_properties-2.4.0/).
+- **rust icu_properties_data 2.4.0**: `Unicode-3.0`; [preserved texts](third-party/rust/icu_properties_data-2.4.0/).
+- **rust icu_provider 2.4.0**: `Unicode-3.0`; [preserved texts](third-party/rust/icu_provider-2.4.0/).
+- **rust ident_case 1.0.1**: `MIT/Apache-2.0`; [preserved texts](third-party/rust/ident_case-1.0.1/).
+- **rust idna 1.1.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/idna-1.1.0/).
+- **rust idna_adapter 1.2.2**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/idna_adapter-1.2.2/).
+- **rust indexmap 1.9.3**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/indexmap-1.9.3/).
+- **rust indexmap 2.14.2**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/indexmap-2.14.2/).
+- **rust infer 0.22.0**: `MIT`; [preserved texts](third-party/rust/infer-0.22.0/).
+- **rust ioctl-rs 0.1.6**: `MIT`; [preserved texts](third-party/rust/ioctl-rs-0.1.6/).
+- **rust itoa 1.0.18**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/itoa-1.0.18/).
+- **rust json-patch 4.2.0**: `MIT/Apache-2.0`; [preserved texts](third-party/rust/json-patch-4.2.0/).
+- **rust jsonptr 0.7.1**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/jsonptr-0.7.1/).
+- **rust keyboard-types 0.8.3**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/keyboard-types-0.8.3/).
+- **rust libc 0.2.191**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/libc-0.2.191/).
+- **rust litemap 0.8.3**: `Unicode-3.0`; [preserved texts](third-party/rust/litemap-0.8.3/).
+- **rust lock_api 0.4.14**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/lock_api-0.4.14/).
+- **rust log 0.4.34**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/log-0.4.34/).
+- **rust markup5ever 0.39.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/markup5ever-0.39.0/).
+- **rust memchr 2.8.3**: `Unlicense OR MIT`; [preserved texts](third-party/rust/memchr-2.8.3/).
+- **rust memoffset 0.6.5**: `MIT`; [preserved texts](third-party/rust/memoffset-0.6.5/).
+- **rust mime 0.3.17**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/mime-0.3.17/).
+- **rust miniz_oxide 0.8.9**: `MIT OR Zlib OR Apache-2.0`; [preserved texts](third-party/rust/miniz_oxide-0.8.9/).
+- **rust miniz_oxide 0.9.1**: `MIT OR Zlib OR Apache-2.0`; [preserved texts](third-party/rust/miniz_oxide-0.9.1/).
+- **rust muda 0.20.0**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/muda-0.20.0/).
+- **rust new_debug_unreachable 1.0.6**: `MIT`; [preserved texts](third-party/rust/new_debug_unreachable-1.0.6/).
+- **rust nix 0.25.1**: `MIT`; [preserved texts](third-party/rust/nix-0.25.1/).
+- **rust num-conv 0.2.2**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/num-conv-0.2.2/).
+- **rust objc2 0.6.5**: `MIT`; [preserved texts](third-party/rust/objc2-0.6.5/).
+- **rust objc2-app-kit 0.3.2**: `Zlib OR Apache-2.0 OR MIT`; [preserved texts](third-party/rust/objc2-app-kit-0.3.2/).
+- **rust objc2-core-foundation 0.3.2**: `Zlib OR Apache-2.0 OR MIT`; [preserved texts](third-party/rust/objc2-core-foundation-0.3.2/).
+- **rust objc2-encode 4.1.0**: `MIT`; [preserved texts](third-party/rust/objc2-encode-4.1.0/).
+- **rust objc2-exception-helper 0.1.1**: `Zlib OR Apache-2.0 OR MIT`; [preserved texts](third-party/rust/objc2-exception-helper-0.1.1/).
+- **rust objc2-foundation 0.3.2**: `MIT`; [preserved texts](third-party/rust/objc2-foundation-0.3.2/).
+- **rust objc2-quartz-core 0.3.2**: `Zlib OR Apache-2.0 OR MIT`; [preserved texts](third-party/rust/objc2-quartz-core-0.3.2/).
+- **rust objc2-web-kit 0.3.2**: `Zlib OR Apache-2.0 OR MIT`; [preserved texts](third-party/rust/objc2-web-kit-0.3.2/).
+- **rust once_cell 1.21.4**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/once_cell-1.21.4/).
+- **rust option-ext 0.2.0**: `MPL-2.0`; [preserved texts](third-party/rust/option-ext-0.2.0/).
+- **rust parking_lot 0.12.5**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/parking_lot-0.12.5/).
+- **rust parking_lot_core 0.9.12**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/parking_lot_core-0.9.12/).
+- **rust percent-encoding 2.3.2**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/percent-encoding-2.3.2/).
+- **rust phf 0.13.1**: `MIT`; [preserved texts](third-party/rust/phf-0.13.1/).
+- **rust phf_generator 0.13.1**: `MIT`; [preserved texts](third-party/rust/phf_generator-0.13.1/).
+- **rust phf_macros 0.13.1**: `MIT`; [preserved texts](third-party/rust/phf_macros-0.13.1/).
+- **rust phf_shared 0.13.1**: `MIT`; [preserved texts](third-party/rust/phf_shared-0.13.1/).
+- **rust pin-project-lite 0.2.17**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/pin-project-lite-0.2.17/).
+- **rust pin-utils 0.1.1**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/pin-utils-0.1.1/).
+- **rust plist 1.10.3**: `MIT`; [preserved texts](third-party/rust/plist-1.10.3/).
+- **rust png 0.18.1**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/png-0.18.1/).
+- **rust portable-pty 0.8.1**: `MIT`; [preserved texts](third-party/rust/portable-pty-0.8.1/).
+- **rust potential_utf 0.1.6**: `Unicode-3.0`; [preserved texts](third-party/rust/potential_utf-0.1.6/).
+- **rust powerfmt 0.2.1**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/powerfmt-0.2.1/).
+- **rust precomputed-hash 0.1.1**: `MIT`; [preserved texts](third-party/rust/precomputed-hash-0.1.1/).
+- **rust proc-macro2 1.0.107**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/proc-macro2-1.0.107/).
+- **rust quick-xml 0.42.0**: `MIT`; [preserved texts](third-party/rust/quick-xml-0.42.0/).
+- **rust quote 1.0.47**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/quote-1.0.47/).
+- **rust raw-window-handle 0.6.2**: `MIT OR Apache-2.0 OR Zlib`; [preserved texts](third-party/rust/raw-window-handle-0.6.2/).
+- **rust regex 1.13.1**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/regex-1.13.1/).
+- **rust regex-automata 0.4.18**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/regex-automata-0.4.18/).
+- **rust regex-syntax 0.8.11**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/regex-syntax-0.8.11/).
+- **rust rfd 0.17.2**: `MIT`; [preserved texts](third-party/rust/rfd-0.17.2/).
+- **rust rustc-hash 2.1.3**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/rustc-hash-2.1.3/).
+- **rust same-file 1.0.6**: `Unlicense/MIT`; [preserved texts](third-party/rust/same-file-1.0.6/).
+- **rust schemars 0.8.22**: `MIT`; [preserved texts](third-party/rust/schemars-0.8.22/).
+- **rust schemars_derive 0.8.22**: `MIT`; [preserved texts](third-party/rust/schemars_derive-0.8.22/).
+- **rust scopeguard 1.2.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/scopeguard-1.2.0/).
+- **rust selectors 0.38.0**: `MPL-2.0`; [preserved texts](third-party/rust/selectors-0.38.0/).
+- **rust semver 1.0.28**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/semver-1.0.28/).
+- **rust serde 1.0.229**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/serde-1.0.229/).
+- **rust serde-untagged 0.1.9**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/serde-untagged-0.1.9/).
+- **rust serde_core 1.0.229**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/serde_core-1.0.229/).
+- **rust serde_derive 1.0.229**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/serde_derive-1.0.229/).
+- **rust serde_derive_internals 0.29.1**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/serde_derive_internals-0.29.1/).
+- **rust serde_json 1.0.154**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/serde_json-1.0.154/).
+- **rust serde_repr 0.1.21**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/serde_repr-0.1.21/).
+- **rust serde_spanned 1.1.2**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/serde_spanned-1.1.2/).
+- **rust serde_with 3.24.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/serde_with-3.24.0/).
+- **rust serde_with_macros 3.24.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/serde_with_macros-3.24.0/).
+- **rust serial 0.4.0**: `MIT`; [preserved texts](third-party/rust/serial-0.4.0/).
+- **rust serial-core 0.4.0**: `MIT`; [preserved texts](third-party/rust/serial-core-0.4.0/).
+- **rust serial-unix 0.4.0**: `MIT`; [preserved texts](third-party/rust/serial-unix-0.4.0/).
+- **rust serialize-to-javascript 0.1.2**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/serialize-to-javascript-0.1.2/).
+- **rust serialize-to-javascript-impl 0.1.2**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/serialize-to-javascript-impl-0.1.2/).
+- **rust servo_arc 0.4.3**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/servo_arc-0.4.3/).
+- **rust sha2 0.10.9**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/sha2-0.10.9/).
+- **rust shell-words 1.1.1**: `MIT/Apache-2.0`; [preserved texts](third-party/rust/shell-words-1.1.1/).
+- **rust simd-adler32 0.3.10**: `MIT`; [preserved texts](third-party/rust/simd-adler32-0.3.10/).
+- **rust siphasher 1.0.4**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/siphasher-1.0.4/).
+- **rust smallvec 1.16.4**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/smallvec-1.16.4/).
+- **rust stable_deref_trait 1.2.1**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/stable_deref_trait-1.2.1/).
+- **rust string_cache 0.9.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/string_cache-0.9.0/).
+- **rust strsim 0.11.1**: `MIT`; [preserved texts](third-party/rust/strsim-0.11.1/).
+- **rust swift-rs 1.0.9**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/swift-rs-1.0.9/).
+- **rust syn 2.0.119**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/syn-2.0.119/).
+- **rust syn 3.0.9**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/syn-3.0.9/).
+- **rust synstructure 0.14.0**: `MIT`; [preserved texts](third-party/rust/synstructure-0.14.0/).
+- **rust tao 0.37.2**: `Apache-2.0`; [preserved texts](third-party/rust/tao-0.37.2/).
+- **rust tauri 2.12.5**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/tauri-2.12.5/).
+- **rust tauri-codegen 2.7.4**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/tauri-codegen-2.7.4/).
+- **rust tauri-macros 2.7.4**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/tauri-macros-2.7.4/).
+- **rust tauri-plugin-dialog 2.8.4**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/tauri-plugin-dialog-2.8.4/).
+- **rust tauri-plugin-fs 2.7.1**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/tauri-plugin-fs-2.7.1/).
+- **rust tauri-runtime 2.12.2**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/tauri-runtime-2.12.2/).
+- **rust tauri-runtime-wry 2.12.3**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/tauri-runtime-wry-2.12.3/).
+- **rust tauri-utils 2.10.2**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/tauri-utils-2.10.2/).
+- **rust tendril 0.5.1**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/tendril-0.5.1/).
+- **rust termios 0.2.2**: `MIT`; [preserved texts](third-party/rust/termios-0.2.2/).
+- **rust thiserror 1.0.69**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/thiserror-1.0.69/).
+- **rust thiserror 2.0.21**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/thiserror-2.0.21/).
+- **rust thiserror-impl 1.0.69**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/thiserror-impl-1.0.69/).
+- **rust thiserror-impl 2.0.21**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/thiserror-impl-2.0.21/).
+- **rust time 0.3.55**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/time-0.3.55/).
+- **rust time-core 0.1.9**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/time-core-0.1.9/).
+- **rust time-macros 0.2.32**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/time-macros-0.2.32/).
+- **rust tinystr 0.8.5**: `Unicode-3.0`; [preserved texts](third-party/rust/tinystr-0.8.5/).
+- **rust tokio 1.54.1**: `MIT`; [preserved texts](third-party/rust/tokio-1.54.1/).
+- **rust toml 1.1.8+spec-1.1.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/toml-1.1.8+spec-1.1.0/).
+- **rust toml_datetime 1.1.2+spec-1.1.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/toml_datetime-1.1.2+spec-1.1.0/).
+- **rust toml_parser 1.1.5+spec-1.1.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/toml_parser-1.1.5+spec-1.1.0/).
+- **rust toml_writer 1.1.3+spec-1.1.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/toml_writer-1.1.3+spec-1.1.0/).
+- **rust typeid 1.0.3**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/typeid-1.0.3/).
+- **rust typenum 1.20.1**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/typenum-1.20.1/).
+- **rust unicode-ident 1.0.27**: `(MIT OR Apache-2.0) AND Unicode-3.0`; [preserved texts](third-party/rust/unicode-ident-1.0.27/).
+- **rust url 2.5.8**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/url-2.5.8/).
+- **rust urlpattern 0.6.0**: `MIT`; [preserved texts](third-party/rust/urlpattern-0.6.0/).
+- **rust utf8_iter 1.1.0**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/utf8_iter-1.1.0/).
+- **rust utf_types 1.0.0**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/utf_types-1.0.0/).
+- **rust uuid 1.29.0**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/uuid-1.29.0/).
+- **rust walkdir 2.5.0**: `Unlicense/MIT`; [preserved texts](third-party/rust/walkdir-2.5.0/).
+- **rust web-time 1.1.0**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/web-time-1.1.0/).
+- **rust web_atoms 0.2.6**: `MIT OR Apache-2.0`; [preserved texts](third-party/rust/web_atoms-0.2.6/).
+- **rust window-vibrancy 0.8.1**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/window-vibrancy-0.8.1/).
+- **rust winnow 1.0.4**: `MIT`; [preserved texts](third-party/rust/winnow-1.0.4/).
+- **rust writeable 0.6.4**: `Unicode-3.0`; [preserved texts](third-party/rust/writeable-0.6.4/).
+- **rust wry 0.57.1**: `Apache-2.0 OR MIT`; [preserved texts](third-party/rust/wry-0.57.1/).
+- **rust yoke 0.8.4**: `Unicode-3.0`; [preserved texts](third-party/rust/yoke-0.8.4/).
+- **rust yoke-derive 0.8.4**: `Unicode-3.0`; [preserved texts](third-party/rust/yoke-derive-0.8.4/).
+- **rust zerofrom 0.1.8**: `Unicode-3.0`; [preserved texts](third-party/rust/zerofrom-0.1.8/).
+- **rust zerofrom-derive 0.1.8**: `Unicode-3.0`; [preserved texts](third-party/rust/zerofrom-derive-0.1.8/).
+- **rust zerotrie 0.2.5**: `Unicode-3.0`; [preserved texts](third-party/rust/zerotrie-0.2.5/).
+- **rust zerovec 0.11.9**: `Unicode-3.0`; [preserved texts](third-party/rust/zerovec-0.11.9/).
+- **rust zerovec-derive 0.11.7**: `Unicode-3.0`; [preserved texts](third-party/rust/zerovec-derive-0.11.7/).
+- **rust zmij 1.0.23**: `MIT`; [preserved texts](third-party/rust/zmij-1.0.23/).
+- **node @babel/code-frame 7.29.7**: `MIT`; [preserved texts](third-party/node/@babel__code-frame-7.29.7/).
+- **node @babel/compat-data 7.29.7**: `MIT`; [preserved texts](third-party/node/@babel__compat-data-7.29.7/).
+- **node @babel/core 7.29.7**: `MIT`; [preserved texts](third-party/node/@babel__core-7.29.7/).
+- **node @babel/generator 7.29.8**: `MIT`; [preserved texts](third-party/node/@babel__generator-7.29.8/).
+- **node @babel/helper-compilation-targets 7.29.7**: `MIT`; [preserved texts](third-party/node/@babel__helper-compilation-targets-7.29.7/).
+- **node @babel/helper-globals 7.29.7**: `MIT`; [preserved texts](third-party/node/@babel__helper-globals-7.29.7/).
+- **node @babel/helper-module-imports 7.29.7**: `MIT`; [preserved texts](third-party/node/@babel__helper-module-imports-7.29.7/).
+- **node @babel/helper-module-transforms 7.29.7**: `MIT`; [preserved texts](third-party/node/@babel__helper-module-transforms-7.29.7/).
+- **node @babel/helper-plugin-utils 7.29.7**: `MIT`; [preserved texts](third-party/node/@babel__helper-plugin-utils-7.29.7/).
+- **node @babel/helper-string-parser 7.29.11**: `MIT`; [preserved texts](third-party/node/@babel__helper-string-parser-7.29.11/).
+- **node @babel/helper-validator-identifier 7.29.7**: `MIT`; [preserved texts](third-party/node/@babel__helper-validator-identifier-7.29.7/).
+- **node @babel/helper-validator-option 7.29.7**: `MIT`; [preserved texts](third-party/node/@babel__helper-validator-option-7.29.7/).
+- **node @babel/helpers 7.29.10**: `MIT`; [preserved texts](third-party/node/@babel__helpers-7.29.10/).
+- **node @babel/parser 7.29.11**: `MIT`; [preserved texts](third-party/node/@babel__parser-7.29.11/).
+- **node @babel/plugin-transform-react-jsx-self 7.29.7**: `MIT`; [preserved texts](third-party/node/@babel__plugin-transform-react-jsx-self-7.29.7/).
+- **node @babel/plugin-transform-react-jsx-source 7.29.7**: `MIT`; [preserved texts](third-party/node/@babel__plugin-transform-react-jsx-source-7.29.7/).
+- **node @babel/template 7.29.7**: `MIT`; [preserved texts](third-party/node/@babel__template-7.29.7/).
+- **node @babel/traverse 7.29.10**: `MIT`; [preserved texts](third-party/node/@babel__traverse-7.29.10/).
+- **node @babel/types 7.29.11**: `MIT`; [preserved texts](third-party/node/@babel__types-7.29.11/).
+- **node @fontsource/jetbrains-mono 5.3.0**: `OFL-1.1`; [preserved texts](third-party/node/@fontsource__jetbrains-mono-5.3.0/).
+- **node @jridgewell/gen-mapping 0.3.13**: `MIT`; [preserved texts](third-party/node/@jridgewell__gen-mapping-0.3.13/).
+- **node @jridgewell/remapping 2.3.5**: `MIT`; [preserved texts](third-party/node/@jridgewell__remapping-2.3.5/).
+- **node @jridgewell/resolve-uri 3.1.2**: `MIT`; [preserved texts](third-party/node/@jridgewell__resolve-uri-3.1.2/).
+- **node @jridgewell/sourcemap-codec 1.6.0**: `MIT`; [preserved texts](third-party/node/@jridgewell__sourcemap-codec-1.6.0/).
+- **node @jridgewell/trace-mapping 0.3.31**: `MIT`; [preserved texts](third-party/node/@jridgewell__trace-mapping-0.3.31/).
+- **node @monaco-editor/loader 1.7.0**: `MIT`; [preserved texts](third-party/node/@monaco-editor__loader-1.7.0/).
+- **node @monaco-editor/react 4.7.0**: `MIT`; [preserved texts](third-party/node/@monaco-editor__react-4.7.0/).
+- **node @rolldown/pluginutils 1.0.0-beta.27**: `MIT`; [preserved texts](third-party/node/@rolldown__pluginutils-1.0.0-beta.27/).
+- **node @tauri-apps/api 2.12.4**: `Apache-2.0 OR MIT`; [preserved texts](third-party/node/@tauri-apps__api-2.12.4/).
+- **node @tauri-apps/cli 2.12.4**: `Apache-2.0 OR MIT`; [preserved texts](third-party/node/@tauri-apps__cli-2.12.4/).
+- **node @tauri-apps/plugin-dialog 2.8.4**: `MIT OR Apache-2.0`; [preserved texts](third-party/node/@tauri-apps__plugin-dialog-2.8.4/).
+- **node @types/babel__core 7.20.5**: `MIT`; [preserved texts](third-party/node/@types__babel__core-7.20.5/).
+- **node @types/babel__generator 7.27.0**: `MIT`; [preserved texts](third-party/node/@types__babel__generator-7.27.0/).
+- **node @types/babel__template 7.4.4**: `MIT`; [preserved texts](third-party/node/@types__babel__template-7.4.4/).
+- **node @types/babel__traverse 7.28.0**: `MIT`; [preserved texts](third-party/node/@types__babel__traverse-7.28.0/).
+- **node @types/estree 1.0.9**: `MIT`; [preserved texts](third-party/node/@types__estree-1.0.9/).
+- **node @types/node 20.19.43**: `MIT`; [preserved texts](third-party/node/@types__node-20.19.43/).
+- **node @types/prop-types 15.7.15**: `MIT`; [preserved texts](third-party/node/@types__prop-types-15.7.15/).
+- **node @types/react 18.3.31**: `MIT`; [preserved texts](third-party/node/@types__react-18.3.31/).
+- **node @types/react-dom 18.3.7**: `MIT`; [preserved texts](third-party/node/@types__react-dom-18.3.7/).
+- **node @vitejs/plugin-react 4.7.0**: `MIT`; [preserved texts](third-party/node/@vitejs__plugin-react-4.7.0/).
+- **node @xterm/addon-fit 0.10.0**: `MIT`; [preserved texts](third-party/node/@xterm__addon-fit-0.10.0/).
+- **node @xterm/addon-web-links 0.11.0**: `MIT`; [preserved texts](third-party/node/@xterm__addon-web-links-0.11.0/).
+- **node @xterm/xterm 5.5.0**: `MIT`; [preserved texts](third-party/node/@xterm__xterm-5.5.0/).
+- **node baseline-browser-mapping 2.11.34**: `Apache-2.0`; [preserved texts](third-party/node/baseline-browser-mapping-2.11.34/).
+- **node browserslist 4.29.5**: `MIT`; [preserved texts](third-party/node/browserslist-4.29.5/).
+- **node caniuse-lite 1.0.30001819**: `CC-BY-4.0`; [preserved texts](third-party/node/caniuse-lite-1.0.30001819/).
+- **node convert-source-map 2.0.0**: `MIT`; [preserved texts](third-party/node/convert-source-map-2.0.0/).
+- **node csstype 3.2.3**: `MIT`; [preserved texts](third-party/node/csstype-3.2.3/).
+- **node debug 4.4.3**: `MIT`; [preserved texts](third-party/node/debug-4.4.3/).
+- **node electron-to-chromium 1.5.467**: `ISC`; [preserved texts](third-party/node/electron-to-chromium-1.5.467/).
+- **node esbuild 0.21.5**: `MIT`; [preserved texts](third-party/node/esbuild-0.21.5/).
+- **node escalade 3.2.0**: `MIT`; [preserved texts](third-party/node/escalade-3.2.0/).
+- **node fsevents 2.3.3**: `MIT`; [preserved texts](third-party/node/fsevents-2.3.3/).
+- **node gensync 1.0.0-beta.2**: `MIT`; [preserved texts](third-party/node/gensync-1.0.0-beta.2/).
+- **node js-tokens 4.0.0**: `MIT`; [preserved texts](third-party/node/js-tokens-4.0.0/).
+- **node jsesc 3.1.0**: `MIT`; [preserved texts](third-party/node/jsesc-3.1.0/).
+- **node json5 2.2.3**: `MIT`; [preserved texts](third-party/node/json5-2.2.3/).
+- **node loose-envify 1.4.0**: `MIT`; [preserved texts](third-party/node/loose-envify-1.4.0/).
+- **node lru-cache 5.1.1**: `ISC`; [preserved texts](third-party/node/lru-cache-5.1.1/).
+- **node monaco-editor 0.52.2**: `MIT`; [preserved texts](third-party/node/monaco-editor-0.52.2/).
+- **node ms 2.1.3**: `MIT`; [preserved texts](third-party/node/ms-2.1.3/).
+- **node nanoid 3.3.20**: `MIT`; [preserved texts](third-party/node/nanoid-3.3.20/).
+- **node node-releases 2.0.60**: `MIT`; [preserved texts](third-party/node/node-releases-2.0.60/).
+- **node picocolors 1.1.1**: `ISC`; [preserved texts](third-party/node/picocolors-1.1.1/).
+- **node postcss 8.5.32**: `MIT`; [preserved texts](third-party/node/postcss-8.5.32/).
+- **node react 18.3.1**: `MIT`; [preserved texts](third-party/node/react-18.3.1/).
+- **node react-dom 18.3.1**: `MIT`; [preserved texts](third-party/node/react-dom-18.3.1/).
+- **node react-refresh 0.17.0**: `MIT`; [preserved texts](third-party/node/react-refresh-0.17.0/).
+- **node rollup 4.66.0**: `MIT`; [preserved texts](third-party/node/rollup-4.66.0/).
+- **node scheduler 0.23.2**: `MIT`; [preserved texts](third-party/node/scheduler-0.23.2/).
+- **node semver 6.3.1**: `ISC`; [preserved texts](third-party/node/semver-6.3.1/).
+- **node source-map-js 1.2.2**: `BSD-3-Clause`; [preserved texts](third-party/node/source-map-js-1.2.2/).
+- **node state-local 1.0.7**: `MIT`; [preserved texts](third-party/node/state-local-1.0.7/).
+- **node typescript 5.9.3**: `Apache-2.0`; [preserved texts](third-party/node/typescript-5.9.3/).
+- **node undici-types 6.21.0**: `MIT`; [preserved texts](third-party/node/undici-types-6.21.0/).
+- **node update-browserslist-db 1.3.4**: `MIT`; [preserved texts](third-party/node/update-browserslist-db-1.3.4/).
+- **node use-sync-external-store 1.7.0**: `MIT`; [preserved texts](third-party/node/use-sync-external-store-1.7.0/).
+- **node vite 5.4.21**: `MIT`; [preserved texts](third-party/node/vite-5.4.21/).
+- **node yallist 3.1.1**: `ISC`; [preserved texts](third-party/node/yallist-3.1.1/).
+- **node zustand 4.5.7**: `MIT`; [preserved texts](third-party/node/zustand-4.5.7/).

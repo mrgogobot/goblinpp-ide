@@ -12,6 +12,8 @@ export interface DialogSpec {
   kind: 'confirm' | 'prompt' | 'choose'
   title: string
   message?: string
+  secret?: boolean
+  owner?: string
   defaultValue?: string
   placeholder?: string
   validate?: (v: string) => string | null
@@ -51,12 +53,14 @@ export async function confirmDialog(title: string, message: string, opts: { ok?:
   return r.button as 'ok' | 'cancel' | 'third'
 }
 
-export async function promptDialog(title: string, opts: { message?: string; defaultValue?: string; placeholder?: string; ok?: string; validate?: (v: string) => string | null } = {}): Promise<string | null> {
+export async function promptDialog(title: string, opts: { secret?: boolean; owner?: string; message?: string; defaultValue?: string; placeholder?: string; ok?: string; validate?: (v: string) => string | null } = {}): Promise<string | null> {
   const r = await useDialogStore.getState().push({
     kind: 'prompt',
     title,
     message: opts.message,
-    defaultValue: opts.defaultValue,
+    secret: opts.secret,
+    owner: opts.owner,
+    defaultValue: opts.secret ? undefined : opts.defaultValue,
     placeholder: opts.placeholder,
     validate: opts.validate,
     buttons: [{ id: 'cancel', label: 'Cancel' }, { id: 'ok', label: opts.ok ?? 'OK', primary: true }],
@@ -85,4 +89,9 @@ export const useToastStore = create<ToastState>((set) => ({
 }))
 export function toast(kind: Toast['kind'], title: string, detail?: string, actions?: Toast['actions']): number {
   return useToastStore.getState().push({ kind, title, detail, actions })
+}
+
+/** Close only this process's masked dialogs; never retain secret responses. */
+export function cancelSecretDialogs(owner: string): void {
+  for (const d of [...useDialogStore.getState().queue]) if (d.secret && d.owner === owner) useDialogStore.getState().close(d.id, { button: 'cancel' })
 }

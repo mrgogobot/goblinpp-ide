@@ -1,6 +1,6 @@
 {
  "schema": "goblin-ide.functions.v1",
- "runtime": "goblin++ 0.1.0-alpha.41",
+ "runtime": "goblin++ 0.1.0-alpha.43",
  "authority": "EDITOR_AID_NOT_LANGUAGE_SPEC",
  "arrayMathHelp": "Also element-wise over numeric arrays: equal array lengths, explicit scalar repetition, independent copies, dimensional checks and zero-based failing indices. No reduction, truncation or length-one array broadcasting.",
  "quantityLiterals": "Compound suffixes such as 1.13e-10 m/s^2; 3 m^2 means 3 square metres, (3 m)^2 squares the whole quantity; group multiple denominator factors with parentheses.",
@@ -2264,6 +2264,106 @@
    "see": "STRINGS.md",
    "arrayMath": false,
    "legacy": false
+  },
+  {
+   "name": "input_secret",
+   "domain": "Confidential Files",
+   "signature": "input_secret(\"Passphrase: \")",
+   "description": "Read a masked password in GO_PRIVATE only. No scientific input event or replay file. Returns ordinary in-memory text; never print real passwords.",
+   "snippet": "input_secret(\"${1:Passphrase: }\")",
+   "see": "PRIVATE_FUNCTIONS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "encrypt_text",
+   "domain": "Confidential Files",
+   "signature": "encrypt_text(text, key, \"secret.age\")",
+   "description": "GO_PRIVATE only: authenticated age encryption of UTF-8 text into a new file; minimum 12-byte passphrase. Returns true; errors stop execution.",
+   "snippet": "encrypt_text(${1:text}, ${2:key}, \"${3:secret.age}\")",
+   "see": "PRIVATE_FUNCTIONS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "encrypt_file",
+   "domain": "Confidential Files",
+   "signature": "encrypt_file(\"input.txt\", key, \"secret.age\")",
+   "description": "GO_PRIVATE only: age-encrypt an existing regular file to a new destination. No overwrite or scientific receipt.",
+   "snippet": "encrypt_file(\"${1:input.txt}\", ${2:key}, \"${3:secret.age}\")",
+   "see": "PRIVATE_FUNCTIONS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "decrypt_file",
+   "domain": "Confidential Files",
+   "signature": "decrypt_file(\"secret.age\", key, \"restored.txt\")",
+   "description": "GO_PRIVATE only: authenticate fully before publishing a new plaintext file; exact binary bytes. Returns true or refuses.",
+   "snippet": "decrypt_file(\"${1:secret.age}\", ${2:key}, \"${3:restored.txt}\")",
+   "see": "PRIVATE_FUNCTIONS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "decrypt_text",
+   "domain": "Confidential Files",
+   "signature": "decrypt_text(\"secret.age\", key)",
+   "description": "GO_PRIVATE only: authenticate and decode at most 1 MiB UTF-8 plaintext in memory. Does not create a plaintext file.",
+   "snippet": "decrypt_text(\"${1:secret.age}\", ${2:key})",
+   "see": "PRIVATE_FUNCTIONS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "read_text",
+   "domain": "Confidential Files",
+   "signature": "read_text(\"input.txt\")",
+   "description": "GO_PRIVATE only: read at most 1 MiB UTF-8 from a regular file. Returns raw text; print() is an explicit plaintext disclosure.",
+   "snippet": "read_text(\"${1:input.txt}\")",
+   "see": "PRIVATE_FUNCTIONS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "display_file",
+   "domain": "Confidential Files",
+   "signature": "display_file(\"input.txt\")",
+   "description": "GO_PRIVATE only: display a bounded UTF-8 file with terminal controls escaped. Explicit plaintext disclosure; returns true.",
+   "snippet": "display_file(\"${1:input.txt}\")",
+   "see": "PRIVATE_FUNCTIONS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_b64",
+   "domain": "Strings",
+   "signature": "str_b64(text)",
+   "description": "Encode UTF-8 as RFC 4648 standard padded Base64, at most 1 MiB output. Encoding only, NOT encryption; ordinary run evidence remains plaintext.",
+   "snippet": "str_b64(${1:text})",
+   "see": "PRIVATE_FUNCTIONS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_to_b64",
+   "domain": "Strings",
+   "signature": "str_to_b64(text)",
+   "description": "Alias for str_b64: standard padded Base64; not encryption.",
+   "snippet": "str_to_b64(${1:text})",
+   "see": "PRIVATE_FUNCTIONS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "str_from_b64",
+   "domain": "Strings",
+   "signature": "str_from_b64(text)",
+   "description": "Decode canonical standard padded Base64 to UTF-8. Refuses whitespace, URL alphabet, invalid padding bits and non-UTF-8 output.",
+   "snippet": "str_from_b64(${1:text})",
+   "see": "PRIVATE_FUNCTIONS.md",
+   "arrayMath": false,
+   "legacy": false
   }
  ],
  "statements": [
@@ -2428,6 +2528,12 @@
    "kind": "statement",
    "description": "Ends an inline Rust block.",
    "snippet": null
+  },
+  {
+   "name": "GO_PRIVATE",
+   "kind": "directive",
+   "description": "First main-source directive. Confidential file scripts: no scientific source snapshots, receipts, logs, seals or final-state capture. Incompatible with GO_PARANOID, COMPLETELY_MAD, numeric audits, inline Rust and scientific I/O. Not an OS sandbox or secure-erasure guarantee.",
+   "snippet": "GO_PRIVATE"
   }
  ]
 }

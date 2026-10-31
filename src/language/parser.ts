@@ -9,7 +9,7 @@ export interface ParseDiagnostic { code: string; severity: Severity; message: st
 export type SymbolKind = 'function' | 'directive' | 'seal' | 'rust' | 'variable' | 'import' | 'loop' | 'branch'
 export interface DocumentSymbol { name: string; kind: SymbolKind; detail?: string; line: number; endLine?: number; children?: DocumentSymbol[] }
 export interface FoldingRange { start: number; end: number; kind: string }
-export interface ParseResult { diagnostics: ParseDiagnostic[]; symbols: DocumentSymbol[]; foldingRanges: FoldingRange[]; profile: 'everyday' | 'GO_PARANOID' | 'COMPLETELY_MAD'; seals: string[]; hasInlineRust: boolean; imports: string[] }
+export interface ParseResult { diagnostics: ParseDiagnostic[]; symbols: DocumentSymbol[]; foldingRanges: FoldingRange[]; profile: 'everyday' | 'GO_PARANOID' | 'COMPLETELY_MAD' | 'GO_PRIVATE'; seals: string[]; hasInlineRust: boolean; imports: string[] }
 export interface Registry { byCode: Map<string, { severity: Severity; message: string; see?: string }> }
 
 export const IDENT = '[A-Za-z_πħωΩΔΣλμσθ∇∂µÅ][A-Za-z0-9_πħωΩΔΣλμσθ∇∂µÅ]*'
@@ -87,9 +87,10 @@ export function parseDocument(source: string, registry: Registry): ParseResult {
     }
     if (!trimmed) continue
 
-    const dm = /^(GO_PARANOID|COMPLETELY_MAD|GO_LOOP_BUDGET|GO_NUMERIC_AUDIT)\b/.exec(trimmed)
-    if (dm) {
-      if (dm[1] === 'COMPLETELY_MAD') profile = 'COMPLETELY_MAD'
+    const dm = /^(GO_PRIVATE|GO_PARANOID|COMPLETELY_MAD|GO_LOOP_BUDGET|GO_NUMERIC_AUDIT)\b/.exec(trimmed)
+    if (dm && !(dm[1] === 'GO_PRIVATE' && trimmed !== 'GO_PRIVATE')) {
+      if (dm[1] === 'GO_PRIVATE') profile = 'GO_PRIVATE'
+      else if (dm[1] === 'COMPLETELY_MAD') profile = 'COMPLETELY_MAD'
       else if (dm[1] === 'GO_PARANOID' && profile === 'everyday') profile = 'GO_PARANOID'
       symbols.push({ name: dm[1], kind: 'directive', detail: rawLines[i].trim().slice(dm[1].length).trim() || undefined, line: i + 1 })
     }

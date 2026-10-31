@@ -1,9 +1,11 @@
 [package]
 name = "goblin-ide"
-version = "0.1.0"
+version = "0.2.1"
 description = "Goblin++ IDE — a JetBrains-style IDE for the Goblin++ scientific language"
 authors = ["Goblin++ IDE contributors"]
 edition = "2021"
+license = "MIT"
+repository = "https://github.com/mrgogobot/goblinpp-ide"
 
 [lib]
 name = "goblin_ide_lib"
@@ -19,3 +21,9 @@ serde_json = "1"
 portable-pty = "0.8"
 tauri-plugin-dialog = "2"
 base64 = "0.22"
+
+# Retain build-time macro debug information with the pinned Rust toolchain.
+# Avoids macOS LINKEDIT loader failures (rust-lang/rust#157750); this does not
+# change the runtime profile or upgrade the compiler/dependencies.
+[profile.release.build-override]
+debug = true

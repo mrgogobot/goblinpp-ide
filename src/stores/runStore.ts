@@ -1,3 +1,4 @@
+import { SecretFrames, isPrivateSource, secretValidation } from '../run/secretInput'
 /*
  * Runs the real `goblin++` engine. Program output streams into the Run panel;
  * the trailing KEY=VALUE summary and RUN_DIR/receipt.json feed the summary card,
@@ -9,7 +10,7 @@ import type { Profile, Receipt, RunStatus, Summary } from '../run/cli'
 import { fs, isTauri, proc } from '../platform/tauri'
 import type { ProcExitEvent, ProcOutputEvent } from '../platform/tauri'
 import { basename, dirname, isUntitled, join } from '../util/path'
-import { confirmDialog, promptDialog, toast } from './dialogStore'
+import { confirmDialog, promptDialog, toast, cancelSecretDialogs } from './dialogStore'
 import { useEditorStore } from './editorStore'
 import { useLanguageStore } from './languageStore'
 import { useProjectStore } from './projectStore'
@@ -72,6 +73,7 @@ interface RunState {
   currentProcId: string | null
   currentCommand: string | null
   awaitingInput: boolean
+  awaitingSecret: boolean
   lastRun: RunRecord | null
   history: RunRecord[]
   runDirs: RunDirInfo[]
@@ -128,6 +130,7 @@ let listenersReady = false
 let stdoutBuf = ''
 let stderrBuf = ''
 let collected = { stdout: '', stderr: '' }
+let secretFrames = new SecretFrames()
 
 async function ensureListeners(set: (fn: (s: RunState) => Partial<RunState>) => void, get: () => RunState) {
   if (listenersReady || !isTauri()) return
@@ -151,11 +154,27 @@ async function ensureListeners(set: (fn: (s: RunState) => Partial<RunState>) => 
   }
   await proc.onOutput((e: ProcOutputEvent) => {
     if (e.id !== get().currentProcId) return
-    collected[e.stream] += e.data
-    flush(e.stream, e.data)
+    if (e.stream === 'stdout') {collected.stdout += e.data;flush('stdout',e.data);return}
+    for (const frame of secretFrames.push(e.data)) {
+      if(frame.kind==='text'){collected.stderr += frame.text;flush('stderr',frame.text)}
+      else if(frame.kind==='invalid'){void proc.closeStdin(e.id).catch(()=>{});push('stderr','Invalid secret-input request; stdin closed.')}
+      else {
+        set(()=>({awaitingSecret:true,awaitingInput:false}))
+        void promptDialog('Goblin++ secret input',{secret:true,owner:e.id,message:frame.prompt,validate:secretValidation}).then(async answer=>{
+          if(get().currentProcId!==e.id)return
+          try {
+            if(answer===null || secretValidation(answer))await proc.closeStdin(e.id)
+            else await proc.write(e.id,answer+'\n')
+          } catch { /* Child reports a redacted error. Never log the answer. */ }
+          finally {if(get().currentProcId===e.id)set(()=>({awaitingSecret:false}))}
+        })
+      }
+    }
   })
   await proc.onExit((e: ProcExitEvent) => {
     if (e.id !== get().currentProcId) return
+    cancelSecretDialogs(e.id)
+    for(const frame of secretFrames.push('',true))if(frame.kind==='text'){collected.stderr+=frame.text;flush('stderr',frame.text)}
     flush('stdout', '', true)
     flush('stderr', '', true)
     exitResolvers.get(e.id)?.(e)
@@ -170,6 +189,7 @@ export const useRunStore = create<RunState>((set, get) => ({
   currentProcId: null,
   currentCommand: null,
   awaitingInput: false,
+  awaitingSecret: false,
   lastRun: null,
   history: [],
   runDirs: [],
@@ -221,7 +241,15 @@ export const useRunStore = create<RunState>((set, get) => ({
 
     await ensureListeners(set, get)
     const settings = getSettings()
+    const source = await fs.readText(file)
+    const privateRun = isPrivateSource(source)
     const cwd = cwdFor(file)
+    if(privateRun){
+      try {
+        const caps=JSON.parse((await proc.run(engine,['capabilities','--json'],cwd)).stdout)
+        if(!caps.confidential_functions?.includes('input_secret') || typeof caps.confidential_code_profile!=='string' || !caps.confidential_code_profile.includes('GO_PRIVATE'))throw new Error('unsupported')
+      }catch{toast('error','Alpha.43 engine required','Private scripts need a matching Goblin++ executable. No source was run.');return null}
+    }
     const rel = file.startsWith(cwd + '/') ? file.slice(cwd.length + 1) : file
     const args: string[] = []
     if (kind === 'check') args.push('check', rel)
@@ -231,20 +259,21 @@ export const useRunStore = create<RunState>((set, get) => ({
       const hash = settings.inlineRustHashes[file]
       const analysis = useLanguageStore.getState().analysisByPath[file]
       if (kind === 'compile' && analysis?.hasInlineRust && hash) args.push('--allow-inline-rust', hash)
-      if (settings.runsRoot) args.push('--runs-root', settings.runsRoot)
+      if (!privateRun && settings.runsRoot) args.push('--runs-root', settings.runsRoot)
       const programArgs = opts.programArgs ?? (get().programArgsByFile[file] ? get().programArgsByFile[file].split(/\s+/).filter(Boolean) : [])
       if (programArgs.length) args.push('--', ...programArgs)
     }
     const id = `run-${uid()}`
     const command = `goblin++ ${args.map((a) => (/\s/.test(a) ? JSON.stringify(a) : a)).join(' ')}`
+    secretFrames = new SecretFrames()
     collected = { stdout: '', stderr: '' }
     stdoutBuf = ''
     stderrBuf = ''
-    set({ running: true, currentProcId: id, currentCommand: command, awaitingInput: false, output: [{ t: stamp(), kind: 'system', text: `$ ${command}` }, { t: stamp(), kind: 'system', text: `cwd ${cwd}` }] })
+    set({ running: true, currentProcId: id, currentCommand: command, awaitingInput: false, awaitingSecret: false, output: [{ t: stamp(), kind: 'system', text: `$ ${command}` }, { t: stamp(), kind: 'system', text: `cwd ${cwd}` }] })
     const started = Date.now()
     const exitPromise = new Promise<ProcExitEvent>((resolve) => exitResolvers.set(id, resolve))
     try {
-      await proc.spawn(id, engine, args, cwd)
+      await proc.spawn(id, engine, args, cwd, { GOBLIN_SECRET_PROMPT_PROTOCOL: 'hex-v1' })
     } catch (e) {
       set((s) => ({ running: false, currentProcId: null, output: [...s.output, { t: stamp(), kind: 'stderr', text: String(e) }] }))
       return null
@@ -253,27 +282,29 @@ export const useRunStore = create<RunState>((set, get) => ({
     const stdout = collected.stdout
     const stderr = collected.stderr
     const summary = parseSummary(stdout + '\n' + stderr)
+    if(privateRun){
+      for(const key of Object.keys(summary))if(!['RUN_STATUS','CHECK_STATUS','COMPILE_STATUS'].includes(key))delete summary[key]
+      summary.EXECUTION_PROFILE='GO_PRIVATE';summary.CONFIDENTIAL_OPERATION='NO_RUN_RECEIPT'
+    }
     const status = statusFromSummary(summary, exit.code, stdout + '\n' + stderr)
     const err = parseGoblinError(stderr) ?? parseGoblinError(stdout)
-    const runDir = absRunDir(cwd, summary.RUN_DIR)
+    const runDir = privateRun ? null : absRunDir(cwd, summary.RUN_DIR)
     let receipt: Receipt | null = null
     if (runDir) {
       try { receipt = JSON.parse(await fs.readText(join(runDir, 'receipt.json'))) as Receipt } catch { receipt = null }
     }
-    const source = tab?.content ?? ''
-    const record: RunRecord = { id, file, cwd, command, kind, status, summary, receipt, runDir, error: err ? { code: err.code, title: err.title, message: err.message } : null, profile: profileOf(receipt, source), at: new Date().toISOString(), durationMs: Date.now() - started, exitCode: exit.code }
+    const record: RunRecord = { id, file, cwd, command, kind, status, summary, receipt, runDir, error: err ? { code: err.code, title: err.title, message: err.message } : null, profile: privateRun ? 'GO_PRIVATE' : profileOf(receipt, source), at: new Date().toISOString(), durationMs: Date.now() - started, exitCode: exit.code }
     const k = resultKind(stdout, stderr, exit.code)
     const label = kind === 'check' ? (status === 'PASS' ? 'check PASS (preview only, no evidence)' : `check ${status}`) : `${status}${runDir ? ` · RUN_DIR ${summary.RUN_DIR}` : ''} · ${record.durationMs} ms · exit ${exit.code ?? (exit.signal != null ? `signal ${exit.signal}` : '?')}`
     set((s) => ({
-      running: false, currentProcId: null, awaitingInput: false, lastRun: record,
+      running: false, currentProcId: null, awaitingInput: false, awaitingSecret: false, lastRun: record,
       history: [record, ...s.history].slice(0, 200),
       output: [...s.output, { t: stamp(), kind: k === 'pass' ? 'system' : 'stderr', text: label }],
-      freezeLog: kind === 'check' ? s.freezeLog : [{ type: 'run' as const, file, hash: summary.SOURCE_SHA256, at: record.at, detail: `${status} ${summary.RUN_DIR ?? ''}`.trim(), ok: status === 'PASS' }, ...s.freezeLog].slice(0, 500),
+      freezeLog: privateRun || kind === 'check' ? s.freezeLog : [{ type: 'run' as const, file, hash: summary.SOURCE_SHA256, at: record.at, detail: `${status} ${summary.RUN_DIR ?? ''}`.trim(), ok: status === 'PASS' }, ...s.freezeLog].slice(0, 500),
     }))
     if (k === 'protocol-violation') toast('error', 'Protocol violation', err?.title ?? 'Frozen source changed or custody breach. The refusal is preserved as a verifiable run.')
     else if (k === 'machinery-failure' && !opts.silent) toast('error', `${err?.code ?? 'Run failed'}`, err?.title)
-    void get().refreshStatus(file)
-    void get().scanRuns()
+    if (!privateRun) {void get().refreshStatus(file);void get().scanRuns()}
     void useProjectStore.getState().refresh()
     if (kind !== 'check' && runDir && status === 'PASS' && settings.autoVerify) await get().verifyRun(runDir)
     return record
@@ -298,7 +329,7 @@ export const useRunStore = create<RunState>((set, get) => ({
 
   sendInput: async (text) => {
     const id = get().currentProcId
-    if (!id) return
+    if (!id || get().awaitingSecret) return
     set((s) => ({ awaitingInput: false, output: [...s.output, { t: stamp(), kind: 'input', text }] }))
     try { await proc.write(id, text + '\n') } catch (e) { toast('error', 'stdin closed', String(e)) }
   },

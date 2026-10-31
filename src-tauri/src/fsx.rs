@@ -279,7 +279,8 @@ pub fn fs_search(
     let include = include.unwrap_or_default();
     let exclude = exclude.unwrap_or_default();
 
-    let matcher: Box<dyn Fn(&str) -> Option<usize>> = if use_regex {
+    type LineMatcher = Box<dyn Fn(&str) -> Option<usize>>;
+    let matcher: LineMatcher = if use_regex {
         // No regex crate: fall back to a tiny subset by treating the query literally when it is not a valid pattern.
         let q = if case_sensitive { query.clone() } else { query.to_lowercase() };
         Box::new(move |line: &str| {

@@ -1,3 +1,9 @@
+# Alpha.43 callable file protection
+
+This language folder now includes GO_PRIVATE, hidden input_secret(), code-level
+encryption/decryption and text reading/display. The guide is docs/PRIVATE_FUNCTIONS.md.
+Base64 remains encoding, not encryption. The IDE and sidecars must both match.
+
 # Goblin++ Rust Engine 0.1.0-alpha.41 (local, unreleased)
 
 Alpha.41 adds native NumPy NPY/NPZ, SciPy sparse NPZ (CSR/CSC/COO), and an explicit Astropy ECSV scalar subset. No Python runtime is required. Inputs are bounded, snapshotted and replay-verified; exact IDs and declared units receive checked conversions. See [scientific readers](docs/SCIENTIFIC_READERS.md) and `examples/scientific_readers.gbl`. VS Code 0.1.32 / JetBrains 0.3.22 add completion and help.

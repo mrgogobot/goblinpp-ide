@@ -1,3 +1,4 @@
+import { isPrivateSource } from '../run/secretInput'
 import { create } from 'zustand'
 import { assembleContext } from '../ai/context'
 import { providerById, resolveProvider } from '../ai/providers'
@@ -100,18 +101,18 @@ export const useAiStore = create<AiState>((set, get) => {
 
     const activeTab = editor.tabs.find((t) => t.path === editor.activePath)
     const openFiles = editor.tabs
-      .filter((t) => t.path !== editor.activePath)
+      .filter((t) => t.path !== editor.activePath && !isPrivateSource(t.content))
       .map((t) => ({ path: t.path, snippet: t.content.split('\n').slice(0, 50).join('\n') }))
     const diagnostics = editor.diagnostics.map((d) => `${d.code}: ${d.message} (${d.file}:${d.line})`)
 
     const bundle = assembleContext({
       userPrompt: prompt,
-      contextFree: s.contextFree,
+      contextFree: s.contextFree || !!(activeTab && isPrivateSource(activeTab.content)),
       budgetChars: s.budgetTokens * 4,
       activeFile: s.contextSources['active-file'] && activeTab ? { path: activeTab.path, content: activeTab.content } : undefined,
       openFiles: s.contextSources['open-files'] ? openFiles : undefined,
       diagnostics: s.contextSources['diagnostics'] ? diagnostics : undefined,
-      runDir: s.contextSources['run-dir'] && run.lastRun ? `${run.lastRun.command}\nstatus ${run.lastRun.status}${run.lastRun.runDir ? ` RUN_DIR ${run.lastRun.runDir}` : ''}${run.lastRun.error ? `\n${run.lastRun.error.code} ${run.lastRun.error.message}` : ''}` : undefined,
+      runDir: s.contextSources['run-dir'] && run.lastRun && run.lastRun.profile !== 'GO_PRIVATE' ? `${run.lastRun.command}\nstatus ${run.lastRun.status}${run.lastRun.runDir ? ` RUN_DIR ${run.lastRun.runDir}` : ''}${run.lastRun.error ? `\n${run.lastRun.error.code} ${run.lastRun.error.message}` : ''}` : undefined,
       sealLedger: s.contextSources['seal-ledger'] ? (run.lastRun?.receipt?.sealed_artifacts ?? []).map((x) => `${x.name} ${x.sha256}`) : undefined,
       freezeState: s.contextSources['freeze-state'] && activeTab && run.fileStatus[activeTab.path] ? `${activeTab.path} ${run.fileStatus[activeTab.path].state}` : undefined,
       docs: s.contextSources['docs'] ? buildDocsExcerpt(lang.functions, activeTab?.content ?? '') : undefined,

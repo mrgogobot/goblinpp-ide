@@ -7,7 +7,7 @@
  */
 
 export type RunStatus = 'PASS' | 'FAIL' | 'MACHINERY_FAIL' | 'PROTOCOL_VIOLATION' | 'PARTIAL' | 'REFUSED' | 'UNKNOWN'
-export type Profile = 'everyday' | 'GO_PARANOID' | 'COMPLETELY_MAD'
+export type Profile = 'everyday' | 'GO_PARANOID' | 'COMPLETELY_MAD' | 'GO_PRIVATE'
 
 export interface SealedArtifact { name: string; path: string; sha256: string }
 export interface GeneratedArtifact { path?: string; name?: string; sha256?: string; kind?: string; [k: string]: unknown }
@@ -71,7 +71,7 @@ export function parseGoblinError(text: string): GoblinErrorInfo | null {
 
 export function statusFromSummary(summary: Summary, exitCode: number | null, text: string): RunStatus {
   const s = summary.RUN_STATUS ?? summary.COMPILE_STATUS ?? summary.VERIFICATION_STATUS
-  if (s === 'PASS') return 'PASS'
+  if (s === 'PASS' && exitCode === 0) return 'PASS'
   if (s === 'MACHINERY_FAIL') return 'MACHINERY_FAIL'
   if (s === 'PROTOCOL_VIOLATION' || /GOBLIN PROTOCOL VIOLATION/.test(text)) return 'PROTOCOL_VIOLATION'
   if (s === 'PARTIAL') return 'PARTIAL'
@@ -96,6 +96,8 @@ export function resultKind(stdout: string, stderr: string, exitCode: number | nu
 
 export function profileOf(receipt: Receipt | null, source: string): Profile {
   const p = receipt?.execution_profile?.toUpperCase()
+  if (p === 'GO_PRIVATE') return 'GO_PRIVATE'
+  if (/^\s*GO_PRIVATE\s*(?:#.*)?$/m.test(source)) return 'GO_PRIVATE'
   if (p === 'COMPLETELY_MAD') return 'COMPLETELY_MAD'
   if (p === 'GO_PARANOID' || p === 'PARANOID') return 'GO_PARANOID'
   if (/^\s*COMPLETELY_MAD\b/m.test(source)) return 'COMPLETELY_MAD'

@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Goblin++ IDE",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "identifier": "com.goblinpp.ide",
   "build": {
     "beforeDevCommand": "pnpm dev",
@@ -28,11 +28,14 @@
   },
   "bundle": {
     "active": true,
-    "targets": ["app", "dmg"],
+    "targets": [
+      "app",
+      "dmg"
+    ],
     "category": "DeveloperTool",
     "shortDescription": "JetBrains-style IDE for the Goblin++ scientific language",
     "longDescription": "Goblin++ IDE: evidence-first scientific programming with run, freeze, verify and revise workflows, a real terminal, and the goblin++ engine bundled.",
-    "copyright": "Goblin++ IDE contributors. goblin++ engine © Malin Hess, MIT.",
+    "copyright": "Goblin++ IDE contributors. goblin++ engine \u00a9 Malin Hess, MIT.",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
@@ -40,15 +43,40 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
-    "externalBin": ["binaries/goblin++", "binaries/goblin-orbit"],
+    "externalBin": [
+      "binaries/goblin++",
+      "binaries/goblin-orbit"
+    ],
     "macOS": {
       "minimumSystemVersion": "12.0",
       "signingIdentity": "-",
       "dmg": {
-        "appPosition": { "x": 180, "y": 170 },
-        "applicationFolderPosition": { "x": 480, "y": 170 },
-        "windowSize": { "width": 660, "height": 400 }
+        "appPosition": {
+          "x": 180,
+          "y": 170
+        },
+        "applicationFolderPosition": {
+          "x": 480,
+          "y": 170
+        },
+        "windowSize": {
+          "width": 660,
+          "height": 400
+        }
       }
+    },
+    "resources": {
+      "../LICENSE": "licenses/LICENSE",
+      "../CITATION.cff": "CITATION.cff",
+      "../THIRD_PARTY_NOTICES.md": "licenses/THIRD_PARTY_NOTICES.md",
+      "../third-party/inventory.json": "licenses/third-party/inventory.json",
+      "../third-party/rust/": "licenses/third-party/rust/",
+      "../third-party/node/": "licenses/third-party/node/",
+      "../public/goblin++/LICENSE": "licenses/engine/LICENSE",
+      "../public/goblin++/LICENSE-DOCS.md": "licenses/engine/LICENSE-DOCS.md",
+      "../public/goblin++/BRANDING.md": "licenses/engine/BRANDING.md",
+      "../public/goblin++/THIRD_PARTY_NOTICES.md": "licenses/engine/THIRD_PARTY_NOTICES.md",
+      "../public/goblin++/third-party/": "licenses/engine/third-party/"
     }
   }
 }

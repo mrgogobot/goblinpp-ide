@@ -57,6 +57,8 @@
   "strings.gbl",
   "table_joins.gbl",
   "text_toolkit.gbl",
-  "vector_motion.gbl"
+  "vector_motion.gbl",
+  "private_encryption.gbl",
+  "base64_text.gbl"
  ]
 }

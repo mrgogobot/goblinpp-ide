@@ -1,0 +1,50 @@
+name: IDE checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  macos:
+    name: macOS arm64 IDE integration
+    runs-on: macos-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Use retained Rust 1.92.0
+        run: rustup default 1.92.0
+      - name: Install lint component
+        run: rustup component add clippy
+      - name: Select locked package manager
+        run: |
+          corepack enable
+          corepack prepare pnpm@11.25.0 --activate
+      - name: Check supported architecture and bundled engine
+        run: |
+          test "$(uname -m)" = "arm64"
+          src-tauri/binaries/goblin++-aarch64-apple-darwin --version
+      - name: Install frontend dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Real engine and frontend integration
+        run: pnpm test
+      - name: Fetch locked native dependencies
+        working-directory: src-tauri
+        run: cargo fetch --locked
+      - name: Native backend tests
+        working-directory: src-tauri
+        run: cargo test --locked --offline
+      - name: Native lint
+        working-directory: src-tauri
+        run: cargo clippy --locked --offline --all-targets -- -D warnings
+      - name: Build local app
+        run: pnpm exec tauri build --bundles app --ci -- --locked --offline
+      - name: Check bundled app signature
+        run: codesign --verify --deep --strict 'src-tauri/target/release/bundle/macos/Goblin++ IDE.app'

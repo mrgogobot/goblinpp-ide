@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDialogStore, useToastStore } from '../stores/dialogStore'
 import type { DialogSpec } from '../stores/dialogStore'
 
-function Dialog({ d }: { d: DialogSpec }) {
+export function Dialog({ d }: { d: DialogSpec }) {
   const close = useDialogStore((s) => s.close)
   const [value, setValue] = useState(d.defaultValue ?? '')
   const error = d.kind === 'prompt' && d.validate ? d.validate(value) : null
@@ -25,7 +25,7 @@ function Dialog({ d }: { d: DialogSpec }) {
           {d.message && <p className="modal-message">{d.message}</p>}
           {d.kind === 'prompt' && (
             <>
-              <input autoFocus value={value} placeholder={d.placeholder} onChange={(e) => setValue(e.target.value)} onFocus={(e) => e.target.select()} style={{ width: '100%' }} />
+              <input type={d.secret ? "password" : "text"} autoComplete={d.secret ? "off" : undefined} autoCapitalize={d.secret ? "none" : undefined} spellCheck={d.secret ? false : undefined} autoFocus value={value} placeholder={d.placeholder} onChange={(e) => setValue(e.target.value)} onFocus={(e) => e.target.select()} style={{ width: '100%' }} />
               {error && value && <div className="hint" style={{ color: 'var(--error)' }}>{error}</div>}
             </>
           )}
@@ -43,7 +43,7 @@ function Dialog({ d }: { d: DialogSpec }) {
         </div>
         <div className="modal-actions">
           {d.buttons.map((b) => (
-            <button key={b.id} type="button" className={b.primary ? `run-btn${b.danger ? ' danger' : ''}` : 'toolbar-btn'} disabled={b.primary && d.kind === 'prompt' && (!!error || !value.trim())} onClick={() => close(d.id, { button: b.id, value })}>
+            <button key={b.id} type="button" className={b.primary ? `run-btn${b.danger ? ' danger' : ''}` : 'toolbar-btn'} disabled={b.primary && d.kind === 'prompt' && (!!error || (d.secret ? !value.length : !value.trim()))} onClick={() => close(d.id, { button: b.id, value })}>
               {b.label}
             </button>
           ))}

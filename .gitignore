@@ -23,3 +23,6 @@ src-tauri/icons/ios
 
 # unused large asset
 squirrel.png
+
+# Pinned upstream archives are local evidence; preserved license texts are tracked.
+third-party/upstream/

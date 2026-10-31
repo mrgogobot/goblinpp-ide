@@ -1,3 +1,69 @@
+# Goblin++ IDE 0.2.1 - alpha.43 integration
+
+This update is based on upstream commit
+`892007eb416aad17df7105f3c4d6e420af4e7e66`. It bundles the reviewed alpha.43
+Goblin++/Orbit executables, refreshed completion/help/examples and native
+`GO_PRIVATE`/`input_secret()` Run support. The original sidecars remain preserved
+under ignored `release/validation/original-sidecars/`.
+
+- Open `private_encryption.gbl` and use Run or Compile and Run. Password requests
+  open a masked dialog; answers go only to stdin, not console/history/settings.
+- Private runs skip scientific run-directory overrides, receipt loading,
+  automatic verification and custody display. Cancel closes secret input.
+- An old configured engine is refused before a private source can be launched.
+  Select the bundled alpha.43 engine or an independently trusted matching build.
+- Private source buffers are not copied to check scratch files, and private
+  file context is excluded from automatic AI context. Anything you explicitly
+  type into AI, hardcode, print or save is still your disclosure.
+- `GO_PRIVATE` is not a sandbox, secure-erasure guarantee or a scientific audit.
+  The full code guide is bundled as `goblin++/docs/PRIVATE_FUNCTIONS.md`.
+
+## Reproduce the integration checks
+
+```sh
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm typecheck
+pnpm test
+pnpm build
+cd src-tauri
+cargo test --locked --offline
+```
+
+The frontend tests execute the actual RunStore and actual bundled alpha.43
+engine, adapting only desktop IPC to Node process pipes. They include both
+interpreted and compiled private scripts, cancellation, ordinary run/verify,
+secret response non-echo, split control frames, and refusal of a stale engine.
+Component tests inspect the actual masked input markup. Native backend tests
+exercise the actual process-capture/stdin adapter against the same sidecar.
+All automated fixtures are public; no AI API calls or real secrets are used.
+These do not substitute for a live installed GUI check or a security audit.
+
+The Rust toolchain stays at 1.92.0 for this local verification; dependency lock
+versions were retained. Source/binary sync is explicit and offline:
+`python3 scripts/sync-engine.py --engine-root ../goblinpp`.
+
+For a macOS app: `pnpm exec tauri build --bundles app --ci -- --locked --offline`.
+The release build profile retains debug information for build-time macros to
+avoid the macOS loader issue documented in
+[rust-lang/rust#157750](https://github.com/rust-lang/rust/issues/157750).
+This leaves the runtime release profile and dependency versions unchanged.
+
+## Licensing and citation
+
+IDE software is MIT-licensed; see [LICENSE](LICENSE). Cite Malin Hess using
+[CITATION.cff](CITATION.cff). The bundled engine retains its separate software,
+documentation and branding notices under `public/goblin++/`. Dependency licence
+texts, declarations and pinned source evidence are indexed in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and `third-party/inventory.json`.
+The macOS app includes these notices in `Contents/Resources/licenses/`.
+The IDE CI checks real engine integration and native app packaging on macOS
+arm64; this does not establish Windows/Linux support or an independent security
+audit.
+
+Optional Goblin++ merchandise: https://h4k3rl1f3.myspreadshop.co.uk
+
+## Original project overview (alpha.41-era description)
+
 # Goblin++ IDE
 
 A **JetBrains-style desktop IDE** purpose-built for the [Goblin++](https://github.com/mrgogobot/goblinpp)
@@ -41,12 +107,10 @@ Prerequisites: Node 20+, pnpm, Rust stable, Xcode command line tools.
 ## Installing the DMG on another Mac
 
 The app is ad-hoc signed (no Apple Developer ID), so Gatekeeper shows
-"cannot be opened because the developer cannot be verified" the first time.
-Right-click the app → **Open** → **Open**, or run:
-
-```bash
-xattr -dr com.apple.quarantine "/Applications/Goblin++ IDE.app"
-```
+an unverified-developer warning. Verify the package checksum against its
+independently obtained receipt before deciding whether to open this local
+build. Ad-hoc signing is not Apple notarization or publisher authentication.
+Keep macOS security protections enabled.
 
 Apple-silicon only (the bundled engine is arm64). `goblin++ run --compile`
 needs a Rust toolchain on the machine; everything else works without one.

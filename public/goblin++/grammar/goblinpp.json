@@ -1,6 +1,6 @@
 {
  "schema": "goblin-ide.grammar.v1",
- "source": "vscode/syntaxes/goblinpp.tmLanguage.json (alpha.41)",
+ "source": "vscode/syntaxes/goblinpp.tmLanguage.json (alpha.43)",
  "lineComment": "#",
  "identifierPattern": "[A-Za-z_πħωΩΔΣλμσθ∇∂µÅ][A-Za-z0-9_πħωΩΔΣλμσθ∇∂µÅ]*",
  "tokenCategories": {
@@ -32,7 +32,8 @@
    "GO_NUMERIC_AUDIT",
    "COMPLETELY_MAD",
    "RUST_INLINE_BEGIN",
-   "RUST_INLINE_END"
+   "RUST_INLINE_END",
+   "GO_PRIVATE"
   ],
   "builtins": [
    "npy_read",
@@ -260,7 +261,17 @@
    "str_to_octal",
    "str_from_octal",
    "str_to_binary",
-   "str_from_binary"
+   "str_from_binary",
+   "decrypt_file",
+   "decrypt_text",
+   "display_file",
+   "encrypt_file",
+   "encrypt_text",
+   "input_secret",
+   "read_text",
+   "str_b64",
+   "str_from_b64",
+   "str_to_b64"
   ],
   "units": [
    "L",

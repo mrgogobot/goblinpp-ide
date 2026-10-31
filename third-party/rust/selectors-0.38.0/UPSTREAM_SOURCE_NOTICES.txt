@@ -1,0 +1,217 @@
+attr.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+use crate::parser::SelectorImpl;
+use cssparser::ToCss;
+use std::fmt;
+
+#[cfg(feature = "to_shmem")]
+use to_shmem_derive::ToShmem;
+
+#[derive(Clone, Eq, PartialEq)]
+
+bloom.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+//! Counting and non-counting Bloom filters tuned for use as ancestor filters
+//! for selector matching.
+
+use std::fmt::{self, Debug};
+
+// The top 8 bits of the 32-bit hash value are not used by the bloom filter.
+// Consumers may rely on this to pack hashes more efficiently.
+pub const BLOOM_HASH_MASK: u32 = 0x00ffffff;
+
+build.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+extern crate phf_codegen;
+
+use std::env;
+use std::fs::File;
+use std::io::{BufWriter, Write};
+use std::path::Path;
+
+fn main() {
+
+builder.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+//! Helper module to build up a selector safely and efficiently.
+//!
+//! Our selector representation is designed to optimize matching, and has
+//! several requirements:
+//! * All simple selectors and combinators are stored inline in the same buffer as Component
+//!   instances.
+//! * We store the top-level compound selectors from right to left, i.e. in matching order.
+//! * We store the simple selectors for each combinator from left to right, so that we match the
+
+context.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+use crate::attr::CaseSensitivity;
+use crate::bloom::BloomFilter;
+use crate::nth_index_cache::{NthIndexCache, NthIndexCacheInner};
+use crate::parser::{Selector, SelectorImpl};
+use crate::relative_selector::cache::RelativeSelectorCache;
+use crate::relative_selector::filter::RelativeSelectorFilterMap;
+use crate::tree::{Element, OpaqueElement};
+
+
+kleene_value.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+//! Kleen logic: https://en.wikipedia.org/wiki/Three-valued_logic#Kleene_and_Priest_logics
+
+/// A "trilean" value based on Kleen logic.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum KleeneValue {
+    /// False
+    False = 0,
+    /// True
+
+lib.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+// Make |cargo bench| work.
+#![cfg_attr(feature = "bench", feature(test))]
+
+pub mod attr;
+pub mod bloom;
+mod builder;
+pub mod context;
+pub mod kleene_value;
+
+matching.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+use crate::attr::{
+    AttrSelectorOperation, AttrSelectorWithOptionalNamespace, CaseSensitivity, NamespaceConstraint,
+    ParsedAttrSelectorOperation, ParsedCaseSensitivity,
+};
+use crate::bloom::{BloomFilter, BLOOM_HASH_MASK};
+use crate::kleene_value::KleeneValue;
+use crate::parser::{
+    AncestorHashes, Combinator, Component, LocalName, MatchesFeaturelessHost, NthSelectorData,
+
+nth_index_cache.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+use std::hash::Hash;
+
+use crate::{parser::Selector, tree::OpaqueElement, SelectorImpl};
+use rustc_hash::FxHashMap;
+
+/// A cache to speed up matching of nth-index-like selectors.
+///
+/// See [1] for some discussion around the design tradeoffs.
+
+parser.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+use crate::attr::{AttrSelectorOperator, AttrSelectorWithOptionalNamespace};
+use crate::attr::{NamespaceConstraint, ParsedAttrSelectorOperation, ParsedCaseSensitivity};
+use crate::bloom::BLOOM_HASH_MASK;
+use crate::builder::{
+    relative_selector_list_specificity_and_flags, selector_list_specificity_and_flags,
+    SelectorBuilder, SelectorFlags, Specificity, SpecificityAndFlags,
+};
+use crate::context::QuirksMode;
+
+relative_selector/cache.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+use rustc_hash::FxHashMap;
+/// Relative selector cache. This is useful for following cases.
+/// First case is non-subject relative selector: Imagine `.anchor:has(<..>) ~ .foo`, with DOM
+/// `.anchor + .foo + .. + .foo`. Each match on `.foo` triggers `:has()` traversal that
+/// yields the same result. This is simple enough, since we just need to store
+/// the exact match on that anchor pass/fail.
+/// Second case is `querySelectorAll`: Imagine `querySelectorAll(':has(.a)')`, with DOM
+/// `div > .. > div > .a`. When the we perform the traversal at the top div,
+
+relative_selector/filter.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+/// Bloom filter for relative selectors.
+use rustc_hash::FxHashMap;
+
+use crate::bloom::BloomFilter;
+use crate::context::QuirksMode;
+use crate::parser::{collect_selector_hashes, RelativeSelector, RelativeSelectorMatchHint};
+use crate::tree::{Element, OpaqueElement};
+use crate::SelectorImpl;
+
+relative_selector/mod.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+pub mod cache;
+pub mod filter;
+
+sink.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+//! Small helpers to abstract over different containers.
+#![deny(missing_docs)]
+
+use smallvec::{Array, SmallVec};
+
+/// A trait to abstract over a `push` method that may be implemented for
+/// different kind of types.
+///
+
+tree.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+//! Traits that nodes must implement. Breaks the otherwise-cyclic dependency
+//! between layout and style.
+
+use crate::attr::{AttrSelectorOperation, CaseSensitivity, NamespaceConstraint};
+use crate::bloom::BloomFilter;
+use crate::matching::{ElementSelectorFlags, MatchingContext};
+use crate::parser::SelectorImpl;
+use std::fmt::Debug;
+
+visitor.rs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+//! Visitor traits for selectors.
+
+#![deny(missing_docs)]
+
+use crate::attr::NamespaceConstraint;
+use crate::parser::{Combinator, Component, RelativeSelector, Selector, SelectorImpl};
+use bitflags::bitflags;
+

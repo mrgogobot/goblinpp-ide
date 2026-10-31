@@ -1,2 +1,6 @@
 allowBuilds:
   esbuild: true
+# Keep installs reproducible inside this checkout, including script invocations.
+storeDir: .pnpm-store
+verifyDepsBeforeRun: false
+confirmModulesPurge: false

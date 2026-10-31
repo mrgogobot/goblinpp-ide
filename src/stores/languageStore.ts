@@ -1,3 +1,4 @@
+import { isPrivateSource } from '../run/secretInput'
 import { create } from 'zustand'
 import { detectLanguageFolder, joinPath } from '../language/manifest'
 import type { ConstantEntry, DiagnosticCode, FunctionEntry, LanguageDefinition, Manifest, Snippet, StatementEntry, UnitEntry } from '../language/manifest'
@@ -142,6 +143,7 @@ export const useLanguageStore = create<LanguageState>((set, get) => ({
     let cwd = dirname(path)
     const tab = useEditorStore.getState().tabs.find((t) => t.path === path)
     if (tab && tab.content !== tab.savedContent) {
+      if (isPrivateSource(source)) return // Do not write private buffers to automatic check scratch files.
       if (/^\s*import\s+"/m.test(source)) return
       try {
         const paths = await settingsApi.appPaths()
