@@ -7,7 +7,7 @@ import type { FunctionEntry } from './manifest'
 
 export const KEYWORDS = ['for', 'in', 'while', 'range', 'break', 'continue', 'if', 'else', 'switch', 'case', 'default', 'g_func', 'return', 'import', 'seal']
 export const LITERALS = ['true', 'false', 'argc']
-export const DIRECTIVES = ['GO_PARANOID', 'GO_LOOP_BUDGET', 'GO_NUMERIC_AUDIT', 'COMPLETELY_MAD', 'RUST_INLINE_BEGIN', 'RUST_INLINE_END']
+export const DIRECTIVES = ['GO_PRIVATE', 'GO_PARANOID', 'GO_LOOP_BUDGET', 'GO_NUMERIC_AUDIT', 'COMPLETELY_MAD', 'RUST_INLINE_BEGIN', 'RUST_INLINE_END']
 export const CONSTANTS = ['speed_of_light', 'planck_constant', 'gravitational_constant', 'boltzmann_constant', 'avogadro_constant', 'molar_gas_constant', 'atomic_mass_constant', 'hbar', 'pi', 'k_B', 'N_A', 'm_u', 'R', 'c', 'h', 'G', 'π', 'ħ']
 export const UNITS = ['kg', 'g', 'm', 'km', 's', 'K', 'mol', 'J', 'L', 'mL', 'uL', 'µL', 'nm', 'pm', 'angstrom', 'Å', 'Pa', 'kPa', 'bar', 'atm', 'Da', 'A', 'mA', 'uA', 'µA', 'C', 'V', 'mV', 'kV', 'ohm', 'Ω', 'kohm', 'kΩ', 'Mohm', 'MΩ', 'F', 'mF', 'uF', 'µF', 'nF', 'pF', 'H', 'mH', 'uH', 'µH', 'W', 'mW', 'kW', 'S', 'mS', 'uS', 'µS', 'Hz', 'kHz', 'MHz']
 

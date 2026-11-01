@@ -1,3 +1,4 @@
+import appPackage from '../../package.json'
 import { useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { PROVIDERS } from '../ai/providers'
@@ -120,7 +121,7 @@ function LanguagePathSection() {
   return (
     <div>
       <SectionTitle>Goblin++ → Language Path</SectionTitle>
-      <Field label="Language folder" hint="A folder containing manifest.json (grammar, snippets, docs, function registry). The IDE bundles the alpha.41 folder; auto-detection also walks the project folder and its parents for goblin++/ or goblinpp/.">
+      <Field label="Language folder" hint="A folder containing manifest.json (grammar, snippets, docs, function registry). The IDE bundles the alpha.45 folder; auto-detection also walks the project folder and its parents for goblin++/ or goblinpp/.">
         <div className="settings-row" style={{ gap: 6 }}>
           <input style={{ flex: 1 }} value={draft} onChange={(e) => setDraft(e.target.value)} placeholder="/path/to/goblin++ (optional)" />
           <button type="button" className="toolbar-btn framed" onClick={async () => { const p = await dialogs.pickFolder('Select the goblin++ language folder'); if (p) setDraft(p) }}>Browse…</button>
@@ -278,7 +279,7 @@ function AboutSection() {
     <div style={{ textAlign: 'center', paddingTop: 8 }}>
       <img src="/goblinpp-logo.png" alt="" width={96} height={96} />
       <h2 style={{ margin: '12px 0 4px' }}>Goblin++ IDE</h2>
-      <div className="muted">v0.2.0 · JetBrains-style shell for the Goblin++ scientific language</div>
+      <div className="muted">v{appPackage.version} · JetBrains-style shell for the Goblin++ scientific language</div>
       <p style={{ fontStyle: 'italic', marginTop: 16 }}>“A Pragmatic Language for Curious Minds; Built on Rust; Ideas Compile Here.”</p>
       <div style={{ marginTop: 20, fontSize: 12, color: 'var(--fg-muted)', lineHeight: 1.8 }}>
         <div>Engine · {engine?.version ?? `goblin++ ${manifest?.version ?? ''}`} ({engine?.source ?? 'not found'})</div>

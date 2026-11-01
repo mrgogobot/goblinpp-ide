@@ -1,0 +1,42 @@
+[package]
+name = "goblinpp"
+version = "0.1.0-alpha.45"
+edition = "2024"
+rust-version = "1.92"
+description = "Evidence-first scientific language engine"
+license = "MIT"
+publish = false
+default-run = "goblinpp"
+
+[[bin]]
+name = "goblinpp"
+path = "src/main.rs"
+
+[[bin]]
+name = "goblin-orbit"
+path = "src/bin/goblin-orbit.rs"
+
+[dependencies]
+base64 = "=0.23.1"
+rcgen = "=0.14.10"
+rustls = { version = "=0.23.46", default-features = false, features = ["ring", "std", "tls12"] }
+age = { version = "=0.11.5", default-features = false }
+rpassword = "=7.5.4"
+zeroize = "1"
+tempfile = "3.23.0"
+chrono = { version = "0.4.42", default-features = false, features = ["clock", "serde"] }
+clap = { version = "4.5.53", features = ["derive"] }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = { version = "1.0.145", features = ["preserve_order", "float_roundtrip"] }
+sha2 = "0.10.9"
+zip = { version = "=9.0.0", default-features = false, features = ["deflate-flate2"] }
+flate2 = { version = "1.1", default-features = false, features = ["rust_backend"] }
+ureq = { version = "=3.4.2", default-features = false, features = ["rustls", "platform-verifier"] }
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+
+[profile.release]
+lto = "thin"
+strip = "symbols"

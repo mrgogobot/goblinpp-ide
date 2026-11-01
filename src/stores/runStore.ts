@@ -1,3 +1,4 @@
+import { missingNetworkFunctions } from '../run/privateCapabilities'
 import { SecretFrames, isPrivateSource, secretValidation } from '../run/secretInput'
 /*
  * Runs the real `goblin++` engine. Program output streams into the Run panel;
@@ -248,6 +249,7 @@ export const useRunStore = create<RunState>((set, get) => ({
       try {
         const caps=JSON.parse((await proc.run(engine,['capabilities','--json'],cwd)).stdout)
         if(!caps.confidential_functions?.includes('input_secret') || typeof caps.confidential_code_profile!=='string' || !caps.confidential_code_profile.includes('GO_PRIVATE'))throw new Error('unsupported')
+        if(missingNetworkFunctions(source,caps.confidential_functions).length){toast('error','Matching networking engine required','Select the bundled alpha.45 executable for LAN setup and networking functions. No source was run.');return null}
       }catch{toast('error','Alpha.43 engine required','Private scripts need a matching Goblin++ executable. No source was run.');return null}
     }
     const rel = file.startsWith(cwd + '/') ? file.slice(cwd.length + 1) : file

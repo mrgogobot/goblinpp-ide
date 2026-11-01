@@ -48,9 +48,38 @@ test('private files are excluded from automatic AI context',()=>{
  const publicContext=assembleContext({userPrompt:'Question',contextFree:false,budgetChars:5000,openFiles:[{path:'p.gbl',snippet:'GO_PRIVATE\nsecret="fixture"'}]})
  assert(!publicContext.user.includes('fixture'))
 })
-test('bundled grammar, help and sidecar contract expose alpha.43 private code',()=>{
- const m=JSON.parse(fs.readFileSync('public/goblin++/manifest.json','utf8'));assert.equal(m.version,'0.1.0-alpha.43');assert(m.profiles.includes('GO_PRIVATE'))
+test('bundled grammar, help and sidecar contract expose alpha.44 private code',()=>{
+ const m=JSON.parse(fs.readFileSync('public/goblin++/manifest.json','utf8'));assert.equal(m.version,'0.1.0-alpha.45');assert(m.profiles.includes('GO_PRIVATE'))
  const reg=JSON.parse(fs.readFileSync('public/goblin++/functions/registry.json','utf8'))
  for(const name of ['input_secret','encrypt_text','encrypt_file','decrypt_text','decrypt_file','read_text','display_file','str_b64'])assert(reg.functions.some((f:{name:string})=>f.name===name),name)
  assert(fs.existsSync('public/goblin++/docs/PRIVATE_FUNCTIONS.md'))
 })
+
+ test('network capability guard distinguishes code from quoted text and comments', async()=>{
+ const {missingNetworkFunctions,NETWORK_FUNCTIONS}=await import('../src/run/privateCapabilities')
+ assert.deepEqual(missingNetworkFunctions('GO_PRIVATE\n# net_connect()\nprint("e2e_encrypt(x,y)")\n',[]),[])
+ assert.deepEqual(missingNetworkFunctions('GO_PRIVATE\nc = net_connect("x","x","x","x","x")\n',['input_secret']),['net_connect'])
+ assert.deepEqual(missingNetworkFunctions('GO_PRIVATE\nx = e2e_encrypt("x","y")',NETWORK_FUNCTIONS),[])
+ })
+ test('alpha.44 networking vocabulary, guide and four examples are bundled',()=>{
+ const reg=JSON.parse(fs.readFileSync('public/goblin++/functions/registry.json','utf8'))
+ for(const name of ['net_connect','net_listen','net_peer_sha256','e2e_keygen','e2e_encrypt','e2e_decrypt'])assert(reg.functions.some((f:{name:string})=>f.name===name),name)
+ for(const name of ['network_setup.gbl','network_client.gbl','network_server.gbl','network_relay.gbl'])assert(fs.existsSync('public/goblin++/examples/'+name))
+ assert(fs.existsSync('public/goblin++/docs/NETWORKING.md'))
+ })
+
+ test('private key files and credential folders are excluded from automatic AI context',()=>{
+ for(const [path,content] of [['recipient.key','fixture'],['server.pem','fixture'],['network-demo/recipient.txt','fixture'],['lan-pair/client/ca.pem','fixture'],['unknown.txt','AGE-SECRET-KEY-publicfixture'],['key.txt','-----BEGIN PRIVATE KEY-----']]) {
+ const context=assembleContext({userPrompt:'Explain networking',contextFree:false,budgetChars:5000,activeFile:{path,content}})
+ assert.deepEqual(context.sources,['user prompt'])
+ const open=assembleContext({userPrompt:'Question',contextFree:false,budgetChars:5000,openFiles:[{path,snippet:content}]})
+ assert(!open.user.includes('fixture'));assert(!open.sources.includes('open files'))
+ }
+ })
+
+ test('LAN pair provisioning and split-role examples are bundled',()=>{
+ const reg=JSON.parse(fs.readFileSync('public/goblin++/functions/registry.json','utf8'))
+ assert(reg.functions.some((f:{name:string})=>f.name==='net_pair_credentials'))
+ for(const name of ['setup.gbl','network_server.gbl','network_client.gbl','README.md','QUICKSTART.md'])assert(fs.existsSync('public/goblin++/examples/network/lan/'+name))
+ for(const name of ['setup.gbl','client.gbl','server.gbl','README.md'])assert(fs.existsSync('public/goblin++/examples/network/'+name))
+ })

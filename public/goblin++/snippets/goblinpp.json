@@ -355,5 +355,117 @@
    "GO_PRIVATE"
   ],
   "description": "Confidential script, no scientific receipt."
+ },
+ "net_demo_credentials": {
+  "prefix": "net_demo_credentials",
+  "body": [
+   "net_demo_credentials(\"${1:network-demo}\")"
+  ],
+  "description": "GO_PRIVATE only. Create a new owner-only directory containing fresh CA/server/client PEM credentials, valid 90 days for localhost learning. Refuses existing paths. CA signing key is not saved; never share private demo keys."
+ },
+ "net_allow": {
+  "prefix": "net_allow",
+  "body": [
+   "net_allow(\"${1:192.0.2.1:7443}\")"
+  ],
+  "description": "GO_PRIVATE only. Permit this exact numeric IP:port for the current execution. Loopback is allowed by default; wildcard, broadcast and multicast addresses are refused. Not an OS firewall or sandbox."
+ },
+ "net_timeout": {
+  "prefix": "net_timeout",
+  "body": [
+   "net_timeout(${1:30000})"
+  ],
+  "description": "GO_PRIVATE only. Set total per-operation deadline in integer milliseconds, 1–60000; default 30000. Partial traffic does not reset the deadline."
+ },
+ "net_listen": {
+  "prefix": "net_listen",
+  "body": [
+   "net_listen(\"${1:127.0.0.1:7443}\", \"${2:server.pem}\", \"${3:server-key.pem}\", \"${4:ca.pem}\")"
+  ],
+  "description": "GO_PRIVATE only. Bind a TLS 1.3 listener requiring a trusted client certificate. Numeric IP:port; loopback by default. Returns a handle. No plaintext or certificate bypass."
+ },
+ "net_connect": {
+  "prefix": "net_connect",
+  "body": [
+   "net_connect(\"${1:127.0.0.1:7443}\", \"${2:localhost}\", \"${3:ca.pem}\", \"${4:client.pem}\", \"${5:client-key.pem}\")"
+  ],
+  "description": "GO_PRIVATE only. TLS 1.3 with verified server certificate/name and mandatory client identity. Explicit PEM CA; numeric endpoint; no DNS/proxy/redirect/fallback. Returns a connection handle."
+ },
+ "net_accept": {
+  "prefix": "net_accept",
+  "body": [
+   "net_accept(${1:listener})"
+  ],
+  "description": "GO_PRIVATE only. Accept one mutually authenticated TLS 1.3 connection within the total timeout. Each listener is synchronous; no automatic concurrent server or application authorization."
+ },
+ "net_send": {
+  "prefix": "net_send",
+  "body": [
+   "net_send(${1:connection}, ${2:text})"
+  ],
+  "description": "GO_PRIVATE only. Send one UTF-8 message, at most 1 MiB, with a four-byte big-endian length prefix inside TLS. Transport failure retires the connection. Delivery/application processing is not guaranteed by send success."
+ },
+ "net_receive": {
+  "prefix": "net_receive",
+  "body": [
+   "net_receive(${1:connection})"
+  ],
+  "description": "GO_PRIVATE only. Receive one bounded UTF-8 message. Oversized, truncated, invalid-UTF8 or failed frames refuse and retire the connection. Treat received text as untrusted; do not print terminal controls directly."
+ },
+ "net_close": {
+  "prefix": "net_close",
+  "body": [
+   "net_close(${1:handle})"
+  ],
+  "description": "GO_PRIVATE only. Close a listener or connection; repeated/unknown closes refuse. Handles are owned by one execution and sockets close on drop. Not a secure-erasure guarantee."
+ },
+ "net_address": {
+  "prefix": "net_address",
+  "body": [
+   "net_address(${1:handle})"
+  ],
+  "description": "GO_PRIVATE only. Return the local numeric socket address for an open listener/connection. Listener port zero selects an ephemeral port."
+ },
+ "net_peer_sha256": {
+  "prefix": "net_peer_sha256",
+  "body": [
+   "net_peer_sha256(${1:connection})"
+  ],
+  "description": "GO_PRIVATE only. Return SHA-256 of the authenticated peer leaf certificate DER. Compare with an independently obtained value for application authorization; this is not a message signature."
+ },
+ "e2e_keygen": {
+  "prefix": "e2e_keygen",
+  "body": [
+   "e2e_keygen(\"${1:recipient.key}\", \"${2:recipient.txt}\")"
+  ],
+  "description": "GO_PRIVATE only. Generate an age X25519 identity using OS cryptographic randomness. Write a new owner-only private key and optional new public-key file; return public recipient key. Refuses overwrite; operations are not transactional."
+ },
+ "e2e_public_key": {
+  "prefix": "e2e_public_key",
+  "body": [
+   "e2e_public_key(\"${1:recipient.key}\")"
+  ],
+  "description": "GO_PRIVATE only. Read an owner-only age identity and return its public recipient key. Refuses symlinks; authenticate the public key independently before distribution."
+ },
+ "e2e_encrypt": {
+  "prefix": "e2e_encrypt",
+  "body": [
+   "e2e_encrypt(${1:text}, ${2:recipient})"
+  ],
+  "description": "GO_PRIVATE only. Encrypt up to 512 KiB UTF-8 to one age X25519 public recipient; return canonical padded Base64 of standard binary age v1. Relay needs no private key. No sender authentication, replay prevention, forward secrecy or post-quantum claim."
+ },
+ "e2e_decrypt": {
+  "prefix": "e2e_decrypt",
+  "body": [
+   "e2e_decrypt(${1:envelope}, \"${2:recipient.key}\")"
+  ],
+  "description": "GO_PRIVATE only. Authenticate and decrypt an at-most-1-MiB Base64 age message using an owner-only X25519 private-key file. Rejects wrong keys, corruption, truncation, oversized results and scrypt messages. Returns UTF-8 only after full authentication."
+ },
+ "net_pair_credentials": {
+  "prefix": "net_pair_credentials",
+  "body": [
+   "net_pair_credentials(\"${1:lan-pair}\", \"${2:192.168.1.42}\")"
+  ],
+  "description": "GO_PRIVATE only. Generate a dedicated 90-day TLS pair for an explicit RFC1918 LAN IPv4 address (loopback allowed for tests). New owner-only directory; separate server/client folders contain only their own private keys. The trusted setup computer sees both identities; no CA signing key is saved. Transfer only the intended role folder through a trusted channel and verify the CA fingerprint independently. Learning setup, not managed production PKI."
  }
 }

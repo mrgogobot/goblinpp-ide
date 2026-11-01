@@ -26,3 +26,6 @@ squirrel.png
 
 # Pinned upstream archives are local evidence; preserved license texts are tracked.
 third-party/upstream/
+
+# Per-computer LAN private credentials.
+**/lan-pair/

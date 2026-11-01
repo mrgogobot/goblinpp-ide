@@ -1,3 +1,68 @@
+# Goblin++ IDE 0.2.3 — two-computer LAN examples
+
+Bundles alpha.45 and adds net_pair_credentials completion/help, split server/client
+LAN examples and a step-by-step guide. The setup computer is trusted; only the
+correct role folder is transferred to each endpoint. Never share the other role's
+private key. The server certificate binds its actual private IPv4 address.
+
+Existing networking, recipient encryption, scientific Run/Verify, private input
+and AI-context exclusions remain available. The LAN credential folder is also
+excluded from automatic AI context. The About dialog follows package metadata.
+
+The app includes runnable source examples and a short guide under
+Examples/lan/QUICKSTART.md. Separate compiled client/server programs are not
+required; use the bundled interpreter. Linux runtime/build instructions are
+included in the full LAN guide. A real two-machine check still needs the user's
+own network; automated tests distinguish local-interface tests from two hosts.
+
+Rust stays 1.92.0. No dependency upgrades or firewall changes. Ad-hoc signed,
+not Apple-notarized; no independent security audit is claimed.
+
+Optional merchandise: https://h4k3rl1f3.myspreadshop.co.uk
+
+## Previous stage
+
+# Goblin++ IDE 0.2.2 — alpha.44 networking
+
+Bundles Goblin++/Orbit **0.1.0-alpha.44**, including all previous language features,
+TLS 1.3 client/server messaging and age X25519 recipient-message encryption.
+The new `net_*` / `e2e_*` functions have completion, signature help, snippets and
+reference documentation. The About dialog now follows the actual package version.
+
+1. Copy the networking examples into a writable project folder.
+2. Open `network_setup.gbl` and Run once to generate your own local credentials.
+3. Run `network_server.gbl` in one IDE terminal and `network_client.gbl` in another
+   terminal or window. The main Run panel manages one process at a time.
+4. See bundled `NETWORKING.md` for the optional relay, native compilation,
+   certificate trust, exact limits and recipient-key distribution.
+
+An older selected engine missing a directly used new builtin is refused before
+launch with a clear alpha.44 message. Recognized `.key`/`.pem`/`.age` files,
+`network-demo/` credential folders and private-key text are excluded from automatic
+AI context, alongside GO_PRIVATE scripts. This is a conservative guard, not a
+complete secret detector; explicit user prompts can still disclose secrets.
+
+New integration tests run actual IDE RunStore networking and recipient encryption
+against an independent Node/OpenSSL mutual-TLS peer, in interpreted and compiled
+modes, including certificate fingerprints and no scientific receipt creation.
+The current **19 frontend/integration tests** and **3 native backend tests** pass.
+There is no claim of a live installed GUI test or independent security audit.
+
+The CI dependency-cache preparation uses byte-for-byte copies of the bundled
+engine's matching manifests in `engine-dependencies/`. It fetches checksummed
+public dependencies BEFORE private scripts compile with `--locked --offline`.
+It no longer depends on a different repository's old source commit. Rust remains
+**1.92.0**, with no compiler or third-party dependency upgrades.
+
+The app is locally ad-hoc signed, not Apple-notarized. Existing scientific
+Run/Verify and private masked-password workflows remain tested. TLS protects a
+connection; age recipient encryption protects messages through a relay but adds
+no sender signatures, application replay prevention or forward-secrecy ratchet.
+
+Optional Goblin++ merchandise: https://h4k3rl1f3.myspreadshop.co.uk
+
+## Previous stage
+
 # Goblin++ IDE 0.2.1 - alpha.43 integration
 
 This update is based on upstream commit

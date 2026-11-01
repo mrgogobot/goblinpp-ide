@@ -245,13 +245,16 @@ mod tests {
     struct PublicWorkspace(PathBuf);
     impl PublicWorkspace {
         fn new() -> Self {
+            static NEXT: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+            let sequence = NEXT.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
             let p = std::env::temp_dir().join(format!(
-                "goblin-ide-public-backend-{}-{}",
+                "goblin-ide-public-backend-{}-{}-{}",
                 std::process::id(),
                 std::time::SystemTime::now()
                     .duration_since(std::time::UNIX_EPOCH)
                     .unwrap()
-                    .as_nanos()
+                    .as_nanos(),
+                sequence
             ));
             let mut builder = std::fs::DirBuilder::new();
             #[cfg(unix)]

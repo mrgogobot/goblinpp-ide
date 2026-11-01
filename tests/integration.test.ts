@@ -14,7 +14,7 @@ const writes:string[]=[]
 const pending=new Set<Promise<unknown>>()
 const bridge:any={
  editor:{tabs:[],activePath:null,save:async()=>{},saveAs:async()=>null,setFrozen:()=>{},setVerifyFailed:()=>{}},
- language:{engine:{path:engine,source:'test-bundled',version:'0.1.0-alpha.43'},analysisByPath:{}},
+ language:{engine:{path:engine,source:'test-bundled',version:'0.1.0-alpha.45'},analysisByPath:{}},
  project:{root:'',refresh:async()=>{}},
  settings:{autoSaveBeforeRun:true,inlineRustHashes:{},runsRoot:'runs',autoVerify:true},
  fs:{
@@ -52,7 +52,7 @@ async function answerDialogs(answers:(string|null)[],run:()=>Promise<any>){
  try{const result=await run();assert.equal(answers.length,0);return result}finally{stop()}
 }
 
-test('real alpha.43 RunStore encryption/decryption masks responses and creates no scientific evidence', {timeout:120000},async()=>{
+test('real alpha.44 RunStore encryption/decryption masks responses and creates no scientific evidence', {timeout:120000},async()=>{
  const {dir,file}=await fixture('GO_PRIVATE\nkey=input_secret("Passphrase: ")\nencrypt_text("public IDE message",key,"message.age")\ndecrypt_file("message.age",key,"restored.txt")\nprint(read_text("restored.txt"))\n')
  try{
   const before=writes.length
@@ -97,4 +97,65 @@ test('printed receipt-looking text in a private run never opens an unrelated rec
  bridge.fs.readText=async(p:string)=>{reads.push(p);return read(p)}
  bridge.proc.spawn=async(id:string)=>{queueMicrotask(()=>{for(const fn of listeners.out)fn({id,stream:'stdout',data:'RUN_DIR=/unrelated\nRECEIPT_CORE_SHA256=not-evidence\nRUN_STATUS=PASS\n'});for(const fn of listeners.exit)fn({id,code:0,signal:null})});return 0}
  try{const r=await useRunStore.getState().run('run',{file,silent:true});assert.equal(r?.runDir,null);assert.equal(r?.receipt,null);assert.equal(r?.summary.RECEIPT_CORE_SHA256,undefined);assert(!reads.some(p=>p.includes('/unrelated')))}finally{bridge.proc.spawn=original;bridge.fs.readText=read;await fs.rm(dir,{recursive:true,force:true})}
+})
+
+test('real RunStore uses mutual TLS and recipient encryption in interpreted and native modes',{timeout:600000},async()=>{
+ const tls=await import('node:tls');const crypto=await import('node:crypto')
+ const {dir,file}=await fixture('GO_PRIVATE\nnet_demo_credentials("creds")\nrecipient=e2e_keygen("recipient.key","recipient.txt")\n')
+ const sockets=new Set<import('node:tls').TLSSocket>();const envelopes:string[]=[];const failures:Error[]=[]
+ let server:import('node:tls').Server|undefined
+ try{
+  assert.equal((await useRunStore.getState().run('run',{file,silent:true}))?.status,'PASS')
+  const cert=await fs.readFile(path.join(dir,'creds/server.pem'))
+  server=tls.createServer({key:await fs.readFile(path.join(dir,'creds/server-key.pem')),cert,ca:await fs.readFile(path.join(dir,'creds/ca.pem')),requestCert:true,rejectUnauthorized:true,minVersion:'TLSv1.3',maxVersion:'TLSv1.3',ALPNProtocols:['goblin-message/1']},socket=>{
+   sockets.add(socket);socket.on('close',()=>sockets.delete(socket));socket.on('error',e=>failures.push(e))
+   assert(socket.authorized);assert.equal(socket.getProtocol(),'TLSv1.3');assert.equal(socket.alpnProtocol,'goblin-message/1')
+   let buffer=Buffer.alloc(0);let handled=false
+   socket.on('data',chunk=>{
+    buffer=Buffer.concat([buffer,chunk]);if(buffer.length<4||handled)return
+    const n=buffer.readUInt32BE(0);assert(n<=1048576);if(buffer.length<4+n)return;handled=true
+    const envelope=buffer.subarray(4,4+n).toString('utf8');envelopes.push(envelope)
+    assert(Buffer.from(envelope,'base64').subarray(0,22).toString().startsWith('age-encryption.org/v1'))
+    assert(!envelope.includes('public IDE network fixture'))
+    const reply=Buffer.from('ide-network-ok');const length=Buffer.alloc(4);length.writeUInt32BE(reply.length);socket.write(Buffer.concat([length,reply]))
+   });socket.on('end',()=>socket.end())
+  })
+  server.on('tlsClientError',e=>failures.push(e))
+  await new Promise<void>(resolve=>server!.listen(0,'127.0.0.1',resolve))
+  const address=server.address();assert(address&&typeof address!=='string')
+  const expected=crypto.createHash('sha256').update(new crypto.X509Certificate(cert).raw).digest('hex')
+  const content=`GO_PRIVATE\nrecipient=read_text("recipient.txt")\nenvelope=e2e_encrypt("public IDE network fixture",recipient)\nrestored=e2e_decrypt(envelope,"recipient.key")\nchannel=net_connect("127.0.0.1:${address.port}","localhost","creds/ca.pem","creds/client.pem","creds/client-key.pem")\nfingerprint=net_peer_sha256(channel)\nnet_send(channel,envelope)\nreply=net_receive(channel)\nif restored == "public IDE network fixture" { print("recipient-ok") }\nprint(reply)\nprint(fingerprint)\nnet_close(channel)\n`
+  await fs.writeFile(file,content);bridge.editor.tabs=[{path:file,name:'test.gbl',content,savedContent:content}]
+  for(const kind of ['run','compile']as const){
+   const record=await useRunStore.getState().run(kind,{file,silent:true})
+   assert.equal(record?.status,'PASS');assert.equal(record?.profile,'GO_PRIVATE');assert.equal(record?.receipt,null);assert.equal(record?.runDir,null)
+   const output=useRunStore.getState().output.map(l=>l.text).join('\n')
+   for(const marker of ['recipient-ok','ide-network-ok',expected])assert(output.includes(marker),marker)
+   assert(!output.includes('AGE-SECRET-KEY-'));assert(!output.includes('BEGIN PRIVATE KEY'))
+  }
+  assert.equal(envelopes.length,2);assert.notEqual(envelopes[0],envelopes[1]);assert.deepEqual(failures,[])
+  assert(!(await bridge.fs.exists(path.join(dir,'runs'))));assert(!(await bridge.fs.exists(path.join(dir,'.goblin'))))
+ }finally{
+  for(const socket of sockets)socket.destroy()
+  if(server?.listening)await new Promise<void>(resolve=>server!.close(()=>resolve()))
+  await fs.rm(dir,{recursive:true,force:true})
+ }
+})
+
+test('an alpha.43-only private engine is refused before new networking source launches',async()=>{
+ const {dir,file}=await fixture('GO_PRIVATE\nchannel=net_connect("127.0.0.1:7443","localhost","ca","cert","key")\n')
+ const original=bridge.proc.run;const before=launches.length
+ bridge.proc.run=async()=>({code:0,stdout:JSON.stringify({confidential_functions:['input_secret','encrypt_text'],confidential_code_profile:'GO_PRIVATE'}),stderr:''})
+ try{assert.equal(await useRunStore.getState().run('run',{file,silent:true}),null);assert.equal(launches.length,before)}
+ finally{bridge.proc.run=original;await fs.rm(dir,{recursive:true,force:true})}
+})
+
+test('real IDE LAN setup generates separate role identities without scientific evidence',async()=>{
+ const {dir,file}=await fixture('GO_PRIVATE\nnet_pair_credentials("lan-pair","127.0.0.1")\n')
+ try{
+  const record=await useRunStore.getState().run('run',{file,silent:true});assert.equal(record?.status,'PASS');assert.equal(record?.receipt,null)
+  assert(await bridge.fs.exists(path.join(dir,'lan-pair/server/server-key.pem')));assert(await bridge.fs.exists(path.join(dir,'lan-pair/client/client-key.pem')))
+  assert(!(await bridge.fs.exists(path.join(dir,'lan-pair/server/client-key.pem'))));assert(!(await bridge.fs.exists(path.join(dir,'lan-pair/client/server-key.pem'))))
+  assert(!(await bridge.fs.exists(path.join(dir,'runs'))));assert(!(await bridge.fs.exists(path.join(dir,'.goblin'))))
+ }finally{await fs.rm(dir,{recursive:true,force:true})}
 })

@@ -1,8 +1,61 @@
-# Alpha.43 callable file protection
+# Alpha.45 local — two-computer LAN starter
 
-This language folder now includes GO_PRIVATE, hidden input_secret(), code-level
-encryption/decryption and text reading/display. The guide is docs/PRIVATE_FUNCTIONS.md.
-Base64 remains encoding, not encryption. The IDE and sidecars must both match.
+Adds `net_pair_credentials(new_directory, server_ipv4)` for a dedicated 90-day
+TLS pair with the server's actual private IPv4 SAN, separate role credentials and
+no retained CA signing key. The setup computer is trusted and initially sees
+both keys. A production PKI/CSR/revocation workflow remains separate.
+
+Start with [the LAN quickstart](examples/network/lan/QUICKSTART.md). Run the
+source examples directly; separate compiled client/server programs are optional.
+The bundle includes the runtime, sources and Linux build instructions. Existing
+networking, recipient encryption and scientific workflows remain available.
+Rust stays 1.92.0; dependency versions are retained. This is not a throughput
+benchmark or independently audited production service framework.
+
+Simple client/server examples: start with [NETWORK_EXAMPLES.md](NETWORK_EXAMPLES.md)
+and the clearly named `examples/network/` folder.
+
+# Alpha.44 local — TLS networking and recipient encryption
+
+Adds callable `net_*` client/server functions over mutually authenticated TLS 1.3,
+plus age X25519 `e2e_*` recipient-message encryption. Localhost is allowed by default;
+other numeric endpoints require explicit permission. Messages, credentials and
+operation durations are bounded. Functions require `GO_PRIVATE` to keep plaintext
+and keys outside scientific receipts. These are tested alpha facilities, not an
+independent security certification or a complete authenticated messenger.
+
+Start with [the networking guide](docs/NETWORKING.md) and
+`examples/network_setup.gbl`, `network_server.gbl`, `network_client.gbl` and
+`network_relay.gbl`. Both interpreter/native execution and IDE Run are supported.
+VS Code 0.1.35 / JetBrains 0.3.25 include completion/help. Rust stays 1.92.0;
+existing locked dependency versions are retained.
+
+# Alpha.43 local: callable encryption/decryption
+
+Use the file-protection functions directly from `.gbl` code with `GO_PRIVATE`:
+`input_secret`, `encrypt_text`, `encrypt_file`, `decrypt_text`, `decrypt_file`,
+`read_text` and `display_file`. Both interpreter and native compilation support
+these functions; updated VS Code 0.1.34 and JetBrains 0.3.24 mask secret input
+through the normal Run action. [Code guide](docs/PRIVATE_FUNCTIONS.md).
+
+Private scripts create no scientific receipts and cannot silently weaken
+`GO_PARANOID`/`COMPLETELY_MAD`. Standard age encryption and the existing CLI
+file actions remain available. Rust remains 1.92.0; no dependency upgrades.
+
+# Alpha.42 — confidential file commands and Base64 (local, unreleased)
+
+Adds standard age-v1 passphrase encryption/decryption, hidden password entry,
+no-overwrite file outputs, authenticated-before-display text previews, and four
+file actions in both IDE plugins. These confidential operations run separately
+from scientific evidence: no plaintext input copies or password receipts.
+`str_b64`, `str_to_b64` and strict UTF-8 `str_from_b64` work in both engines;
+Base64 is encoding, not encryption. Literal `-key` is supported with a warning;
+hidden entry is the default. See [File protection](docs/ENCRYPTION.md).
+
+Rust remains 1.92.0. New locked crypto/password dependencies are used. ZIP and TLS certificate
+dependencies receive security fixes; the reader policy records ZIP 9.0.0. No public publication or independent security
+certification is claimed by this local candidate. The previous alpha.41 release
+remains preserved unchanged.
 
 # Goblin++ Rust Engine 0.1.0-alpha.41 (local, unreleased)
 

@@ -59,6 +59,16 @@
   "text_toolkit.gbl",
   "vector_motion.gbl",
   "private_encryption.gbl",
-  "base64_text.gbl"
+  "base64_text.gbl",
+  "network_setup.gbl",
+  "network_client.gbl",
+  "network_server.gbl",
+  "network_relay.gbl",
+  "network/lan/setup.gbl",
+  "network/lan/network_server.gbl",
+  "network/lan/network_client.gbl",
+  "network/setup.gbl",
+  "network/client.gbl",
+  "network/server.gbl"
  ]
 }

@@ -1,6 +1,6 @@
 {
  "schema": "goblin-ide.functions.v1",
- "runtime": "goblin++ 0.1.0-alpha.43",
+ "runtime": "goblin++ 0.1.0-alpha.45",
  "authority": "EDITOR_AID_NOT_LANGUAGE_SPEC",
  "arrayMathHelp": "Also element-wise over numeric arrays: equal array lengths, explicit scalar repetition, independent copies, dimensional checks and zero-based failing indices. No reduction, truncation or length-one array broadcasting.",
  "quantityLiterals": "Compound suffixes such as 1.13e-10 m/s^2; 3 m^2 means 3 square metres, (3 m)^2 squares the whole quantity; group multiple denominator factors with parentheses.",
@@ -2262,6 +2262,166 @@
    "description": "Decode fixed-width 8-digit base-2 byte groups; rejects invalid digits, bytes above 255 and invalid UTF-8; no prefixes or separators.",
    "snippet": "str_from_binary(${1:text})",
    "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "net_pair_credentials",
+   "domain": "Secure Networking",
+   "signature": "net_pair_credentials(\"lan-pair\", \"192.168.1.42\")",
+   "description": "GO_PRIVATE only. Generate a dedicated 90-day TLS pair for an explicit RFC1918 LAN IPv4 address (loopback allowed for tests). New owner-only directory; separate server/client folders contain only their own private keys. The trusted setup computer sees both identities; no CA signing key is saved. Transfer only the intended role folder through a trusted channel and verify the CA fingerprint independently. Learning setup, not managed production PKI.",
+   "snippet": "net_pair_credentials(\"${1:lan-pair}\", \"${2:192.168.1.42}\")",
+   "see": "NETWORKING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "net_demo_credentials",
+   "domain": "Secure Networking",
+   "signature": "net_demo_credentials(\"network-demo\")",
+   "description": "GO_PRIVATE only. Create a new owner-only directory containing fresh CA/server/client PEM credentials, valid 90 days for localhost learning. Refuses existing paths. CA signing key is not saved; never share private demo keys.",
+   "snippet": "net_demo_credentials(\"${1:network-demo}\")",
+   "see": "NETWORKING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "net_allow",
+   "domain": "Secure Networking",
+   "signature": "net_allow(\"192.0.2.1:7443\")",
+   "description": "GO_PRIVATE only. Permit this exact numeric IP:port for the current execution. Loopback is allowed by default; wildcard, broadcast and multicast addresses are refused. Not an OS firewall or sandbox.",
+   "snippet": "net_allow(\"${1:192.0.2.1:7443}\")",
+   "see": "NETWORKING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "net_timeout",
+   "domain": "Secure Networking",
+   "signature": "net_timeout(30000)",
+   "description": "GO_PRIVATE only. Set total per-operation deadline in integer milliseconds, 1–60000; default 30000. Partial traffic does not reset the deadline.",
+   "snippet": "net_timeout(${1:30000})",
+   "see": "NETWORKING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "net_listen",
+   "domain": "Secure Networking",
+   "signature": "net_listen(\"127.0.0.1:7443\", \"server.pem\", \"server-key.pem\", \"ca.pem\")",
+   "description": "GO_PRIVATE only. Bind a TLS 1.3 listener requiring a trusted client certificate. Numeric IP:port; loopback by default. Returns a handle. No plaintext or certificate bypass.",
+   "snippet": "net_listen(\"${1:127.0.0.1:7443}\", \"${2:server.pem}\", \"${3:server-key.pem}\", \"${4:ca.pem}\")",
+   "see": "NETWORKING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "net_connect",
+   "domain": "Secure Networking",
+   "signature": "net_connect(\"127.0.0.1:7443\", \"localhost\", \"ca.pem\", \"client.pem\", \"client-key.pem\")",
+   "description": "GO_PRIVATE only. TLS 1.3 with verified server certificate/name and mandatory client identity. Explicit PEM CA; numeric endpoint; no DNS/proxy/redirect/fallback. Returns a connection handle.",
+   "snippet": "net_connect(\"${1:127.0.0.1:7443}\", \"${2:localhost}\", \"${3:ca.pem}\", \"${4:client.pem}\", \"${5:client-key.pem}\")",
+   "see": "NETWORKING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "net_accept",
+   "domain": "Secure Networking",
+   "signature": "net_accept(listener)",
+   "description": "GO_PRIVATE only. Accept one mutually authenticated TLS 1.3 connection within the total timeout. Each listener is synchronous; no automatic concurrent server or application authorization.",
+   "snippet": "net_accept(${1:listener})",
+   "see": "NETWORKING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "net_send",
+   "domain": "Secure Networking",
+   "signature": "net_send(connection, text)",
+   "description": "GO_PRIVATE only. Send one UTF-8 message, at most 1 MiB, with a four-byte big-endian length prefix inside TLS. Transport failure retires the connection. Delivery/application processing is not guaranteed by send success.",
+   "snippet": "net_send(${1:connection}, ${2:text})",
+   "see": "NETWORKING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "net_receive",
+   "domain": "Secure Networking",
+   "signature": "net_receive(connection)",
+   "description": "GO_PRIVATE only. Receive one bounded UTF-8 message. Oversized, truncated, invalid-UTF8 or failed frames refuse and retire the connection. Treat received text as untrusted; do not print terminal controls directly.",
+   "snippet": "net_receive(${1:connection})",
+   "see": "NETWORKING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "net_close",
+   "domain": "Secure Networking",
+   "signature": "net_close(handle)",
+   "description": "GO_PRIVATE only. Close a listener or connection; repeated/unknown closes refuse. Handles are owned by one execution and sockets close on drop. Not a secure-erasure guarantee.",
+   "snippet": "net_close(${1:handle})",
+   "see": "NETWORKING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "net_address",
+   "domain": "Secure Networking",
+   "signature": "net_address(handle)",
+   "description": "GO_PRIVATE only. Return the local numeric socket address for an open listener/connection. Listener port zero selects an ephemeral port.",
+   "snippet": "net_address(${1:handle})",
+   "see": "NETWORKING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "net_peer_sha256",
+   "domain": "Secure Networking",
+   "signature": "net_peer_sha256(connection)",
+   "description": "GO_PRIVATE only. Return SHA-256 of the authenticated peer leaf certificate DER. Compare with an independently obtained value for application authorization; this is not a message signature.",
+   "snippet": "net_peer_sha256(${1:connection})",
+   "see": "NETWORKING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "e2e_keygen",
+   "domain": "Recipient Encryption",
+   "signature": "e2e_keygen(\"recipient.key\", \"recipient.txt\")",
+   "description": "GO_PRIVATE only. Generate an age X25519 identity using OS cryptographic randomness. Write a new owner-only private key and optional new public-key file; return public recipient key. Refuses overwrite; operations are not transactional.",
+   "snippet": "e2e_keygen(\"${1:recipient.key}\", \"${2:recipient.txt}\")",
+   "see": "NETWORKING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "e2e_public_key",
+   "domain": "Recipient Encryption",
+   "signature": "e2e_public_key(\"recipient.key\")",
+   "description": "GO_PRIVATE only. Read an owner-only age identity and return its public recipient key. Refuses symlinks; authenticate the public key independently before distribution.",
+   "snippet": "e2e_public_key(\"${1:recipient.key}\")",
+   "see": "NETWORKING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "e2e_encrypt",
+   "domain": "Recipient Encryption",
+   "signature": "e2e_encrypt(text, recipient)",
+   "description": "GO_PRIVATE only. Encrypt up to 512 KiB UTF-8 to one age X25519 public recipient; return canonical padded Base64 of standard binary age v1. Relay needs no private key. No sender authentication, replay prevention, forward secrecy or post-quantum claim.",
+   "snippet": "e2e_encrypt(${1:text}, ${2:recipient})",
+   "see": "NETWORKING.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "e2e_decrypt",
+   "domain": "Recipient Encryption",
+   "signature": "e2e_decrypt(envelope, \"recipient.key\")",
+   "description": "GO_PRIVATE only. Authenticate and decrypt an at-most-1-MiB Base64 age message using an owner-only X25519 private-key file. Rejects wrong keys, corruption, truncation, oversized results and scrypt messages. Returns UTF-8 only after full authentication.",
+   "snippet": "e2e_decrypt(${1:envelope}, \"${2:recipient.key}\")",
+   "see": "NETWORKING.md",
    "arrayMath": false,
    "legacy": false
   },

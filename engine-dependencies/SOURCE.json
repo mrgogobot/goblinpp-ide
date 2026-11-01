@@ -1,0 +1,8 @@
+{
+  "engine_version": "0.1.0-alpha.45",
+  "purpose": "Dependency cache preparation only; not an engine source distribution",
+  "files": {
+    "Cargo.toml": "4cde1a0594e879a70a437c50d74d6dd914b6e913ad040198095640b3b1e3184b",
+    "Cargo.lock": "d3b8cca628892dada00a18c48f0459c82210676cebc48f39dc3b73bbc9e9cd84"
+  }
+}

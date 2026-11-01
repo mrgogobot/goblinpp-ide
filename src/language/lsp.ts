@@ -39,7 +39,7 @@ export function fallbackLanguageData(): LiveLanguageData {
     vocabulary: { keywords: KEYWORDS, literals: LITERALS, directives: DIRECTIVES, builtins: BUILTINS.map((b) => b.name), units: UNITS, constants: CONSTANTS },
     docsBase: '',
     docsIndex: [],
-    version: '0.1.0-alpha.41',
+    version: '0.1.0-alpha.45',
   }
 }
 

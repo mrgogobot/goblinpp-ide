@@ -1,7 +1,7 @@
 {
  "name": "goblin++",
  "displayName": "Goblin++",
- "version": "0.1.0-alpha.43",
+ "version": "0.1.0-alpha.45",
  "languageId": "goblinpp",
  "fileExtensions": [
   ".gbl"
@@ -72,7 +72,8 @@
   "VECTORS_COORDINATES_KINEMATICS.md",
   "WB3_ROADMAP.md",
   "PRIVATE_FUNCTIONS.md",
-  "ENCRYPTION.md"
+  "ENCRYPTION.md",
+  "NETWORKING.md"
  ],
  "examples": "examples/",
  "unitRegistry": "units/registry.json",
@@ -135,7 +136,7 @@
   "kΩ",
   "µF"
  ],
- "minIDEVersion": "0.2.1",
+ "minIDEVersion": "0.2.3",
  "minRustVersion": "1.92.0",
  "license": "MIT",
  "changelog": "CHANGELOG.md",

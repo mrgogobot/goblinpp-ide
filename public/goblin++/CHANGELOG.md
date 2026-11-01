@@ -1,3 +1,66 @@
+# Alpha.45 local — two-computer LAN starter
+
+Adds `net_pair_credentials(new_directory, server_ipv4)` for a dedicated 90-day
+TLS pair with the server's actual private IPv4 SAN, separate role credentials and
+no retained CA signing key. The setup computer is trusted and initially sees
+both keys. A production PKI/CSR/revocation workflow remains separate.
+
+Start with [the LAN guide](examples/network/lan/README.md). Compiled macOS arm64
+`network_setup`, `network_server` and `network_client` are provided in the local
+LAN test kit, alongside the sources and Linux build instructions. Existing
+networking, recipient encryption and scientific workflows remain available.
+Rust stays 1.92.0; dependency versions are retained. This is not a throughput
+benchmark or independently audited production service framework.
+
+# Alpha.44 local — TLS networking and recipient encryption
+
+Adds callable `net_*` client/server functions over mutually authenticated TLS 1.3,
+plus age X25519 `e2e_*` recipient-message encryption. Localhost is allowed by default;
+other numeric endpoints require explicit permission. Messages, credentials and
+operation durations are bounded. Functions require `GO_PRIVATE` to keep plaintext
+and keys outside scientific receipts. These are tested alpha facilities, not an
+independent security certification or a complete authenticated messenger.
+
+Start with [the networking guide](docs/NETWORKING.md) and
+`examples/network_setup.gbl`, `network_server.gbl`, `network_client.gbl` and
+`network_relay.gbl`. Both interpreter/native execution and IDE Run are supported.
+VS Code 0.1.35 / JetBrains 0.3.25 include completion/help. Rust stays 1.92.0;
+existing locked dependency versions are retained.
+
+# 0.1.0-alpha.43 - Callable confidential file functions (local)
+
+- `GO_PRIVATE` scripts call encryption, decryption, text reading and display from
+  ordinary code, functions, loops and imports. Both engines use the existing
+  standard age implementation and no-overwrite/authenticated-publication rules.
+- `input_secret` uses hidden terminal input or the updated IDE masked prompt
+  protocol. Secret responses are not scientific input replay events.
+- Private runs produce no scientific run directory, receipt, log or automatic
+  capture. Mixed audit profiles, freezes, seals, numeric audits, inline Rust and
+  scientific evidence I/O refuse explicitly. Static check does not execute.
+- VS Code 0.1.34 and JetBrains 0.3.24 add completion/help/highlighting and secret
+  prompts to normal Run actions. Existing menu actions remain.
+- Private native builds use an isolated temporary target cache; standalone
+  compilation retains explicit output artifacts. Passwords are ordinary runtime
+  strings: do not hardcode, print, log, commit or put real secrets in argv.
+- Rust 1.92.0 and locked external dependency versions are retained.
+- Guide: docs/PRIVATE_FUNCTIONS.md. Optional merchandise:
+  https://h4k3rl1f3.myspreadshop.co.uk
+
+# Alpha.42 — confidential file commands and Base64 (local, unreleased)
+
+Adds standard age-v1 passphrase encryption/decryption, hidden password entry,
+no-overwrite file outputs, authenticated-before-display text previews, and four
+file actions in both IDE plugins. These confidential operations run separately
+from scientific evidence: no plaintext input copies or password receipts.
+`str_b64`, `str_to_b64` and strict UTF-8 `str_from_b64` work in both engines;
+Base64 is encoding, not encryption. Literal `-key` is supported with a warning;
+hidden entry is the default. See [File protection](docs/ENCRYPTION.md).
+
+Rust remains 1.92.0. New locked crypto/password dependencies are used. ZIP and TLS certificate
+dependencies receive security fixes; the reader policy records ZIP 9.0.0. No public publication or independent security
+certification is claimed by this local candidate. The previous alpha.41 release
+remains preserved unchanged.
+
 # 0.1.0-alpha.41 (local, unreleased, native scientific readers)
 
 - Native NPY 1/2/3 and stored/DEFLATE NPZ; logical C-order copies, explicit shape/dtype/storage order, exact integer ID text and no pickle/object execution.

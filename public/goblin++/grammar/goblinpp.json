@@ -1,6 +1,6 @@
 {
  "schema": "goblin-ide.grammar.v1",
- "source": "vscode/syntaxes/goblinpp.tmLanguage.json (alpha.43)",
+ "source": "vscode/syntaxes/goblinpp.tmLanguage.json (0.1.0-alpha.45)",
  "lineComment": "#",
  "identifierPattern": "[A-Za-z_πħωΩΔΣλμσθ∇∂µÅ][A-Za-z0-9_πħωΩΔΣλμσθ∇∂µÅ]*",
  "tokenCategories": {
@@ -271,7 +271,23 @@
    "read_text",
    "str_b64",
    "str_from_b64",
-   "str_to_b64"
+   "str_to_b64",
+   "e2e_decrypt",
+   "e2e_encrypt",
+   "e2e_keygen",
+   "e2e_public_key",
+   "net_accept",
+   "net_address",
+   "net_allow",
+   "net_close",
+   "net_connect",
+   "net_demo_credentials",
+   "net_listen",
+   "net_peer_sha256",
+   "net_receive",
+   "net_send",
+   "net_timeout",
+   "net_pair_credentials"
   ],
   "units": [
    "L",
