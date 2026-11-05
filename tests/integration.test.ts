@@ -14,7 +14,7 @@ const writes:string[]=[]
 const pending=new Set<Promise<unknown>>()
 const bridge:any={
  editor:{tabs:[],activePath:null,save:async()=>{},saveAs:async()=>null,setFrozen:()=>{},setVerifyFailed:()=>{}},
- language:{engine:{path:engine,source:'test-bundled',version:'0.1.0-alpha.45'},analysisByPath:{}},
+ language:{engine:{path:engine,source:'test-bundled',version:'0.1.0-alpha.46'},analysisByPath:{}},
  project:{root:'',refresh:async()=>{}},
  settings:{autoSaveBeforeRun:true,inlineRustHashes:{},runsRoot:'runs',autoVerify:true},
  fs:{
@@ -159,3 +159,17 @@ test('real IDE LAN setup generates separate role identities without scientific e
   assert(!(await bridge.fs.exists(path.join(dir,'runs'))));assert(!(await bridge.fs.exists(path.join(dir,'.goblin'))))
  }finally{await fs.rm(dir,{recursive:true,force:true})}
 })
+
+test('real IDE plans resources in both engines without model loading or scientific receipts',async()=>{
+ const {dir,file}=await fixture('GO_PRIVATE\nhardware=ai_hardware()\nplan=ai_plan("ai_resources.json")\nstatus=ai_plan_status(plan)\nprint(status)\nprint(plan)\n');
+ try{
+  await fs.copyFile('public/goblin++/examples/ai_resources.json',path.join(dir,'ai_resources.json'));
+  for(const kind of ['run','compile']as const){
+   const record=await useRunStore.getState().run(kind,{file,silent:true});
+   assert.equal(record?.status,'PASS');assert.equal(record?.profile,'GO_PRIVATE');assert.equal(record?.receipt,null);assert.equal(record?.runDir,null);
+   const out=useRunStore.getState().output.map(l=>l.text).join('\n');
+   assert(out.includes('NOT_IMPLEMENTED_NOT_STARTED'));assert(out.includes('goblin.ai-resource-plan.v1'));
+  }
+  assert(!(await bridge.fs.exists(path.join(dir,'runs'))));assert(!(await bridge.fs.exists(path.join(dir,'.goblin'))));
+ }finally{await fs.rm(dir,{recursive:true,force:true})}
+});

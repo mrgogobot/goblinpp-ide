@@ -1,6 +1,6 @@
 [package]
 name = "goblin-ide"
-version = "0.2.3"
+version = "0.2.4"
 description = "Goblin++ IDE — a JetBrains-style IDE for the Goblin++ scientific language"
 authors = ["Goblin++ IDE contributors"]
 edition = "2021"

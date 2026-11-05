@@ -12,26 +12,26 @@ for target,source in [('goblin++','goblinpp'),('goblin-orbit','goblin-orbit')]:
  if not(b/dest.name).exists():shutil.copy2(dest,b/dest.name)
  shutil.copy2(e/f'target/release/{source}',dest);dest.chmod(0o755)
 public=root/'public/goblin++';spec=json.loads((e/'vscode/spec/rust-alpha33-editor.json').read_text());names={'input_secret','encrypt_text','encrypt_file','decrypt_text','decrypt_file','read_text','display_file','str_b64','str_to_b64','str_from_b64'}
-names.update(x['spelling'] for x in spec['functions'] if x['spelling'].startswith(('net_','e2e_')))
+names.update(x['spelling'] for x in spec['functions'] if x['spelling'].startswith(('net_','e2e_','ai_')))
 def load(name):return json.loads((public/name).read_text())
 def save(name,data):(public/name).write_text(json.dumps(data,indent=1,ensure_ascii=False)+'\n')
 f=load('functions/registry.json');f['runtime']=f'goblin++ {v}';f['functions']=[x for x in f['functions']if x['name']not in names]
 for x in spec['functions']:
- if x['spelling']in names:f['functions'].append(dict(name=x['spelling'],domain='Secure Networking'if x['spelling'].startswith('net_')else'Recipient Encryption'if x['spelling'].startswith('e2e_')else'Confidential Files'if x['spelling']not in {'str_b64','str_to_b64','str_from_b64'}else'Strings',signature=re.sub(r'\$\{\d+:([^}]+)\}',r'\1',x['snippet']),description=x['detail'],snippet=x['snippet'],see='NETWORKING.md'if x['spelling'].startswith(('net_','e2e_'))else'PRIVATE_FUNCTIONS.md',arrayMath=False,legacy=False))
+ if x['spelling']in names:f['functions'].append(dict(name=x['spelling'],domain='AI Resource Planning'if x['spelling'].startswith('ai_')else'Secure Networking'if x['spelling'].startswith('net_')else'Recipient Encryption'if x['spelling'].startswith('e2e_')else'Confidential Files'if x['spelling']not in {'str_b64','str_to_b64','str_from_b64'}else'Strings',signature=re.sub(r'\$\{\d+:([^}]+)\}',r'\1',x['snippet']),description=x['detail'],snippet=x['snippet'],see='AI_RESOURCES.md'if x['spelling'].startswith('ai_')else'NETWORKING.md'if x['spelling'].startswith(('net_','e2e_'))else'PRIVATE_FUNCTIONS.md',arrayMath=False,legacy=False))
 f['statements']=[x for x in f['statements']if x['name']!='GO_PRIVATE'];x=next(x for x in spec['statements']if x['spelling']=='GO_PRIVATE');f['statements'].append(dict(name='GO_PRIVATE',kind='directive',description=x['detail'],snippet='GO_PRIVATE'));save('functions/registry.json',f)
 g=load('grammar/goblinpp.json');g['source']=f'vscode/syntaxes/goblinpp.tmLanguage.json ({v})'
 for field,items in [('directives',['GO_PRIVATE']),('builtins',sorted(names))]:
  for name in items:
   if name not in g['tokenCategories'][field]:g['tokenCategories'][field].append(name)
 save('grammar/goblinpp.json',g)
-m=load('manifest.json');m['version']=v;m['minIDEVersion']='0.2.3'
+m=load('manifest.json');m['version']=v;m['minIDEVersion']='0.2.4'
 if'GO_PRIVATE'not in m['profiles']:m['profiles'].append('GO_PRIVATE')
-for name in ['PRIVATE_FUNCTIONS.md','ENCRYPTION.md','NETWORKING.md']:
+for name in ['PRIVATE_FUNCTIONS.md','ENCRYPTION.md','NETWORKING.md','AI_RESOURCES.md','AI_QUICKSTART.md']:
  shutil.copy2(e/'docs'/name,public/'docs'/name)
  if name not in m['docsIndex']:m['docsIndex'].append(name)
 save('manifest.json',m)
 i=load('examples/index.json')
-for name in ['private_encryption.gbl','base64_text.gbl','network_setup.gbl','network_client.gbl','network_server.gbl','network_relay.gbl']:
+for name in ['ai_quickstart.gbl','ai_resources.gbl','ai_resources.json','private_encryption.gbl','base64_text.gbl','network_setup.gbl','network_client.gbl','network_server.gbl','network_relay.gbl']:
  shutil.copy2(e/'examples'/name,public/'examples'/name)
  if name not in i['files']:i['files'].append(name)
 for name in ['setup.gbl','client.gbl','server.gbl','README.md']:
@@ -46,10 +46,10 @@ for name in ['setup.gbl','network_server.gbl','network_client.gbl','README.md','
  if name.endswith('.gbl') and entry not in i['files']:i['files'].append(entry)
 # Adapt runtime-bundle setup instructions to the IDE's writable example export.
 local_readme=public/'examples/network/README.md'
-s=local_readme.read_text().replace('**0.1.0-alpha.44**','**0.1.0-alpha.44 or newer**').replace('From the extracted alpha.44 bundle:', 'From this writable local example folder, with Goblin++ on PATH:').replace('cd examples/network\n','').replace('same `examples/network` folder','same local example folder').replace('bundled alpha.44 engine','bundled alpha.45 engine')
+s=local_readme.read_text().replace('**0.1.0-alpha.44**','**0.1.0-alpha.44 or newer**').replace('From the extracted alpha.44 bundle:', 'From this writable local example folder, with Goblin++ on PATH:').replace('cd examples/network\n','').replace('same `examples/network` folder','same local example folder').replace('bundled alpha.44 engine','bundled alpha.46 engine')
 local_readme.write_text(s)
 quickstart=public/'examples/network/lan/QUICKSTART.md'
-s=quickstart.read_text().replace('From the extracted runtime bundle, install and create credentials:', 'Open this writable LAN example folder as an IDE project and select the bundled alpha.45 engine. Run `setup.gbl` with the IDE Play button, or use an installed alpha.45 command-line runtime:').replace('./install.sh --prefix "$HOME/.local"\nrehash\ncd examples/network/lan\n','').replace('Use an alpha.44-or-newer Goblin++ runtime. With this source bundle, install.sh\nbuilds the Linux executable from locked source when run on Linux; Rust 1.92.0\nmust already be available. The supplied Mac binary does not run on Linux.', 'Use an alpha.44-or-newer Goblin++ runtime on the client. This IDE ZIP contains a macOS arm64 app and source examples; it does not contain install.sh or a Linux executable. For Linux, obtain the separate full Goblin++ source/runtime bundle and follow its build instructions (Rust 1.92.0).')
+s=quickstart.read_text().replace('From the extracted runtime bundle, install and create credentials:', 'Open this writable LAN example folder as an IDE project and select the bundled alpha.46 engine. Run `setup.gbl` with the IDE Play button, or use an installed alpha.46 command-line runtime:').replace('./install.sh --prefix "$HOME/.local"\nrehash\ncd examples/network/lan\n','').replace('Use an alpha.44-or-newer Goblin++ runtime. With this source bundle, install.sh\nbuilds the Linux executable from locked source when run on Linux; Rust 1.92.0\nmust already be available. The supplied Mac binary does not run on Linux.', 'Use an alpha.44-or-newer Goblin++ runtime on the client. This IDE ZIP contains a macOS arm64 app and source examples; it does not contain install.sh or a Linux executable. For Linux, obtain the separate full Goblin++ source/runtime bundle and follow its build instructions (Rust 1.92.0).')
 quickstart.write_text(s)
 lan_readme=public/'examples/network/lan/README.md'
 s=lan_readme.read_text()

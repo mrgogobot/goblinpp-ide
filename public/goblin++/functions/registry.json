@@ -1,6 +1,6 @@
 {
  "schema": "goblin-ide.functions.v1",
- "runtime": "goblin++ 0.1.0-alpha.45",
+ "runtime": "goblin++ 0.1.0-alpha.46",
  "authority": "EDITOR_AID_NOT_LANGUAGE_SPEC",
  "arrayMathHelp": "Also element-wise over numeric arrays: equal array lengths, explicit scalar repetition, independent copies, dimensional checks and zero-based failing indices. No reduction, truncation or length-one array broadcasting.",
  "quantityLiterals": "Compound suffixes such as 1.13e-10 m/s^2; 3 m^2 means 3 square metres, (3 m)^2 squares the whole quantity; group multiple denominator factors with parentheses.",
@@ -2262,6 +2262,36 @@
    "description": "Decode fixed-width 8-digit base-2 byte groups; rejects invalid digits, bytes above 255 and invalid UTF-8; no prefixes or separators.",
    "snippet": "str_from_binary(${1:text})",
    "see": "STRINGS.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ai_hardware",
+   "domain": "AI Resource Planning",
+   "signature": "ai_hardware()",
+   "description": "GO_PRIVATE only. Read local CPU/memory/disk and visible GPU observations; returns JSON text. Snapshot only: no model load, network, reservation or backend execution test.",
+   "snippet": "ai_hardware()",
+   "see": "AI_RESOURCES.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ai_plan",
+   "domain": "AI Resource Planning",
+   "signature": "ai_plan(\"ai_resources.json\")",
+   "description": "GO_PRIVATE only. Read a bounded explicit JSON request and estimate training resources. Returns reconstructable JSON text with WITHIN_ESTIMATED_BUDGET, REFUSED or INSUFFICIENT_INFORMATION. No training or OS enforcement; unknown capacity never counts as fit.",
+   "snippet": "ai_plan(\"${1:ai_resources.json}\")",
+   "see": "AI_RESOURCES.md",
+   "arrayMath": false,
+   "legacy": false
+  },
+  {
+   "name": "ai_plan_status",
+   "domain": "AI Resource Planning",
+   "signature": "ai_plan_status(plan)",
+   "description": "GO_PRIVATE only. Reconstruct and check a saved plan JSON string, returning its resource decision. Integrity/arithmetic only; not a model-quality, live-capacity or training-safety certificate.",
+   "snippet": "ai_plan_status(${1:plan})",
+   "see": "AI_RESOURCES.md",
    "arrayMath": false,
    "legacy": false
   },

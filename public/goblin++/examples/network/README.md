@@ -56,7 +56,7 @@ if it is already using that port.
 
 Open this folder as a writable project and run `setup.gbl` once. Use two IDE
 terminal tabs, or separate IDE windows, for server and client. The main Goblin++
-IDE Run panel manages one process at a time. Select the bundled alpha.45 engine
+IDE Run panel manages one process at a time. Select the bundled alpha.46 engine
 if an older executable path is saved.
 
 ## What is protected?

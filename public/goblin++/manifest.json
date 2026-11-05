@@ -1,7 +1,7 @@
 {
  "name": "goblin++",
  "displayName": "Goblin++",
- "version": "0.1.0-alpha.45",
+ "version": "0.1.0-alpha.46",
  "languageId": "goblinpp",
  "fileExtensions": [
   ".gbl"
@@ -73,7 +73,9 @@
   "WB3_ROADMAP.md",
   "PRIVATE_FUNCTIONS.md",
   "ENCRYPTION.md",
-  "NETWORKING.md"
+  "NETWORKING.md",
+  "AI_RESOURCES.md",
+  "AI_QUICKSTART.md"
  ],
  "examples": "examples/",
  "unitRegistry": "units/registry.json",
@@ -136,7 +138,7 @@
   "kΩ",
   "µF"
  ],
- "minIDEVersion": "0.2.3",
+ "minIDEVersion": "0.2.4",
  "minRustVersion": "1.92.0",
  "license": "MIT",
  "changelog": "CHANGELOG.md",

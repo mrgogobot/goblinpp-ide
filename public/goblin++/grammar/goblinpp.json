@@ -1,6 +1,6 @@
 {
  "schema": "goblin-ide.grammar.v1",
- "source": "vscode/syntaxes/goblinpp.tmLanguage.json (0.1.0-alpha.45)",
+ "source": "vscode/syntaxes/goblinpp.tmLanguage.json (0.1.0-alpha.46)",
  "lineComment": "#",
  "identifierPattern": "[A-Za-z_πħωΩΔΣλμσθ∇∂µÅ][A-Za-z0-9_πħωΩΔΣλμσθ∇∂µÅ]*",
  "tokenCategories": {
@@ -287,7 +287,10 @@
    "net_receive",
    "net_send",
    "net_timeout",
-   "net_pair_credentials"
+   "net_pair_credentials",
+   "ai_hardware",
+   "ai_plan",
+   "ai_plan_status"
   ],
   "units": [
    "L",

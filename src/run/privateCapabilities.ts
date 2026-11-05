@@ -2,6 +2,7 @@ import { stripSource } from '../language/parser'
 
 /** Probe only direct new builtin calls; quoted strings/comments are not capabilities. */
 export const NETWORK_FUNCTIONS = [
+  'ai_hardware', 'ai_plan', 'ai_plan_status',
   'net_demo_credentials', 'net_pair_credentials', 'net_allow', 'net_timeout', 'net_listen', 'net_connect',
   'net_accept', 'net_send', 'net_receive', 'net_close', 'net_address', 'net_peer_sha256',
   'e2e_keygen', 'e2e_public_key', 'e2e_encrypt', 'e2e_decrypt',

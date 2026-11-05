@@ -49,7 +49,7 @@ test('private files are excluded from automatic AI context',()=>{
  assert(!publicContext.user.includes('fixture'))
 })
 test('bundled grammar, help and sidecar contract expose alpha.44 private code',()=>{
- const m=JSON.parse(fs.readFileSync('public/goblin++/manifest.json','utf8'));assert.equal(m.version,'0.1.0-alpha.45');assert(m.profiles.includes('GO_PRIVATE'))
+ const m=JSON.parse(fs.readFileSync('public/goblin++/manifest.json','utf8'));assert.equal(m.version,'0.1.0-alpha.46');assert(m.profiles.includes('GO_PRIVATE'))
  const reg=JSON.parse(fs.readFileSync('public/goblin++/functions/registry.json','utf8'))
  for(const name of ['input_secret','encrypt_text','encrypt_file','decrypt_text','decrypt_file','read_text','display_file','str_b64'])assert(reg.functions.some((f:{name:string})=>f.name===name),name)
  assert(fs.existsSync('public/goblin++/docs/PRIVATE_FUNCTIONS.md'))
@@ -83,3 +83,12 @@ test('bundled grammar, help and sidecar contract expose alpha.44 private code',(
  for(const name of ['setup.gbl','network_server.gbl','network_client.gbl','README.md','QUICKSTART.md'])assert(fs.existsSync('public/goblin++/examples/network/lan/'+name))
  for(const name of ['setup.gbl','client.gbl','server.gbl','README.md'])assert(fs.existsSync('public/goblin++/examples/network/'+name))
  })
+
+test('AI planning vocabulary and local request are bundled without claiming training', async()=>{
+ const reg=JSON.parse(fs.readFileSync('public/goblin++/functions/registry.json','utf8'));
+ const {missingNetworkFunctions}=await import('../src/run/privateCapabilities');
+ for(const name of ['ai_hardware','ai_plan','ai_plan_status']) assert(reg.functions.some((f:{name:string})=>f.name===name),name);
+ assert(fs.existsSync('public/goblin++/docs/AI_RESOURCES.md'));
+ assert(fs.existsSync('public/goblin++/examples/ai_resources.json'));
+ assert.deepEqual(missingNetworkFunctions('GO_PRIVATE\nx=ai_plan("request.json")',[]),['ai_plan']);
+});

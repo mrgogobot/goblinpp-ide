@@ -52,7 +52,7 @@ def main():
         assert not path.is_symlink(),path
         if path.is_file():
             rel=path.relative_to(app).as_posix();data=path.read_bytes();inventory[rel]=sha(data);payload[f'Goblin++ IDE.app/{rel}']=(data,path.stat().st_mode&0o777)
-    for name in ['network_setup.gbl','network_client.gbl','network_server.gbl','network_relay.gbl']:
+    for name in ['ai_quickstart.gbl','ai_resources.gbl','ai_resources.json','network_setup.gbl','network_client.gbl','network_server.gbl','network_relay.gbl']:
         payload['Examples/'+name]=((ROOT/'public/goblin++/examples'/name).read_bytes(),0o644)
     for name in ['setup.gbl','client.gbl','server.gbl','README.md']:
         content=(ROOT/'public/goblin++/examples/network'/name).read_bytes()
@@ -60,8 +60,10 @@ def main():
         payload['Examples/local/'+name]=(content,0o644)
     for name in ['setup.gbl','network_server.gbl','network_client.gbl','README.md','QUICKSTART.md']:
         payload['Examples/lan/'+name]=((ROOT/'public/goblin++/examples/network/lan'/name).read_bytes(),0o644)
+    payload['AI_QUICKSTART.md']=((ROOT/'public/goblin++/docs/AI_QUICKSTART.md').read_bytes(),0o644)
+    payload['AI_RESOURCES.md']=((ROOT/'public/goblin++/docs/AI_RESOURCES.md').read_bytes(),0o644)
     payload['NETWORKING.md']=((ROOT/'public/goblin++/docs/NETWORKING.md').read_bytes(),0o644)
-    readme=f'''Goblin++ IDE {version} for macOS arm64\nBundled engine: Goblin++ {engine_version}\n\nOpen Goblin++ IDE.app, or copy it to Applications using Finder.\nIn Settings > Goblin++ > Engine, select the bundled alpha.45 engine if an older explicit path was retained.\n\nThe Examples folder is a writable starting point: open it as a project, run network_setup.gbl once, then start the server and client in separate terminals/windows. The main Run panel manages one process at a time.\nRead NETWORKING.md for complete examples, key distribution, TLS trust and limits. For two computers, start with Examples/lan/QUICKSTART.md and run the source examples directly. Never share or commit network-demo or lan-pair private keys.\n\nThe app is ad-hoc signed, not Apple-notarized. Automated checks do not establish an independent security audit or manual installed GUI test.\nRecipient message encryption does not add sender signatures, replay prevention or a forward-secrecy ratchet. GO_PRIVATE is not a sandbox or secure erasure.\n\nOptional merchandise: https://h4k3rl1f3.myspreadshop.co.uk\n'''
+    readme=f'''Goblin++ IDE {version} for macOS arm64\nBundled engine: Goblin++ {engine_version}\n\nOpen Goblin++ IDE.app, or copy it to Applications using Finder.\nIn Settings > Goblin++ > Engine, select the bundled alpha.46 engine if an older explicit path was retained.\n\nThe Examples folder is a writable starting point: open it as a project, run network_setup.gbl once, then start the server and client in separate terminals/windows. The main Run panel manages one process at a time.\nStart with AI_QUICKSTART.md and Examples/ai_quickstart.gbl for local AI resource planning (no training or model loading); read AI_RESOURCES.md. Read NETWORKING.md for complete examples, key distribution, TLS trust and limits. For two computers, start with Examples/lan/QUICKSTART.md and run the source examples directly. Never share or commit network-demo or lan-pair private keys.\n\nThe app is ad-hoc signed, not Apple-notarized. Automated checks do not establish an independent security audit or manual installed GUI test.\nRecipient message encryption does not add sender signatures, replay prevention or a forward-secrecy ratchet. GO_PRIVATE is not a sandbox or secure erasure.\n\nOptional merchandise: https://h4k3rl1f3.myspreadshop.co.uk\n'''
     payload['README.txt']=(readme.encode(),0o644)
     prefix=f'Goblinpp-IDE-{version}-macos-arm64/'
     with zipfile.ZipFile(archive,'x',compression=zipfile.ZIP_DEFLATED,compresslevel=9)as z:
@@ -72,7 +74,7 @@ def main():
         assert z.testzip()is None and len(z.namelist())==len(payload)
         for name,(data,_)in payload.items():assert z.read(prefix+name)==data
     artifact={'file':filename,'bytes':archive.stat().st_size,'sha256':sha(archive.read_bytes())}
-    receipt={'schema':'goblin.ide.local-package.v1','version':version,'engine_version':engine_version,'target':'aarch64-apple-darwin','source_head_before_user_commit':command('git','-C',str(ROOT),'rev-parse','HEAD'),'uncommitted_local_candidate':True,'artifact':artifact,'app_inventory_sha256':inventory,'app_files':len(inventory),'resource_files_matched_to_source':matched,'binaries':binaries,'local_tests':{'frontend_and_actual_bundled_engine':21,'native_backend':3,'types': 'PASS','native_clippy':'PASS','build':'PASS','deep_strict_codesign':'PASS','signature_identity':'AD_HOC_NOT_NOTARIZED','live_installed_GUI_test':False,'independent_security_audit':False},'authentication':'CHECKSUM_ONLY_NOT_A_PUBLISHER_SIGNATURE','published':False}
+    receipt={'schema':'goblin.ide.local-package.v1','version':version,'engine_version':engine_version,'target':'aarch64-apple-darwin','source_head_before_user_commit':command('git','-C',str(ROOT),'rev-parse','HEAD'),'uncommitted_local_candidate':True,'artifact':artifact,'app_inventory_sha256':inventory,'app_files':len(inventory),'resource_files_matched_to_source':matched,'binaries':binaries,'local_tests':{'frontend_and_actual_bundled_engine':23,'native_backend':3,'types': 'PASS','native_clippy':'PASS','build':'PASS','deep_strict_codesign':'PASS','signature_identity':'AD_HOC_NOT_NOTARIZED','live_installed_GUI_test':False,'independent_security_audit':False},'authentication':'CHECKSUM_ONLY_NOT_A_PUBLISHER_SIGNATURE','published':False}
     receipt_path.write_text(json.dumps(receipt,indent=2)+'\n');sums.write_text(artifact['sha256']+'  '+filename+'\n'+sha(receipt_path.read_bytes())+'  PACKAGE_RECEIPT.json\n');print(json.dumps(artifact,indent=2));print('Matched resource files:',matched,'App files:',len(inventory))
 
 if __name__=='__main__':main()

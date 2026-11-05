@@ -1,6 +1,6 @@
 {
   "name": "goblin-ide",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": true,
   "description": "Goblin++ IDE \u2014 a JetBrains-style desktop IDE for the Goblin++ scientific programming language.",
   "type": "module",

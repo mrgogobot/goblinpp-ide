@@ -1,3 +1,20 @@
+# Goblin++ IDE 0.2.4 — AI resource planning
+
+Bundled engine: **0.1.0-alpha.46**. Adds completion, help, grammar recognition,
+local examples and compatibility checks for `ai_hardware`, `ai_plan` and
+`ai_plan_status`. Use the normal Run or compiled Run action. The functions require
+`GO_PRIVATE`; no model is loaded, downloaded or trained, and no OS memory
+reservation is made. Planning estimates and unknown/refused decisions are
+explained in the bundled `AI_RESOURCES.md`.
+
+An older explicit engine path in Settings must be replaced with the bundled
+engine. Merely updating completion data does not upgrade an external executable.
+Automated RunStore/real-engine tests cover interpreted and compiled plans; no
+manual installed GUI check, physical GPU training or independent security audit
+is claimed. The app remains ad-hoc signed, not Apple-notarized.
+
+Optional: [Goblin++ merchandise](https://h4k3rl1f3.myspreadshop.co.uk).
+
 # Goblin++ IDE 0.2.3 — two-computer LAN examples
 
 Bundles alpha.45 and adds net_pair_credentials completion/help, split server/client

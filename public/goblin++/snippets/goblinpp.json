@@ -467,5 +467,26 @@
    "net_pair_credentials(\"${1:lan-pair}\", \"${2:192.168.1.42}\")"
   ],
   "description": "GO_PRIVATE only. Generate a dedicated 90-day TLS pair for an explicit RFC1918 LAN IPv4 address (loopback allowed for tests). New owner-only directory; separate server/client folders contain only their own private keys. The trusted setup computer sees both identities; no CA signing key is saved. Transfer only the intended role folder through a trusted channel and verify the CA fingerprint independently. Learning setup, not managed production PKI."
+ },
+ "ai_hardware": {
+  "prefix": "ai_hardware",
+  "body": [
+   "ai_hardware()"
+  ],
+  "description": "GO_PRIVATE only. Read local CPU/memory/disk and visible GPU observations; returns JSON text. Snapshot only: no model load, network, reservation or backend execution test."
+ },
+ "ai_plan": {
+  "prefix": "ai_plan",
+  "body": [
+   "ai_plan(\"${1:ai_resources.json}\")"
+  ],
+  "description": "GO_PRIVATE only. Read a bounded explicit JSON request and estimate training resources. Returns reconstructable JSON text with WITHIN_ESTIMATED_BUDGET, REFUSED or INSUFFICIENT_INFORMATION. No training or OS enforcement; unknown capacity never counts as fit."
+ },
+ "ai_plan_status": {
+  "prefix": "ai_plan_status",
+  "body": [
+   "ai_plan_status(${1:plan})"
+  ],
+  "description": "GO_PRIVATE only. Reconstruct and check a saved plan JSON string, returning its resource decision. Integrity/arithmetic only; not a model-quality, live-capacity or training-safety certificate."
  }
 }

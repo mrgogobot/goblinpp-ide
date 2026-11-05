@@ -6,7 +6,7 @@ separate compiled client/server is needed.
 
 ## On the Mac used as the server
 
-Open this writable LAN example folder as an IDE project and select the bundled alpha.45 engine. Run `setup.gbl` with the IDE Play button, or use an installed alpha.45 command-line runtime:
+Open this writable LAN example folder as an IDE project and select the bundled alpha.46 engine. Run `setup.gbl` with the IDE Play button, or use an installed alpha.46 command-line runtime:
 
 ```sh
 goblin++ --version
